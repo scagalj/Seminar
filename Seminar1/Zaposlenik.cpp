@@ -32,7 +32,7 @@ CZaposlenik::CZaposlenik(CDatabase* pdb)
 // store the password in some other form or use a different user authentication.
 CString CZaposlenik::GetDefaultConnect()
 {
-	return _T("DSN=seminar_baza;DBQ=C:\\Users\\Student\\Documents\\SeminarDataBase.accdb;DriverId=25;FIL=MS Access;MaxBufferSize=2048;PageTimeout=5;UID=admin;");
+	return _T("ODBC;DSN=seminar_baza");
 }
 
 CString CZaposlenik::GetDefaultSQL()
