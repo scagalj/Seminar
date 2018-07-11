@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Baza">
+      <UniqueIdentifier>{e79c9f7b-d76f-4257-9478-00684c0f0b02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Seminar1.h">
@@ -33,14 +36,14 @@
     <ClInclude Include="CApplicationDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Zaposlenik.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CHoteli.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hotel.h">
-      <Filter>Header Files</Filter>
+      <Filter>Baza</Filter>
+    </ClInclude>
+    <ClInclude Include="Zaposlenik.h">
+      <Filter>Baza</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,14 +59,14 @@
     <ClCompile Include="CApplicationDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Zaposlenik.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CHoteli.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hotel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Baza</Filter>
+    </ClCompile>
+    <ClCompile Include="Zaposlenik.cpp">
+      <Filter>Baza</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
