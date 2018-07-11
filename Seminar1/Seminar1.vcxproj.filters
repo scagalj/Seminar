@@ -36,6 +36,9 @@
     <ClInclude Include="Zaposlenik.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CHoteli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Seminar1.cpp">
@@ -51,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Zaposlenik.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CHoteli.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
