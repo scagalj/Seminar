@@ -45,6 +45,9 @@
     <ClInclude Include="Zaposlenik.h">
       <Filter>Baza</Filter>
     </ClInclude>
+    <ClInclude Include="CDodajHotel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Seminar1.cpp">
@@ -67,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="Zaposlenik.cpp">
       <Filter>Baza</Filter>
+    </ClCompile>
+    <ClCompile Include="CDodajHotel.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
