@@ -189,6 +189,7 @@
   <ItemGroup>
     <ClInclude Include="CApplicationDlg.h" />
     <ClInclude Include="CDodajHotel.h" />
+    <ClInclude Include="CDodajSobu.h" />
     <ClInclude Include="CHoteli.h" />
     <ClInclude Include="Hotel.h" />
     <ClInclude Include="Resource.h" />
@@ -201,6 +202,7 @@
   <ItemGroup>
     <ClCompile Include="CApplicationDlg.cpp" />
     <ClCompile Include="CDodajHotel.cpp" />
+    <ClCompile Include="CDodajSobu.cpp" />
     <ClCompile Include="CHoteli.cpp" />
     <ClCompile Include="Hotel.cpp" />
     <ClCompile Include="Seminar1.cpp" />
