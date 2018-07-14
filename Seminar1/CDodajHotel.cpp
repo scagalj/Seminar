@@ -51,7 +51,7 @@ void CDodajHotel::OnBnClickedButtonHotelAdd()
 	GetDlgItemText(IDC_EDIT_Hotel_Grad, h_Grad);
 	GetDlgItemText(IDC_EDIT_Hotel_Kontakt, h_Kontakt);
 	CWnd *label = GetDlgItem(IDC_STATIC_Hotel_Stanje);
-	if (h_Naziv == "" && h_Adresa == "" && h_Grad == "") {
+	if (h_Naziv == "" || h_Adresa == "" || h_Grad == "") {
 		
 		label->SetWindowText(_T("Polja ne smiju biti prazna"));	
 	}
