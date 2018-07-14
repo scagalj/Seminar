@@ -51,6 +51,15 @@
     <ClInclude Include="CDodajSobu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VrstaSobe.h">
+      <Filter>Baza</Filter>
+    </ClInclude>
+    <ClInclude Include="Soba.h">
+      <Filter>Baza</Filter>
+    </ClInclude>
+    <ClInclude Include="CPopisSoba.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Seminar1.cpp">
@@ -78,6 +87,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CDodajSobu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VrstaSobe.cpp">
+      <Filter>Baza</Filter>
+    </ClCompile>
+    <ClCompile Include="Soba.cpp">
+      <Filter>Baza</Filter>
+    </ClCompile>
+    <ClCompile Include="CPopisSoba.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

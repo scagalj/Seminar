@@ -191,12 +191,15 @@
     <ClInclude Include="CDodajHotel.h" />
     <ClInclude Include="CDodajSobu.h" />
     <ClInclude Include="CHoteli.h" />
+    <ClInclude Include="CPopisSoba.h" />
     <ClInclude Include="Hotel.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Seminar1.h" />
     <ClInclude Include="Seminar1Dlg.h" />
+    <ClInclude Include="Soba.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="VrstaSobe.h" />
     <ClInclude Include="Zaposlenik.h" />
   </ItemGroup>
   <ItemGroup>
@@ -204,15 +207,18 @@
     <ClCompile Include="CDodajHotel.cpp" />
     <ClCompile Include="CDodajSobu.cpp" />
     <ClCompile Include="CHoteli.cpp" />
+    <ClCompile Include="CPopisSoba.cpp" />
     <ClCompile Include="Hotel.cpp" />
     <ClCompile Include="Seminar1.cpp" />
     <ClCompile Include="Seminar1Dlg.cpp" />
+    <ClCompile Include="Soba.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="VrstaSobe.cpp" />
     <ClCompile Include="Zaposlenik.cpp" />
   </ItemGroup>
   <ItemGroup>
