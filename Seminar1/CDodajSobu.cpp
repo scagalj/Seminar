@@ -1,6 +1,5 @@
 ﻿// CDodajSobu.cpp : implementation file
 //
-
 #include "stdafx.h"
 #include "Seminar1.h"
 #include "CDodajSobu.h"
