@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 #include "CHoteli.h"
 #include "Seminar1Dlg.h"
+#include "CZaposlenici.h"
 
 // CApplicationDlg dialog
 
@@ -47,6 +48,7 @@ BEGIN_MESSAGE_MAP(CApplicationDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_Logout, &CApplicationDlg::OnBnClickedButtonLogout)
 	ON_WM_PAINT()
 	ON_BN_CLICKED(IDC_BUTTON_HOTEL, &CApplicationDlg::OnBnClickedButtonHotel)
+	ON_BN_CLICKED(IDC_BUTTON_ZAPOSLENIK, &CApplicationDlg::OnBnClickedButtonZaposlenik)
 END_MESSAGE_MAP()
 
 
@@ -80,5 +82,14 @@ void CApplicationDlg::OnBnClickedButtonHotel()
 {
 	CHoteli hotel;
 	hotel.DoModal();
+	// TODO: Add your control notification handler code here
+}
+
+
+void CApplicationDlg::OnBnClickedButtonZaposlenik()
+{
+	CZaposlenici zaposlenici;
+	zaposlenici.DoModal();
+
 	// TODO: Add your control notification handler code here
 }

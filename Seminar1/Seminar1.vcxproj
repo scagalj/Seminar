@@ -190,8 +190,10 @@
     <ClInclude Include="CApplicationDlg.h" />
     <ClInclude Include="CDodajHotel.h" />
     <ClInclude Include="CDodajSobu.h" />
+    <ClInclude Include="CGosti.h" />
     <ClInclude Include="CHoteli.h" />
     <ClInclude Include="CPopisSoba.h" />
+    <ClInclude Include="CZaposlenici.h" />
     <ClInclude Include="Hotel.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Seminar1.h" />
@@ -206,8 +208,10 @@
     <ClCompile Include="CApplicationDlg.cpp" />
     <ClCompile Include="CDodajHotel.cpp" />
     <ClCompile Include="CDodajSobu.cpp" />
+    <ClCompile Include="CGosti.cpp" />
     <ClCompile Include="CHoteli.cpp" />
     <ClCompile Include="CPopisSoba.cpp" />
+    <ClCompile Include="CZaposlenici.cpp" />
     <ClCompile Include="Hotel.cpp" />
     <ClCompile Include="Seminar1.cpp" />
     <ClCompile Include="Seminar1Dlg.cpp" />

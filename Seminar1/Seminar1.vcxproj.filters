@@ -60,6 +60,12 @@
     <ClInclude Include="CPopisSoba.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CZaposlenici.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CGosti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Seminar1.cpp">
@@ -96,6 +102,12 @@
       <Filter>Baza</Filter>
     </ClCompile>
     <ClCompile Include="CPopisSoba.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CZaposlenici.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CGosti.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

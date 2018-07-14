@@ -27,4 +27,5 @@ public:
 	afx_msg void OnBnClickedButtonLogout();
 	afx_msg void OnPaint();
 	afx_msg void OnBnClickedButtonHotel();
+	afx_msg void OnBnClickedButtonZaposlenik();
 };

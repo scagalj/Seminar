@@ -9,6 +9,8 @@
 #define IDD_DIALOG_Add_Hotel            134
 #define IDD_DIALOG_DODAJ_SOBU           136
 #define IDD_DIALOG_POPIS_SOBA           138
+#define IDD_DIALOG_ZAPOSLENIK           140
+#define IDD_DIALOG_GOST                 142
 #define IDC_Korisnik                    1000
 #define IDC_Lozinka                     1001
 #define IDC_Login                       1002
@@ -45,15 +47,20 @@
 #define IDC_STATIC_POPIS_HNAZIV         1037
 #define IDC_LIST_POPIS_SOBA             1038
 #define IDC_BUTTON_POPIS_IZBRISI_SOBU   1039
-#define IDC_BUTTON1                     1040
+#define IDC_BUTTON_ZAPOSLENIK           1041
+#define IDC_BUTTON_GOST                 1043
+#define IDC_LIST_POPIS_ZAPOSLENIKA      1044
+#define IDC_BUTTON_ZAPOSLENIK_IZBRISI   1045
+#define IDC_BUTTON2                     1046
+#define IDC_BUTTON_ZAPOSLENIK_DODAJ     1046
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        140
+#define _APS_NEXT_RESOURCE_VALUE        144
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1041
+#define _APS_NEXT_CONTROL_VALUE         1047
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
