@@ -69,6 +69,12 @@
     <ClInclude Include="CDodajZaposlenika.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Gost.h">
+      <Filter>Baza</Filter>
+    </ClInclude>
+    <ClInclude Include="CDodajGosta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Seminar1.cpp">
@@ -114,6 +120,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CDodajZaposlenika.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gost.cpp">
+      <Filter>Baza</Filter>
+    </ClCompile>
+    <ClCompile Include="CDodajGosta.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

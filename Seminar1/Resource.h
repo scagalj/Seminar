@@ -12,6 +12,7 @@
 #define IDD_DIALOG_ZAPOSLENIK           140
 #define IDD_DIALOG_GOST                 142
 #define IDD_DIALOG_DODAJ_ZAPOSLENIK     144
+#define IDD_DIALOG_DODAJ_GOSTA          146
 #define IDC_Korisnik                    1000
 #define IDC_Lozinka                     1001
 #define IDC_Login                       1002
@@ -70,14 +71,24 @@
 #define IDC_EDIT_Z_Kontakt              1061
 #define IDC_EDIT_Z_Lozinka              1062
 #define IDC_STATIC_Z_STATUS             1063
+#define IDC_LIST_GOSTI                  1064
+#define IDC_EDIT_GOST_IME               1065
+#define IDC_EDIT_GOST_PREZIME           1066
+#define IDC_BUTTON1                     1066
+#define IDC_BUTTON_DODAJ_GOSTA          1066
+#define IDC_EDIT_GOST_OIB               1067
+#define IDC_EDIT_GOST_ADRESA            1068
+#define IDC_EDIT_GOST_GRAD              1069
+#define IDC_EDIT_GOST_DRZAVA            1070
+#define IDC_EDIT_GOST_KONTAKT           1071
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        146
+#define _APS_NEXT_RESOURCE_VALUE        148
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1064
+#define _APS_NEXT_CONTROL_VALUE         1067
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
