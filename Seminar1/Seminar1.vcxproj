@@ -195,10 +195,13 @@
     <ClInclude Include="CGosti.h" />
     <ClInclude Include="CHoteli.h" />
     <ClInclude Include="CPopisSoba.h" />
+    <ClInclude Include="CSlobodneSobe.h" />
     <ClInclude Include="CZaposlenici.h" />
+    <ClInclude Include="DetaljiRezervacije.h" />
     <ClInclude Include="Gost.h" />
     <ClInclude Include="Hotel.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Rezervacija.h" />
     <ClInclude Include="Seminar1.h" />
     <ClInclude Include="Seminar1Dlg.h" />
     <ClInclude Include="Soba.h" />
@@ -216,9 +219,12 @@
     <ClCompile Include="CGosti.cpp" />
     <ClCompile Include="CHoteli.cpp" />
     <ClCompile Include="CPopisSoba.cpp" />
+    <ClCompile Include="CSlobodneSobe.cpp" />
     <ClCompile Include="CZaposlenici.cpp" />
+    <ClCompile Include="DetaljiRezervacije.cpp" />
     <ClCompile Include="Gost.cpp" />
     <ClCompile Include="Hotel.cpp" />
+    <ClCompile Include="Rezervacija.cpp" />
     <ClCompile Include="Seminar1.cpp" />
     <ClCompile Include="Seminar1Dlg.cpp" />
     <ClCompile Include="Soba.cpp" />

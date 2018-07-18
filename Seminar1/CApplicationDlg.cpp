@@ -9,6 +9,7 @@
 #include "Seminar1Dlg.h"
 #include "CZaposlenici.h"
 #include "CGosti.h"
+#include "CSlobodneSobe.h"
 
 // CApplicationDlg dialog
 
@@ -51,6 +52,7 @@ BEGIN_MESSAGE_MAP(CApplicationDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_HOTEL, &CApplicationDlg::OnBnClickedButtonHotel)
 	ON_BN_CLICKED(IDC_BUTTON_ZAPOSLENIK, &CApplicationDlg::OnBnClickedButtonZaposlenik)
 	ON_BN_CLICKED(IDC_BUTTON_GOST, &CApplicationDlg::OnBnClickedButtonGost)
+	ON_BN_CLICKED(IDC_BUTTON_SLOBODNE_SOBE, &CApplicationDlg::OnBnClickedButtonSlobodneSobe)
 END_MESSAGE_MAP()
 
 
@@ -102,6 +104,15 @@ void CApplicationDlg::OnBnClickedButtonGost()
 	CGosti gosti;
 	gosti.DoModal();
 	
+
+	// TODO: Add your control notification handler code here
+}
+
+
+void CApplicationDlg::OnBnClickedButtonSlobodneSobe()
+{
+	CSlobodneSobe slobodnesobe;
+	slobodnesobe.DoModal();
 
 	// TODO: Add your control notification handler code here
 }
