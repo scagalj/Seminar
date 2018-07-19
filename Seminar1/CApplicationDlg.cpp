@@ -111,7 +111,7 @@ void CApplicationDlg::OnBnClickedButtonGost()
 
 void CApplicationDlg::OnBnClickedButtonSlobodneSobe()
 {
-	CSlobodneSobe slobodnesobe;
+	CSlobodneSobe slobodnesobe(user,this);
 	slobodnesobe.DoModal();
 
 	// TODO: Add your control notification handler code here
