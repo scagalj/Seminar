@@ -14,6 +14,7 @@
 #define IDD_DIALOG_DODAJ_ZAPOSLENIK     144
 #define IDD_DIALOG_DODAJ_GOSTA          146
 #define IDD_DIALOG_SLOBODNE_SOBE        148
+#define IDD_DIALOG_NOVA_REZERVACIJA     150
 #define IDC_Korisnik                    1000
 #define IDC_Lozinka                     1001
 #define IDC_Login                       1002
@@ -79,6 +80,7 @@
 #define IDC_BUTTON_DODAJ_GOSTA          1066
 #define IDC_BUTTON_SLOBODNE_SOBE        1066
 #define IDC_BUTTON_SLOBODNE_SOBE_PRIKAZ 1066
+#define IDC_BUTTON_R_TRAZI              1066
 #define IDC_EDIT_GOST_OIB               1067
 #define IDC_COMBO_SLOBODNE_NAZIVHOTELA  1067
 #define IDC_EDIT_GOST_ADRESA            1068
@@ -88,14 +90,35 @@
 #define IDC_EDIT_GOST_DRZAVA            1070
 #define IDC_DATETIMEPICKER_COUT         1071
 #define IDC_EDIT_GOST_KONTAKT           1072
+#define IDC_BUTTON_NOVA_REZERVACIJA     1072
+#define IDC_EDIT_R_IME                  1073
+#define IDC_EDIT_R_PREZIME              1074
+#define IDC_EDIT_R_ADRESA               1075
+#define IDC_EDIT_R_GRAD                 1076
+#define IDC_EDIT_R_DRZAVA               1077
+#define IDC_EDIT_R_KONTAKT              1078
+#define IDC_EDIT_R_OIB                  1079
+#define IDC_EDIT_R_OIB_P                1080
+#define IDC_STATIC_R_IMEGOSTA           1081
+#define IDC_STATIC_R_DATUM              1082
+#define IDC_EDIT_R_BROJNOCENJA          1083
+#define IDC_EDIT_R_BROJGOSTIJU          1084
+#define IDC_STATIC_R_UKUPNACIJENA       1087
+#define IDC_STATIC_R_DATUMDOLASKA       1088
+#define IDC_STATIC_R_DATUMODLASKA       1089
+#define IDC_LIST_R_ODABRANESOBE         1090
+#define IDC_EDIT_R_IDSOBE               1091
+#define IDC_BUTTON_R_DODAJ              1092
+#define IDC_BUTTON_R_IZBRISI            1093
+#define IDC_STATIC_R_BROJNOCENJA        1094
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        150
+#define _APS_NEXT_RESOURCE_VALUE        152
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1071
+#define _APS_NEXT_CONTROL_VALUE         1095
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
