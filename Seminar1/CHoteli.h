@@ -11,6 +11,8 @@ public:
 	CHoteli(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CHoteli();
 	BOOL OnInitDialog();
+	void IspisiHotele();
+	void Ugasibotune(bool ispit);
 
 
 // Dialog Data
@@ -25,7 +27,6 @@ protected:
 public:
 	CListCtrl hoteli;
 	CString h_trazi;
-	afx_msg void OnBnClickedButtonOhotel();
 	afx_msg void OnBnClickedButtonAddHotel();
 	afx_msg void OnBnClickedButtonDeleteHotel();
 	afx_msg void OnBnClickedButtonHotelTrazi();

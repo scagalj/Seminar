@@ -34,10 +34,8 @@ BOOL CHoteli::OnInitDialog() {
 	hoteli.InsertColumn(3, _T("Grad"), LVCFMT_LEFT, 130);
 	hoteli.InsertColumn(4, _T("Kontakt"), LVCFMT_LEFT, 130);
 	hoteli.SetExtendedStyle(hoteli.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
-	OnBnClickedButtonOhotel();
-	GetDlgItem(IDC_BUTTON_DODAJ_SOBU)->EnableWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_Delete_Hotel)->EnableWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_POPIS_SOBA)->EnableWindow(FALSE);
+	IspisiHotele();
+	Ugasibotune(false);
 	return TRUE;
 }
 
@@ -51,7 +49,6 @@ void CHoteli::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CHoteli, CDialogEx)
-	ON_BN_CLICKED(IDC_BUTTON_OHotel, &CHoteli::OnBnClickedButtonOhotel)
 	ON_BN_CLICKED(IDC_BUTTON_ADD_HOTEL, &CHoteli::OnBnClickedButtonAddHotel)
 	ON_BN_CLICKED(IDC_BUTTON_Delete_Hotel, &CHoteli::OnBnClickedButtonDeleteHotel)
 	ON_BN_CLICKED(IDC_BUTTON_Hotel_Trazi, &CHoteli::OnBnClickedButtonHotelTrazi)
@@ -64,7 +61,7 @@ END_MESSAGE_MAP()
 // CHoteli message handlers
 
 
-void CHoteli::OnBnClickedButtonOhotel()
+void CHoteli::IspisiHotele()
 {
 	hoteli.DeleteAllItems();
 	CHotel hotel;
@@ -80,15 +77,16 @@ void CHoteli::OnBnClickedButtonOhotel()
 		hotel.MoveNext();
 	}
 	hotel.Close();
-	// TODO: Add your control notification handler code here
 }
 
 
 void CHoteli::OnBnClickedButtonAddHotel()
 {
+	int x;
 	CDodajHotel addHotel;
-	addHotel.DoModal();
-	// TODO: Add your control notification handler code here
+	x = addHotel.DoModal();
+	if (x = IDOK)
+		IspisiHotele();
 }
 
 
@@ -104,20 +102,24 @@ void CHoteli::OnBnClickedButtonDeleteHotel()
 	hotel.Delete();
 	hoteli.DeleteItem(x);
 	hotel.Close();
-
-	// TODO: Add your control notification handler code here
 }
 
 
 void CHoteli::OnBnClickedButtonHotelTrazi()
 {
 	GetDlgItemText(IDC_EDIT_Hotel_Trazi, h_trazi);
+	GetDlgItem(IDC_EDIT_Hotel_Trazi)->SetWindowText(_T(""));
+	Ugasibotune(false);
+	if (h_trazi == "*") {
+		IspisiHotele();
+		return;
+	}
 	CHotel hotel;
 	hotel.Open();
 	hoteli.DeleteAllItems();
 	while (!hotel.IsEOF()) {
 		CString name = hotel.m_Naziv;
-		if (name.MakeLower().Find(h_trazi) != -1) {
+		if (name.MakeLower().Find(h_trazi.MakeLower()) != -1) {
 			CString id("");
 			id.Format(_T("%ld"), hotel.m_HotelID);
 			int nIndex = hoteli.InsertItem(0, id);
@@ -127,10 +129,8 @@ void CHoteli::OnBnClickedButtonHotelTrazi()
 			hoteli.SetItemText(nIndex, 4, hotel.m_Kontakt);	
 		}
 		hotel.MoveNext();
-		
 	}
 	hotel.Close();
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -146,9 +146,6 @@ void CHoteli::OnBnClickedButtonDodajSobu()
 	CDodajSobu soba(hotel.m_HotelID,hotel.m_Naziv,this);
 	soba.DoModal();
 	hotel.Close();
-
-
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -156,17 +153,13 @@ void CHoteli::OnLvnItemchangedListHoteli(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
 	bool ispit = pNMLV->uNewState & LVIS_SELECTED ? TRUE : FALSE;
-	GetDlgItem(IDC_BUTTON_DODAJ_SOBU)->EnableWindow(ispit);
-	GetDlgItem(IDC_BUTTON_Delete_Hotel)->EnableWindow(ispit);
-	GetDlgItem(IDC_BUTTON_POPIS_SOBA)->EnableWindow(ispit);
-	// TODO: Add your control notification handler code here
+	Ugasibotune(ispit);
 	*pResult = 0;
 }
 
 
 void CHoteli::OnBnClickedButtonPopisSoba()
 {
-
 	CHotel hotel;
 	int x = hoteli.GetNextItem(-1, LVNI_SELECTED);
 	CString t = hoteli.GetItemText(x, 0);
@@ -177,5 +170,10 @@ void CHoteli::OnBnClickedButtonPopisSoba()
 	CPopisSoba popis(hotel.m_HotelID, hotel.m_Naziv, this);
 	popis.DoModal();
 	hotel.Close();
-	// TODO: Add your control notification handler code here
+}
+
+void CHoteli::Ugasibotune(bool ispit) {
+	GetDlgItem(IDC_BUTTON_DODAJ_SOBU)->EnableWindow(ispit);
+	GetDlgItem(IDC_BUTTON_Delete_Hotel)->EnableWindow(ispit);
+	GetDlgItem(IDC_BUTTON_POPIS_SOBA)->EnableWindow(ispit);
 }
