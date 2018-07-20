@@ -101,7 +101,6 @@
 #define IDC_EDIT_R_OIB_P                1080
 #define IDC_STATIC_R_IMEGOSTA           1081
 #define IDC_STATIC_R_DATUM              1082
-#define IDC_EDIT_R_BROJNOCENJA          1083
 #define IDC_EDIT_R_BROJGOSTIJU          1084
 #define IDC_STATIC_R_UKUPNACIJENA       1087
 #define IDC_STATIC_R_DATUMDOLASKA       1088
