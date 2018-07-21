@@ -113,7 +113,6 @@
 #define IDC_BUTTON_R_IZBRISI            1093
 #define IDC_STATIC_R_BROJNOCENJA        1094
 #define IDC_LIST_REZERVACIJE            1096
-#define IDC_LIST1                       1097
 #define IDC_LIST_REZERVACIJA_SOBE       1097
 
 // Next default values for new objects
