@@ -30,4 +30,5 @@ public:
 	afx_msg void OnBnClickedButtonZaposlenik();
 	afx_msg void OnBnClickedButtonGost();
 	afx_msg void OnBnClickedButtonSlobodneSobe();
+	afx_msg void OnBnClickedButtonRezervacije();
 };

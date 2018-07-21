@@ -87,6 +87,9 @@
     <ClInclude Include="CNovaRezervacija.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CListaRezervacija.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Seminar1.cpp">
@@ -150,6 +153,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CNovaRezervacija.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CListaRezervacija.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

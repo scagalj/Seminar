@@ -10,6 +10,7 @@
 #include "CZaposlenici.h"
 #include "CGosti.h"
 #include "CSlobodneSobe.h"
+#include "CListaRezervacija.h"
 
 // CApplicationDlg dialog
 
@@ -53,6 +54,7 @@ BEGIN_MESSAGE_MAP(CApplicationDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_ZAPOSLENIK, &CApplicationDlg::OnBnClickedButtonZaposlenik)
 	ON_BN_CLICKED(IDC_BUTTON_GOST, &CApplicationDlg::OnBnClickedButtonGost)
 	ON_BN_CLICKED(IDC_BUTTON_SLOBODNE_SOBE, &CApplicationDlg::OnBnClickedButtonSlobodneSobe)
+	ON_BN_CLICKED(IDC_BUTTON_REZERVACIJE, &CApplicationDlg::OnBnClickedButtonRezervacije)
 END_MESSAGE_MAP()
 
 
@@ -113,6 +115,15 @@ void CApplicationDlg::OnBnClickedButtonSlobodneSobe()
 {
 	CSlobodneSobe slobodnesobe(user,this);
 	slobodnesobe.DoModal();
+
+	// TODO: Add your control notification handler code here
+}
+
+
+void CApplicationDlg::OnBnClickedButtonRezervacije()
+{
+	CListaRezervacija rezervacije;
+	rezervacije.DoModal();
 
 	// TODO: Add your control notification handler code here
 }
