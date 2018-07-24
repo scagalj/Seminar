@@ -15,6 +15,7 @@
 #define IDD_DIALOG_DODAJ_GOSTA          146
 #define IDD_DIALOG_SLOBODNE_SOBE        148
 #define IDD_DIALOG_NOVA_REZERVACIJA     150
+#define IDD_DIALOG_LISTA_REZEVACIJA     152
 #define IDC_Korisnik                    1000
 #define IDC_Lozinka                     1001
 #define IDC_Login                       1002
@@ -22,6 +23,7 @@
 #define IDC_STATIC_User                 1004
 #define IDC_BUTTON_HOTEL                1005
 #define IDC_LIST_HOTELI                 1006
+#define IDC_BUTTON_REZERVACIJE          1006
 #define IDC_BUTTON_OHotel               1007
 #define IDC_BUTTON_ADD_HOTEL            1008
 #define IDC_STATIC_Hotel_Naziv          1009
@@ -81,6 +83,7 @@
 #define IDC_BUTTON_SLOBODNE_SOBE        1066
 #define IDC_BUTTON_SLOBODNE_SOBE_PRIKAZ 1066
 #define IDC_BUTTON_R_TRAZI              1066
+#define IDC_BUTTON_R_PRINT              1066
 #define IDC_EDIT_GOST_OIB               1067
 #define IDC_COMBO_SLOBODNE_NAZIVHOTELA  1067
 #define IDC_EDIT_GOST_ADRESA            1068
@@ -110,10 +113,9 @@
 #define IDC_BUTTON_R_DODAJ              1092
 #define IDC_BUTTON_R_IZBRISI            1093
 #define IDC_STATIC_R_BROJNOCENJA        1094
-#define IDD_DIALOG_LISTA_REZEVACIJA		152
-#define IDC_BUTTON_REZERVACIJE          1006
 #define IDC_LIST_REZERVACIJE            1096
 #define IDC_LIST_REZERVACIJA_SOBE       1097
+
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
