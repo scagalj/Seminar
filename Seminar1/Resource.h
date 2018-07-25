@@ -117,9 +117,8 @@
 #define IDC_STATIC_R_BROJNOCENJA        1094
 #define IDC_LIST_D_REZERVACIJE          1095
 #define IDC_LIST_REZERVACIJE            1096
-#define IDC_LIST1                       1096
-#define IDC_LIST_STARE_REZERVACIJE      1096
-#define IDC_LIST_REZERVACIJA_SOBE       1097
+#define IDC_LIST_STARE_REZERVACIJE      1097
+#define IDC_LIST_REZERVACIJA_SOBE       1098
 
 // Next default values for new objects
 // 
