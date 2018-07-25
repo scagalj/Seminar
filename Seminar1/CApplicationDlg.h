@@ -31,4 +31,9 @@ public:
 	afx_msg void OnBnClickedButtonGost();
 	afx_msg void OnBnClickedButtonSlobodneSobe();
 	afx_msg void OnBnClickedButtonRezervacije();
+	CListCtrl c_rezervacije_danas;
+	void IspisRezervacija();
+	CString IspisGosta(int id);
+	CString IspisZaposlenika(int id);
+	afx_msg void OnBnClickedButtonStareRezervacije();
 };
