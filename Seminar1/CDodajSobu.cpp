@@ -1,4 +1,4 @@
-﻿// CDodajSobu.cpp : implementation file
+// CDodajSobu.cpp : implementation file
 //
 #include "stdafx.h"
 #include "Seminar1.h"
@@ -75,15 +75,17 @@ void CDodajSobu::OnCbnSelchangeComboSobaVrsta()
 {
 	vrsta_soba.GetLBText(vrsta_soba.GetCurSel(), s_vrsta_soba);
 	UpdateData(FALSE);
-	// TODO: Add your control notification handler code here
 }
 
 
 void CDodajSobu::OnBnClickedButtonDodajSobu()
 {
+	//LoadString(hInstance, IDS_STRING1, s, sizeof s);
+	CString s;
 	CWnd *label = GetDlgItem(IDC_STATIC_SOBA_STATUS);
 	if (vrsta_soba.GetCurSel() < 0) {
-		label->SetWindowText(_T("Morate izabrati vrstu sobe"));
+		s.LoadString(500);
+		label->SetWindowText(s);
 		return;
 	}
 	bool duhan,ljubimci;
@@ -91,7 +93,6 @@ void CDodajSobu::OnBnClickedButtonDodajSobu()
 	duhan = (m_ctlCheck1->GetCheck() == 1) ? true : false;
 	m_ctlCheck1 = (CButton*)GetDlgItem(IDC_CHECK_LJUBIMCI);
 	ljubimci = (m_ctlCheck1->GetCheck() == 1) ? true : false;
-	CString s;
 	s.Format(_T("SELECT * FROM VrstaSobe Where Opis = '%s'"), s_vrsta_soba);
 	CVrstaSobe sobe;
 	sobe.Open(CRecordset::dynaset, s);
@@ -103,11 +104,14 @@ void CDodajSobu::OnBnClickedButtonDodajSobu()
 	soba.m_Ljubimci = ljubimci;
 	soba.m_HotelID = s_HotelID;
 	soba.m_VrstaSobeID = id;
-	if (!soba.Update())
-		label->SetWindowText(_T("Soba nije dodan"));
-	label->SetWindowText(_T("Soba uspiješno dodana"));
+	if (!soba.Update()) {
+		s.LoadString(501);
+		label->SetWindowText(s);
+	}else{
+		s.LoadString(502);
+		label->SetWindowText(s);
+	}
 	sobe.Close();
 	soba.Close();
 	vrsta_soba.SetCurSel(-1);
-	// TODO: Add your control notification handler code here
 }

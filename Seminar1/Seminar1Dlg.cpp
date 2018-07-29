@@ -36,7 +36,7 @@ void CSeminar1Dlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CSeminar1Dlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_Login, &CSeminar1Dlg::OnBnClickedLogin)
+	ON_BN_CLICKED(IDC_LOGIRAN, &CSeminar1Dlg::OnBnClickedLogin)
 END_MESSAGE_MAP()
 
 
@@ -51,9 +51,8 @@ BOOL CSeminar1Dlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
-	// TODO: Add extra initialization here
 
-	return TRUE;  // return TRUE  unless you set the focus to a control
+	return TRUE;
 }
 
 // If you add a minimize button to your dialog, you will need the code below
@@ -99,7 +98,7 @@ void CSeminar1Dlg::OnBnClickedLogin()
 
 	UpdateData(TRUE);
 	CZaposlenik login;
-	CString korisnik, lozinka;
+	CString korisnik, lozinka, s;
 	bool t = FALSE;
 	login.Open();
 	while (!login.IsEOF()) {
@@ -120,10 +119,10 @@ void CSeminar1Dlg::OnBnClickedLogin()
 
 	}
 	else {
-		AfxMessageBox(_T("Korisnik nepostoji"));
+		s.LoadString(519);
+		AfxMessageBox(s);
 	}
 	login.Close();
 	
 	UpdateData(FALSE);
-	// TODO: Add your control notification handler code here
 }

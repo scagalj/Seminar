@@ -21,13 +21,13 @@
 IMPLEMENT_DYNAMIC(CApplicationDlg, CDialogEx)
 
 CApplicationDlg::CApplicationDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_DIALOG_App, pParent)
+	: CDialogEx(IDD_DIALOG_APLIKACIJA, pParent)
 {
 
 }
 
 CApplicationDlg::CApplicationDlg(const CString &name, CWnd* pParent)
-	: CDialogEx(IDD_DIALOG_App, pParent)
+	: CDialogEx(IDD_DIALOG_APLIKACIJA, pParent)
 	, user(name)
 {
 
@@ -38,20 +38,28 @@ CApplicationDlg::~CApplicationDlg()
 }
 
 BOOL CApplicationDlg::OnInitDialog() {
-
+	CString s;
 	CDialogEx::OnInitDialog();
-	CWnd *label = GetDlgItem(IDC_STATIC_User);
+	CWnd *label = GetDlgItem(IDC_STATIC_KORISNIK);
 	label->SetWindowText(user);
-
-	c_rezervacije_danas.InsertColumn(0, _T("ID"), LVCFMT_LEFT, 30);
-	c_rezervacije_danas.InsertColumn(1, _T("Datum"), LVCFMT_LEFT, 90);
-	c_rezervacije_danas.InsertColumn(2, _T("Noci"), LVCFMT_LEFT, 50);
-	c_rezervacije_danas.InsertColumn(3, _T("Gosti"), LVCFMT_LEFT, 50);
-	c_rezervacije_danas.InsertColumn(4, _T("Check IN"), LVCFMT_LEFT, 90);
-	c_rezervacije_danas.InsertColumn(5, _T("Check OUT"), LVCFMT_LEFT, 90);
-	c_rezervacije_danas.InsertColumn(6, _T("Gost"), LVCFMT_LEFT, 100);
-	c_rezervacije_danas.InsertColumn(7, _T("Kreirao"), LVCFMT_LEFT, 100);
-	c_rezervacije_danas.InsertColumn(8, _T("Ukupna cijena"), LVCFMT_LEFT, 100);
+	s.LoadString(715);
+	c_rezervacije_danas.InsertColumn(0, s, LVCFMT_LEFT, 30);
+	s.LoadString(700);
+	c_rezervacije_danas.InsertColumn(1, s, LVCFMT_LEFT, 90);
+	s.LoadString(701);
+	c_rezervacije_danas.InsertColumn(2, s, LVCFMT_LEFT, 50);
+	s.LoadString(702);
+	c_rezervacije_danas.InsertColumn(3, s, LVCFMT_LEFT, 50);
+	s.LoadString(703);
+	c_rezervacije_danas.InsertColumn(4, s, LVCFMT_LEFT, 90);
+	s.LoadString(704);
+	c_rezervacije_danas.InsertColumn(5, s, LVCFMT_LEFT, 90);
+	s.LoadString(705);
+	c_rezervacije_danas.InsertColumn(6, s, LVCFMT_LEFT, 100);
+	s.LoadString(706);
+	c_rezervacije_danas.InsertColumn(7, s, LVCFMT_LEFT, 100);
+	s.LoadString(707);
+	c_rezervacije_danas.InsertColumn(8, s, LVCFMT_LEFT, 100);
 	c_rezervacije_danas.SetExtendedStyle(c_rezervacije_danas.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 
 	IspisRezervacija();
@@ -68,7 +76,7 @@ void CApplicationDlg::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CApplicationDlg, CDialogEx)
-	ON_BN_CLICKED(IDC_BUTTON_Logout, &CApplicationDlg::OnBnClickedButtonLogout)
+	ON_BN_CLICKED(IDC_BUTTON_ODJAVA, &CApplicationDlg::OnBnClickedButtonLogout)
 	ON_WM_PAINT()
 	ON_BN_CLICKED(IDC_BUTTON_HOTEL, &CApplicationDlg::OnBnClickedButtonHotel)
 	ON_BN_CLICKED(IDC_BUTTON_ZAPOSLENIK, &CApplicationDlg::OnBnClickedButtonZaposlenik)
@@ -87,15 +95,14 @@ void CApplicationDlg::OnBnClickedButtonLogout()
 	CSeminar1Dlg Logout;
 	CDialogEx::OnOK();
 	Logout.DoModal();
-	// TODO: Add your control notification handler code here
+	
 }
 
 
 void CApplicationDlg::OnPaint()
 {
-	CPaintDC dc(this); // device context for painting
-					   // TODO: Add your message handler code here
-					   // Do not call CDialogEx::OnPaint() for painting messages
+	CPaintDC dc(this); 
+
 	RECT rc;
 	GetClientRect(&rc);
 	dc.MoveTo(rc.right / 3, 0);
@@ -109,7 +116,6 @@ void CApplicationDlg::OnBnClickedButtonHotel()
 {
 	CHoteli hotel;
 	hotel.DoModal();
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -117,8 +123,6 @@ void CApplicationDlg::OnBnClickedButtonZaposlenik()
 {
 	CZaposlenici zaposlenici;
 	zaposlenici.DoModal();
-
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -128,7 +132,6 @@ void CApplicationDlg::OnBnClickedButtonGost()
 	gosti.DoModal();
 	
 
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -136,8 +139,6 @@ void CApplicationDlg::OnBnClickedButtonSlobodneSobe()
 {
 	CSlobodneSobe slobodnesobe(user,this);
 	slobodnesobe.DoModal();
-
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -145,12 +146,10 @@ void CApplicationDlg::OnBnClickedButtonRezervacije()
 {
 	CListaRezervacija rezervacije;
 	rezervacije.DoModal();
-
-	// TODO: Add your control notification handler code here
 }
 
 void CApplicationDlg::IspisRezervacija() {
-	CString s;
+	CString s,s1;
 	CRezervacija rez;
 	rez.Open();
 	CTime today = CTime::GetCurrentTime();
@@ -173,7 +172,8 @@ void CApplicationDlg::IspisRezervacija() {
 			c_rezervacije_danas.SetItemText(nIndex, 5, s);
 			c_rezervacije_danas.SetItemText(nIndex, 6, IspisGosta(rez.m_GostID));
 			c_rezervacije_danas.SetItemText(nIndex, 7, IspisZaposlenika(rez.m_ZaposlenikID));
-			s.Format(_T("%.2f HRK"), rez.m_Ukupna_cijena);
+			s1.LoadString(524);
+			s.Format(_T("%.2f %s"), rez.m_Ukupna_cijena,s1);
 			c_rezervacije_danas.SetItemText(nIndex, 8, s);
 			rez.MoveNext();
 		}
@@ -208,6 +208,4 @@ void CApplicationDlg::OnBnClickedButtonStareRezervacije()
 {
 	CStareRezervacije sr;
 	sr.DoModal();
-
-	// TODO: Add your control notification handler code here
 }

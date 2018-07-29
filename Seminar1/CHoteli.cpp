@@ -1,4 +1,4 @@
-﻿// CHoteli.cpp : implementation file
+// CHoteli.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -28,11 +28,17 @@ CHoteli::~CHoteli()
 
 BOOL CHoteli::OnInitDialog() {
 	CDialog::OnInitDialog();
-	hoteli.InsertColumn(0, _T("HotelID"), LVCFMT_LEFT, 90);
-	hoteli.InsertColumn(1, _T("Naziv"), LVCFMT_LEFT, 150);
-	hoteli.InsertColumn(2, _T("Adresa"), LVCFMT_LEFT, 150);
-	hoteli.InsertColumn(3, _T("Grad"), LVCFMT_LEFT, 130);
-	hoteli.InsertColumn(4, _T("Kontakt"), LVCFMT_LEFT, 130);
+	CString s;
+	s.LoadString(715);
+	hoteli.InsertColumn(0, s, LVCFMT_LEFT, 90);
+	s.LoadString(716);
+	hoteli.InsertColumn(1, s, LVCFMT_LEFT, 150);
+	s.LoadString(711);
+	hoteli.InsertColumn(2, s, LVCFMT_LEFT, 150);
+	s.LoadString(712);
+	hoteli.InsertColumn(3, s, LVCFMT_LEFT, 130);
+	s.LoadString(714);
+	hoteli.InsertColumn(4, s, LVCFMT_LEFT, 130);
 	hoteli.SetExtendedStyle(hoteli.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 	IspisiHotele();
 	Ugasibotune(false);
@@ -49,8 +55,8 @@ void CHoteli::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CHoteli, CDialogEx)
-	ON_BN_CLICKED(IDC_BUTTON_ADD_HOTEL, &CHoteli::OnBnClickedButtonAddHotel)
-	ON_BN_CLICKED(IDC_BUTTON_Delete_Hotel, &CHoteli::OnBnClickedButtonDeleteHotel)
+	ON_BN_CLICKED(IDC_BUTTON_DODAJ_HOTEL, &CHoteli::OnBnClickedButtonAddHotel)
+	ON_BN_CLICKED(IDC_BUTTON_HOTEL_IZBRISI, &CHoteli::OnBnClickedButtonDeleteHotel)
 	ON_BN_CLICKED(IDC_BUTTON_Hotel_Trazi, &CHoteli::OnBnClickedButtonHotelTrazi)
 	ON_BN_CLICKED(IDC_BUTTON_DODAJ_SOBU, &CHoteli::OnBnClickedButtonDodajSobu)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_HOTELI, &CHoteli::OnLvnItemchangedListHoteli)
@@ -174,6 +180,6 @@ void CHoteli::OnBnClickedButtonPopisSoba()
 
 void CHoteli::Ugasibotune(bool ispit) {
 	GetDlgItem(IDC_BUTTON_DODAJ_SOBU)->EnableWindow(ispit);
-	GetDlgItem(IDC_BUTTON_Delete_Hotel)->EnableWindow(ispit);
+	GetDlgItem(IDC_BUTTON_HOTEL_IZBRISI)->EnableWindow(ispit);
 	GetDlgItem(IDC_BUTTON_POPIS_SOBA)->EnableWindow(ispit);
 }

@@ -13,7 +13,7 @@
 IMPLEMENT_DYNAMIC(CDodajHotel, CDialogEx)
 
 CDodajHotel::CDodajHotel(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_DIALOG_Add_Hotel, pParent)
+	: CDialogEx(IDD_DIALOG_DODAJ_HOTEL, pParent)
 	, h_Naziv(_T(""))
 	, h_Adresa(_T(""))
 	, h_Grad(_T(""))
@@ -37,7 +37,7 @@ void CDodajHotel::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CDodajHotel, CDialogEx)
-	ON_BN_CLICKED(IDC_BUTTON_Hotel_Add, &CDodajHotel::OnBnClickedButtonHotelAdd)
+	ON_BN_CLICKED(IDC_BUTTON_DODAJ_HOTEL, &CDodajHotel::OnBnClickedButtonHotelAdd)
 END_MESSAGE_MAP()
 
 
@@ -46,13 +46,15 @@ END_MESSAGE_MAP()
 
 void CDodajHotel::OnBnClickedButtonHotelAdd()
 {
+	CString s;
 	GetDlgItemText(IDC_EDIT_Hotel_Naziv, h_Naziv);
 	GetDlgItemText(IDC_EDIT_Hotel_Adresa, h_Adresa);
 	GetDlgItemText(IDC_EDIT_Hotel_Grad, h_Grad);
 	GetDlgItemText(IDC_EDIT_Hotel_Kontakt, h_Kontakt);
 	CWnd *label = GetDlgItem(IDC_STATIC_Hotel_Stanje);
-	if (h_Naziv == "" || h_Adresa == "" || h_Grad == "") {	
-		label->SetWindowText(_T("Polja ne smiju biti prazna"));	
+	if (h_Naziv == "" || h_Adresa == "" || h_Grad == "") {
+		s.LoadString(503);
+		label->SetWindowText(s);	
 		return;
 	}
 	
@@ -64,12 +66,12 @@ void CDodajHotel::OnBnClickedButtonHotelAdd()
 	hotel.m_Grad = h_Grad;
 	hotel.m_Kontakt = h_Kontakt;
 	if (!hotel.Update()) {
-		label->SetWindowText(_T("Hotel nije dodan"));
+		s.LoadString(506);
+		label->SetWindowText(s);
 		return;
 	}
-	label->SetWindowText(_T("Hotel uspiješno dodan"));
+	s.LoadString(507);
+	label->SetWindowText(s);
 	hotel.Close();
 	CDialogEx::OnOK();
-
-	// TODO: Add your control notification handler code here
 }
