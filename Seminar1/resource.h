@@ -41,7 +41,7 @@
 #define IDS_STRING_REZERVACIJA3         521
 #define IDS_STRING_REZERVACIJA4         522
 #define IDS_STRING_REZERVACIJA5         523
-#define IDS_STRING_VALTUA               524
+#define IDS_STRING_VALUTA               524
 #define IDS_STRING_DATUM                700
 #define IDS_STRING_NOCI                 701
 #define IDS_STRING_BROJ_GOSTIJU         702
