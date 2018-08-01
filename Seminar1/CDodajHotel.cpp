@@ -53,7 +53,7 @@ void CDodajHotel::OnBnClickedButtonHotelAdd()
 	GetDlgItemText(IDC_EDIT_Hotel_Kontakt, h_Kontakt);
 	CWnd *label = GetDlgItem(IDC_STATIC_Hotel_Stanje);
 	if (h_Naziv == "" || h_Adresa == "" || h_Grad == "") {
-		s.LoadString(503);
+		s.LoadString(IDS_STRING_PAZNA_POLJA);
 		label->SetWindowText(s);	
 		return;
 	}
@@ -66,11 +66,11 @@ void CDodajHotel::OnBnClickedButtonHotelAdd()
 	hotel.m_Grad = h_Grad;
 	hotel.m_Kontakt = h_Kontakt;
 	if (!hotel.Update()) {
-		s.LoadString(506);
+		s.LoadString(IDS_STRING_HOTEL1);
 		label->SetWindowText(s);
 		return;
 	}
-	s.LoadString(507);
+	s.LoadString(IDS_STRING_HOTEL2);
 	label->SetWindowText(s);
 	hotel.Close();
 	CDialogEx::OnOK();

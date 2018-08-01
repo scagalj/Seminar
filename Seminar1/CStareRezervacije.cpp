@@ -42,23 +42,23 @@ BOOL CStareRezervacije::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 	CString s;
-	s.LoadString(715);
+	s.LoadString(IDS_STRING_ID);
 	c_stare_rezervacije.InsertColumn(0, s, LVCFMT_LEFT, 30);
-	s.LoadString(700);
+	s.LoadString(IDS_STRING_DATUM);
 	c_stare_rezervacije.InsertColumn(1, s, LVCFMT_LEFT, 90);
-	s.LoadString(701);
+	s.LoadString(IDS_STRING_NOCI);
 	c_stare_rezervacije.InsertColumn(2, s, LVCFMT_LEFT, 50);
-	s.LoadString(702);
+	s.LoadString(IDS_STRING_BROJ_GOSTIJU);
 	c_stare_rezervacije.InsertColumn(3, s, LVCFMT_LEFT, 50);
-	s.LoadString(703);
+	s.LoadString(IDS_STRING_CHECK_IN);
 	c_stare_rezervacije.InsertColumn(4, s, LVCFMT_LEFT, 90);
-	s.LoadString(704);
+	s.LoadString(IDS_STRING_CHECK_OUT);
 	c_stare_rezervacije.InsertColumn(5,s, LVCFMT_LEFT, 90);
-	s.LoadString(705);
+	s.LoadString(IDS_STRING_GOST);
 	c_stare_rezervacije.InsertColumn(6, s, LVCFMT_LEFT, 100);
-	s.LoadString(706);
+	s.LoadString(IDS_STRING_ZAPOSLENIK);
 	c_stare_rezervacije.InsertColumn(7, s, LVCFMT_LEFT, 100);
-	s.LoadString(707);
+	s.LoadString(IDS_STRING_UKUPNO);
 	c_stare_rezervacije.InsertColumn(8, s, LVCFMT_LEFT, 100);
 	c_stare_rezervacije.SetExtendedStyle(c_stare_rezervacije.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 
@@ -87,7 +87,7 @@ void CStareRezervacije::IspisRezervacija() {
 			c_stare_rezervacije.SetItemText(nIndex, 5, s);
 			c_stare_rezervacije.SetItemText(nIndex, 6, IspisGosta(rez.m_GostID));
 			c_stare_rezervacije.SetItemText(nIndex, 7, IspisZaposlenika(rez.m_ZaposlenikID));
-			s1.LoadString(524);
+			s1.LoadString(IDS_STRING_VALUTA);
 			s.Format(_T("%.2f %s"), rez.m_Ukupna_cijena,s1);
 			c_stare_rezervacije.SetItemText(nIndex, 8, s);
 			rez.MoveNext();

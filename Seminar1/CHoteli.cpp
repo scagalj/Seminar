@@ -29,15 +29,15 @@ CHoteli::~CHoteli()
 BOOL CHoteli::OnInitDialog() {
 	CDialog::OnInitDialog();
 	CString s;
-	s.LoadString(715);
+	s.LoadString(IDS_STRING_ID);
 	hoteli.InsertColumn(0, s, LVCFMT_LEFT, 90);
-	s.LoadString(716);
+	s.LoadString(IDS_STRING_NAZIV);
 	hoteli.InsertColumn(1, s, LVCFMT_LEFT, 150);
-	s.LoadString(711);
+	s.LoadString(IDS_STRING_ADRESA);
 	hoteli.InsertColumn(2, s, LVCFMT_LEFT, 150);
-	s.LoadString(712);
+	s.LoadString(IDS_STRING_GRAD);
 	hoteli.InsertColumn(3, s, LVCFMT_LEFT, 130);
-	s.LoadString(714);
+	s.LoadString(IDS_STRING_KONTAKT);
 	hoteli.InsertColumn(4, s, LVCFMT_LEFT, 130);
 	hoteli.SetExtendedStyle(hoteli.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 	IspisiHotele();

@@ -119,7 +119,7 @@ void CSeminar1Dlg::OnBnClickedLogin()
 
 	}
 	else {
-		s.LoadString(519);
+		s.LoadString(IDS_STRING_KORISNIK_NEPOSTOJI);
 		AfxMessageBox(s);
 	}
 	login.Close();

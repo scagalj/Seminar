@@ -89,13 +89,13 @@ BOOL CNovaRezervacija::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 	CString s;
-	s.LoadString(715);
+	s.LoadString(IDS_STRING_ID);
 	c_OdabraneSobe.InsertColumn(0, s, LVCFMT_LEFT, 40);
-	s.LoadString(717);
+	s.LoadString(IDS_STRING_OPIS);
 	c_OdabraneSobe.InsertColumn(1, s, LVCFMT_LEFT, 140);
-	s.LoadString(722);
+	s.LoadString(IDS_STRING_CIJENA);
 	c_OdabraneSobe.InsertColumn(2, s, LVCFMT_LEFT, 60);
-	s.LoadString(723);
+	s.LoadString(IDS_STRING_OSOBE);
 	c_OdabraneSobe.InsertColumn(3,s, LVCFMT_LEFT, 70);
 	c_OdabraneSobe.SetExtendedStyle(c_OdabraneSobe.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 	CWnd *label = GetDlgItem(IDC_STATIC_R_DATUMDOLASKA);
@@ -156,7 +156,7 @@ bool CNovaRezervacija::DodajGosta() {
 
 void CNovaRezervacija::IspisiCijenu() {
 	CString s, s1;
-	s1.LoadString(524);
+	s1.LoadString(IDS_STRING_VALUTA);
 	if (!(datumD.GetMonth() < 7 && datumO.GetMonth() < 7 || datumD.GetMonth() >= 9 && datumO.GetMonth() >= 9))
 		s.Format(_T("%.2f %s"), ukupna_cijena*1.2,s1);
 	CWnd *label = GetDlgItem(IDC_STATIC_R_UKUPNACIJENA);
@@ -190,7 +190,7 @@ void CNovaRezervacija::OnBnClickedOk()
 	CString s;
 	if (gostID < 0) {
 		if (DodajGosta() == false) {
-			s.LoadString(520);
+			s.LoadString(IDS_STRING_REZERVACIJA2);
 			AfxMessageBox(s);
 			return;
 		}
@@ -198,7 +198,7 @@ void CNovaRezervacija::OnBnClickedOk()
 	GetDlgItemText(IDC_EDIT_R_BROJGOSTIJU, s);
 	m_Brojgostiju = _tstoi(s);
 	if (m_Brojgostiju > m_BrojGostijuizracun || m_Brojgostiju == 0) {
-		s.LoadString(521);
+		s.LoadString(IDS_STRING_REZERVACIJA3);
 		AfxMessageBox(s);
 		return;
 	}
@@ -243,7 +243,7 @@ void CNovaRezervacija::OnBnClickedButtonRDodaj()
 	GetDlgItemText(IDC_EDIT_R_IDSOBE, m_IDSobe);
 	int id = _tstoi(m_IDSobe);
 	if (id < 0) {
-		s.LoadString(522);
+		s.LoadString(IDS_STRING_REZERVACIJA4);
 		AfxMessageBox(s);
 		return;
 	}
@@ -258,7 +258,7 @@ void CNovaRezervacija::OnBnClickedButtonRDodaj()
 		i++;
 	}
 	if (t == FALSE) {
-		s.LoadString(523);
+		s.LoadString(IDS_STRING_REZERVACIJA5);
 		AfxMessageBox(s);
 		GetDlgItem(IDC_EDIT_R_IDSOBE)->SetWindowText(_T(""));
 		return;
@@ -272,7 +272,7 @@ void CNovaRezervacija::OnBnClickedButtonRDodaj()
 	vrsta.Open();
 	c_OdabraneSobe.SetItemText(nIndex, 1, vrsta.m_Opis);
 	//cijena i broj osoba
-	s1.LoadString(524);
+	s1.LoadString(IDS_STRING_VALUTA);
 	s.Format(_T("%.2f %s"), vrsta.m_Cijena,s1);
 	c_OdabraneSobe.SetItemText(nIndex, 2, s);
 	s.Format(_T("%ld"), vrsta.m_Maks_broj_gostiju);

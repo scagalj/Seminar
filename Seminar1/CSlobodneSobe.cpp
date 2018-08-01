@@ -85,19 +85,19 @@ BOOL CSlobodneSobe::OnInitDialog()
 	}
 	hotel.Close();
 
-	s.LoadString(715);
+	s.LoadString(IDS_STRING_ID);
 	c_list_sobe.InsertColumn(0, s, LVCFMT_LEFT, 90);
-	s.LoadString(718);
+	s.LoadString(IDS_STRING_DUHAN);
 	c_list_sobe.InsertColumn(1, s, LVCFMT_LEFT, 90);
-	s.LoadString(719);
+	s.LoadString(IDS_STRING_LJUBIMAC);
 	c_list_sobe.InsertColumn(2, s, LVCFMT_LEFT, 90);
-	s.LoadString(724);
+	s.LoadString(IDS_STRING_VRSTA_SOBE);
 	c_list_sobe.InsertColumn(3, s, LVCFMT_LEFT, 90);
-	s.LoadString(725);
+	s.LoadString(IDS_STRING_OPIS_SOBE);
 	c_list_sobe.InsertColumn(4, s, LVCFMT_LEFT, 130);
-	s.LoadString(722);
+	s.LoadString(IDS_STRING_CIJENA);
 	c_list_sobe.InsertColumn(5, s, LVCFMT_LEFT, 130);
-	s.LoadString(726);
+	s.LoadString(IDS_STRING_MAX_OSOBA);
 	c_list_sobe.InsertColumn(6, s, LVCFMT_LEFT, 130);
 	c_list_sobe.SetExtendedStyle(c_list_sobe.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 
@@ -124,11 +124,11 @@ void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 	GetDlgItem(IDC_BUTTON_NOVA_REZERVACIJA)->EnableWindow(TRUE);
 	c_list_sobe.DeleteAllItems();
 	if (c_hoteli_naziv == "" || datumin == "" || datumout== "") {
-		s.LoadString(503);
+		s.LoadString(IDS_STRING_PAZNA_POLJA);
 		AfxMessageBox(s);
 		return;
 	}
-	s.Format(_T("[Naziv] = %s"), c_hoteli_naziv);
+	s.Format(_T("[Naziv] = '%s'"), c_hoteli_naziv);
 	hotel.m_strFilter = s;
 	hotel.Open();
 	hotelid = hotel.m_HotelID;
@@ -185,8 +185,8 @@ void CSlobodneSobe::IspisSobe(long sobaid, bool duhan, bool ljubimac, long vrsta
 	CString id,s,s1;
 	id.Format(_T("%ld"), sobaid);
 	int nIndex = c_list_sobe.InsertItem(0, id);
-	s.LoadString(720);
-	s1.LoadString(721);
+	s.LoadString(IDS_STRING_DA);
+	s1.LoadString(IDS_STRING_NE);
 	duhan == TRUE ? c_list_sobe.SetItemText(nIndex, 1, s) : c_list_sobe.SetItemText(nIndex, 1, s1);
 	ljubimac == TRUE ? c_list_sobe.SetItemText(nIndex, 2, s) : c_list_sobe.SetItemText(nIndex, 2, s1);
 	id.Format(_T("%ld"), vrstasobeid);
@@ -196,7 +196,7 @@ void CSlobodneSobe::IspisSobe(long sobaid, bool duhan, bool ljubimac, long vrsta
 	vrsta.m_strFilter = s;
 	vrsta.Open();
 	c_list_sobe.SetItemText(nIndex, 4, vrsta.m_Opis);
-	s1.LoadString(524);
+	s1.LoadString(IDS_STRING_VALUTA);
 	s.Format(_T("%.2f %s"), vrsta.m_Cijena,s1);
 	c_list_sobe.SetItemText(nIndex, 5, s);
 	s.Format(_T("%ld"), vrsta.m_Maks_broj_gostiju);

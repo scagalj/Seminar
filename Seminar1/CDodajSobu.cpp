@@ -86,7 +86,7 @@ void CDodajSobu::OnBnClickedButtonDodajSobu()
 	CSoba soba;
 	CWnd *label = GetDlgItem(IDC_STATIC_SOBA_STATUS);
 	if (vrsta_soba.GetCurSel() < 0) {
-		s.LoadString(500);
+		s.LoadString(IDS_STRING_SOBA1);
 		label->SetWindowText(s);
 		return;
 	}
@@ -106,10 +106,10 @@ void CDodajSobu::OnBnClickedButtonDodajSobu()
 	soba.m_HotelID = s_HotelID;
 	soba.m_VrstaSobeID = id;
 	if (!soba.Update()) {
-		s.LoadString(501);
+		s.LoadString(IDS_STRING_SOBA2);
 		label->SetWindowText(s);
 	}else{
-		s.LoadString(502);
+		s.LoadString(IDS_STRING_SOBA3);
 		label->SetWindowText(s);
 	}
 	sobe.Close();

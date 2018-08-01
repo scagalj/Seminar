@@ -42,21 +42,21 @@ BOOL CGosti::OnInitDialog()
 {
 	CString s;
 	CDialogEx::OnInitDialog();
-	s.LoadString(715);
+	s.LoadString(IDS_STRING_ID);
 	gosti.InsertColumn(0,s, LVCFMT_LEFT, 50);
-	s.LoadString(708);
+	s.LoadString(IDS_STRING_IME);
 	gosti.InsertColumn(1, s, LVCFMT_LEFT, 80);
-	s.LoadString(709);
+	s.LoadString(IDS_STRING_PREZIME);
 	gosti.InsertColumn(2, s, LVCFMT_LEFT, 80);
-	s.LoadString(710);
+	s.LoadString(IDS_STRING_OIB);
 	gosti.InsertColumn(3, s, LVCFMT_LEFT, 100);
-	s.LoadString(711);
+	s.LoadString(IDS_STRING_ADRESA);
 	gosti.InsertColumn(4, s, LVCFMT_LEFT, 100);
-	s.LoadString(712);
+	s.LoadString(IDS_STRING_GRAD);
 	gosti.InsertColumn(5, s, LVCFMT_LEFT, 100);
-	s.LoadString(713);
+	s.LoadString(IDS_STRING_DRZAVA);
 	gosti.InsertColumn(6, s, LVCFMT_LEFT, 100);
-	s.LoadString(714);
+	s.LoadString(IDS_STRING_KONTAKT);
 	gosti.InsertColumn(7, s, LVCFMT_LEFT, 100);
 	gosti.SetExtendedStyle(gosti.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 
@@ -95,7 +95,7 @@ void CGosti::OnBnClickedButtonDodajGosta()
 	int x = gost.DoModal();
 	if (x == IDOK) {
 		IspisiGoste();
-		s.LoadString(504);
+		s.LoadString(IDS_STRING_GOST1);
 		AfxMessageBox(s);
 	}
 }

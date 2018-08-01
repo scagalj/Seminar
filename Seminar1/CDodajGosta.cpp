@@ -61,7 +61,7 @@ void CDodajGosta::OnBnClickedOk()
 	GetDlgItemText(IDC_EDIT_GOST_DRZAVA, m_Drzava);
 	GetDlgItemText(IDC_EDIT_GOST_KONTAKT, m_Kontakt);
 	if (m_Ime == "" || m_Prezime == "" || m_OIB == "" || m_Adresa == "" || m_Grad  == "" || m_Drzava=="" || m_Kontakt == "") {
-		s.LoadString(503);
+		s.LoadString(IDS_STRING_PAZNA_POLJA);
 		AfxMessageBox(s);
 		return;
 	}
@@ -76,7 +76,7 @@ void CDodajGosta::OnBnClickedOk()
 	gost.m_Drzava = m_Drzava;
 	gost.m_Kontakt = m_Kontakt;
 	if (!gost.Update()) {
-		s.LoadString(505);
+		s.LoadString(IDS_STRING_GOST2);
 		AfxMessageBox(s);
 	}
 	gost.Close();

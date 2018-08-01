@@ -41,15 +41,15 @@ void CPopisSoba::PopisSoba(CString x) {
 	CString s,s1;
 	CString id=x;
 	CVrstaSobe vrsta;
-	s.Format(_T("[HotelID] = %d"), id);
+	s.Format(_T("[HotelID] = %s"), id);
 	p_soba.m_strFilter = s;
 	p_soba.Open();
 	popis_soba.DeleteAllItems();
 	while (!p_soba.IsEOF()) {
 		id.Format(_T("%ld"), p_soba.m_SobaID);
 		int nIndex = popis_soba.InsertItem(0, id);
-		s.LoadString(720);
-		s1.LoadString(721);
+		s.LoadString(IDS_STRING_DA);
+		s1.LoadString(IDS_STRING_NE);
 		p_soba.m_Konzumiranje_duhana == TRUE ? popis_soba.SetItemText(nIndex, 1, s) : popis_soba.SetItemText(nIndex, 1, s1);
 		p_soba.m_Ljubimci == TRUE ? popis_soba.SetItemText(nIndex, 2, s) : popis_soba.SetItemText(nIndex, 2, s1);
 		id.Format(_T("%ld"), p_soba.m_VrstaSobeID);
@@ -58,7 +58,7 @@ void CPopisSoba::PopisSoba(CString x) {
 		vrsta.m_strFilter = s;
 		vrsta.Open();
 		popis_soba.SetItemText(nIndex, 4, vrsta.m_Opis);
-		s1.LoadString(524);
+		s1.LoadString(IDS_STRING_VALUTA);
 		s.Format(_T("%.2f %s"), vrsta.m_Cijena,s1);
 		popis_soba.SetItemText(nIndex, 5, s);
 		vrsta.Close();
@@ -76,17 +76,17 @@ BOOL CPopisSoba::OnInitDialog() {
 		label->SetWindowText(id);
 		label = GetDlgItem(IDC_STATIC_POPIS_HNAZIV);
 		label->SetWindowTextW(p_NazivHotela);
-		s.LoadString(715);
+		s.LoadString(IDS_STRING_ID);
 		popis_soba.InsertColumn(0, s, LVCFMT_LEFT, 90);
-		s.LoadString(718);
+		s.LoadString(IDS_STRING_DUHAN);
 		popis_soba.InsertColumn(1, s, LVCFMT_LEFT, 130);
-		s.LoadString(719);
+		s.LoadString(IDS_STRING_LJUBIMAC);
 		popis_soba.InsertColumn(2, s, LVCFMT_LEFT, 130);
-		s.LoadString(724);
+		s.LoadString(IDS_STRING_VRSTA_SOBE);
 		popis_soba.InsertColumn(3, s, LVCFMT_LEFT, 90);
-		s.LoadString(725);
+		s.LoadString(IDS_STRING_OPIS_SOBE);
 		popis_soba.InsertColumn(4, s, LVCFMT_LEFT, 170);
-		s.LoadString(722);
+		s.LoadString(IDS_STRING_CIJENA);
 		popis_soba.InsertColumn(5, s, LVCFMT_LEFT, 90);
 		popis_soba.SetExtendedStyle(popis_soba.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 

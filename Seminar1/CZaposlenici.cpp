@@ -63,21 +63,21 @@ BOOL CZaposlenici::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 	CString s;
-	s.LoadString(715);
+	s.LoadString(IDS_STRING_ID);
 	zaposlenici.InsertColumn(0,s, LVCFMT_LEFT, 50);
-	s.LoadString(727);
+	s.LoadString(IDS_STRING_OZNAKA);
 	zaposlenici.InsertColumn(1, s, LVCFMT_LEFT, 90);
-	s.LoadString(708);
+	s.LoadString(IDS_STRING_IME);
 	zaposlenici.InsertColumn(2, s, LVCFMT_LEFT, 90);
-	s.LoadString(709);
+	s.LoadString(IDS_STRING_PREZIME);
 	zaposlenici.InsertColumn(3, s, LVCFMT_LEFT, 90);
-	s.LoadString(711);
+	s.LoadString(IDS_STRING_ADRESA);
 	zaposlenici.InsertColumn(4, s, LVCFMT_LEFT, 120);
-	s.LoadString(712);
+	s.LoadString(IDS_STRING_GRAD);
 	zaposlenici.InsertColumn(5, s, LVCFMT_LEFT, 90);
-	s.LoadString(713);
+	s.LoadString(IDS_STRING_DRZAVA);
 	zaposlenici.InsertColumn(6, s, LVCFMT_LEFT, 90);
-	s.LoadString(714);
+	s.LoadString(IDS_STRING_KONTAKT);
 	zaposlenici.InsertColumn(7, s, LVCFMT_LEFT, 120);
 	zaposlenici.SetExtendedStyle(zaposlenici.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 	

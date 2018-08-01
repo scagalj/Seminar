@@ -65,7 +65,7 @@ void CDodajZaposlenika::OnBnClickedOk()
 	GetDlgItemText(IDC_EDIT_Z_Drzava, m_Drzava);
 	GetDlgItemText(IDC_EDIT_Z_Kontakt, m_Kontakt);
 	if (m_Kor_Oznaka == "" || m_Lozinka == "") {
-		s.LoadString(503);
+		s.LoadString(IDS_STRING_PAZNA_POLJA);
 		label->SetWindowText(s);
 		return;
 	}
@@ -81,11 +81,11 @@ void CDodajZaposlenika::OnBnClickedOk()
 	zaposlenik.m_Drzava = m_Drzava;
 	zaposlenik.m_Kontakt = m_Kontakt;
 	if (!zaposlenik.Update()) {
-		s.LoadString(508);
+		s.LoadString(IDS_STRING_ZAPOSLENIK1);
 		label->SetWindowText(s);
 	}
 	else {
-		s.LoadString(509);
+		s.LoadString(IDS_STRING_ZAPOSLENIK2);
 		label->SetWindowText(s);
 	}
 	zaposlenik.Close();
