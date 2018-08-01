@@ -187,8 +187,9 @@ void CApplicationDlg::IspisRezervacija() {
 CString CApplicationDlg::IspisGosta(int id) {
 	CString s;
 	CGost gost;
-	s.Format(_T("SELECT * FROM Gost Where GostID = %d"), id);
-	gost.Open(CRecordset::dynaset, s);
+	s.Format(_T("[GostID] = %d"), id);
+	gost.m_strFilter = s;
+	gost.Open();
 	s.Format(_T("%s %s"), gost.m_Ime, gost.m_Prezime);
 	gost.Close();
 	return s;
@@ -196,8 +197,9 @@ CString CApplicationDlg::IspisGosta(int id) {
 CString CApplicationDlg::IspisZaposlenika(int id) {
 	CString s;
 	CZaposlenik zaposlenik;
-	s.Format(_T("SELECT * FROM Zaposlenik Where ZaposlenikID = %d"), id);
-	zaposlenik.Open(CRecordset::dynaset, s);
+	s.Format(_T("[ZaposlenikID] = %d"), id);
+	zaposlenik.m_strFilter = s;
+	zaposlenik.Open();
 	s.Format(_T("%s"), zaposlenik.m_Kor_Oznaka);
 	zaposlenik.Close();
 	return s;

@@ -45,8 +45,9 @@ CNovaRezervacija::CNovaRezervacija(int *sobeID, CString datumD, CString datumO,C
 	}
 	CZaposlenik zaposlenik;
 	CString s;
-	s.Format(_T("SELECT * FROM Zaposlenik Where Kor_Oznaka = '%s'"), korisnik);
-	zaposlenik.Open(CRecordset::dynaset, s);
+	s.Format(_T("[Kor_Oznaka] = %s"), korisnik);
+	zaposlenik.m_strFilter = s;
+	zaposlenik.Open();
 	zapID = zaposlenik.m_ZaposlenikID;
 	zaposlenik.Close();
 }
@@ -169,8 +170,9 @@ void CNovaRezervacija::OnBnClickedButtonRTrazi()
 	CWnd *label = GetDlgItem(IDC_STATIC_R_IMEGOSTA);
 	GetDlgItemText(IDC_EDIT_R_OIB_P, m_pretraziOIB);
 	CGost gost;
-	s.Format(_T("SELECT * FROM Gost Where OIB = '%s'"), m_pretraziOIB);
-	gost.Open(CRecordset::dynaset, s);
+	s.Format(_T("[OIB] = %s"), m_pretraziOIB);
+	gost.m_strFilter = s;
+	gost.Open();
 	if (gost.m_Ime != "") {	
 		gostID = gost.m_GostID;
 		s.Format(_T("%s %s"), gost.m_Ime, gost.m_Prezime);
@@ -235,6 +237,8 @@ void CNovaRezervacija::OnBnClickedOk()
 
 void CNovaRezervacija::OnBnClickedButtonRDodaj()
 {
+	CSoba soba;
+	CVrstaSobe vrsta;
 	CString s,s1;
 	GetDlgItemText(IDC_EDIT_R_IDSOBE, m_IDSobe);
 	int id = _tstoi(m_IDSobe);
@@ -259,13 +263,13 @@ void CNovaRezervacija::OnBnClickedButtonRDodaj()
 		GetDlgItem(IDC_EDIT_R_IDSOBE)->SetWindowText(_T(""));
 		return;
 	}
-	s.Format(_T("SELECT * FROM Soba Where SobaID = %d"), id);
-	CSoba soba;
-	CVrstaSobe vrsta;
-	soba.Open(CRecordset::dynaset, s);
+	s.Format(_T("[SobaID] = %d"), id);
+	soba.m_strFilter = s;
+	soba.Open();
 	int nIndex = c_OdabraneSobe.InsertItem(0, m_IDSobe);
-	s.Format(_T("SELECT * FROM VrstaSobe Where VrstaSobeID = %d"), soba.m_VrstaSobeID);
-	vrsta.Open(CRecordset::dynaset, s);
+	s.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
+	vrsta.m_strFilter = s;
+	vrsta.Open();
 	c_OdabraneSobe.SetItemText(nIndex, 1, vrsta.m_Opis);
 	//cijena i broj osoba
 	s1.LoadString(524);

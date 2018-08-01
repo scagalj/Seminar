@@ -104,8 +104,9 @@ void CZaposlenici::OnBnClickedButtonZaposlenikIzbrisi()
 	CZaposlenik zaposlenik;
 	int y = _tstoi(t);
 	CString s;
-	s.Format(_T("SELECT * FROM Zaposlenik Where ZaposlenikID = %d"), y);
-	zaposlenik.Open(CRecordset::dynaset, s);
+	s.Format(_T("[ZaposlenikID] = %d"), y);
+	zaposlenik.m_strFilter = s;
+	zaposlenik.Open();
 	zaposlenik.Delete();
 	zaposlenici.DeleteItem(x);
 	zaposlenik.Close();

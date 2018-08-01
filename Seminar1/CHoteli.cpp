@@ -103,8 +103,9 @@ void CHoteli::OnBnClickedButtonDeleteHotel()
 	CHotel hotel;
 	int y = _tstoi(t);
 	CString s;
-	s.Format(_T("SELECT * FROM Hotel Where HotelID = %d"), y);
-	hotel.Open(CRecordset::dynaset, s);
+	s.Format(_T("[HotelID] = %d"), y);
+	hotel.m_strFilter = s;
+	hotel.Open();
 	hotel.Delete();
 	hoteli.DeleteItem(x);
 	hotel.Close();
@@ -147,8 +148,9 @@ void CHoteli::OnBnClickedButtonDodajSobu()
 	CString t = hoteli.GetItemText(x, 0);
 	int y = _tstoi(t);
 	CString s;
-	s.Format(_T("SELECT * FROM Hotel Where HotelID = %d"), y);
-	hotel.Open(CRecordset::dynaset, s);
+	s.Format(_T("[HotelID] = %d"),y);
+	hotel.m_strFilter = s;
+	hotel.Open();
 	CDodajSobu soba(hotel.m_HotelID,hotel.m_Naziv,this);
 	soba.DoModal();
 	hotel.Close();
@@ -171,8 +173,9 @@ void CHoteli::OnBnClickedButtonPopisSoba()
 	CString t = hoteli.GetItemText(x, 0);
 	int y = _tstoi(t);
 	CString s;
-	s.Format(_T("SELECT * FROM Hotel Where HotelID = %d"), y);
-	hotel.Open(CRecordset::dynaset, s);
+	s.Format(_T("[HotelID] = %d"), y);
+	hotel.m_strFilter = s;
+	hotel.Open();
 	CPopisSoba popis(hotel.m_HotelID, hotel.m_Naziv, this);
 	popis.DoModal();
 	hotel.Close();

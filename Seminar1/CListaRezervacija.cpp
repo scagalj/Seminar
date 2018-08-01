@@ -116,8 +116,9 @@ void CListaRezervacija::IspisRezervacija() {
 CString CListaRezervacija::IspisGosta(int id) {
 	CString s;
 	CGost gost;
-	s.Format(_T("SELECT * FROM Gost Where GostID = %d"), id);
-	gost.Open(CRecordset::dynaset, s);
+	s.Format(_T("[GostID] = %d"), id);
+	gost.m_strFilter = s;
+	gost.Open();
 	s.Format(_T("%s %s"), gost.m_Ime , gost.m_Prezime);
 	gost.Close();
 	return s;
@@ -125,8 +126,9 @@ CString CListaRezervacija::IspisGosta(int id) {
 CString CListaRezervacija::IspisZaposlenika(int id) {
 	CString s;
 	CZaposlenik zaposlenik;
-	s.Format(_T("SELECT * FROM Zaposlenik Where ZaposlenikID = %d"), id);
-	zaposlenik.Open(CRecordset::dynaset, s);
+	s.Format(_T("[ZaposlenikID] = %d"), id);
+	zaposlenik.m_strFilter = s;
+	zaposlenik.Open();
 	s.Format(_T("%s"), zaposlenik.m_Kor_Oznaka);
 	zaposlenik.Close();
 	return s;
@@ -136,17 +138,20 @@ void CListaRezervacija::IspisiSobe(int id) {
 	CString s;
 	int nIndex;
 	CDetaljiRezervacije det;
-	s.Format(_T("SELECT * FROM DetaljiRezervacije Where RezervacijaID = %d"), id);
-	det.Open(CRecordset::dynaset, s);
+	s.Format(_T("[RezervacijaID] = %d"), id);
+	det.m_strFilter = s;
+	det.Open();
 	while (!det.IsEOF()) {
 		CSoba soba;
-		s.Format(_T("SELECT * FROM Soba Where SobaID = %d"), det.m_SobaID);
-		soba.Open(CRecordset::dynaset, s);
+		s.Format(_T("[SobaID] = %d"), det.m_SobaID);
+		soba.m_strFilter = s;
+		soba.Open();
 		s.Format(_T("%d"), soba.m_SobaID);
 		nIndex = c_list_rez_sobe.InsertItem(0, s);
 		CVrstaSobe vrsta;
-		s.Format(_T("SELECT * FROM VrstaSobe Where VrstaSobeID = %d"), soba.m_VrstaSobeID);
-		vrsta.Open(CRecordset::dynaset, s);
+		s.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
+		vrsta.m_strFilter = s;
+		vrsta.Open();
 		c_list_rez_sobe.SetItemText(nIndex, 1, vrsta.m_Opis);
 		vrsta.Close();
 		soba.Close();
@@ -182,8 +187,9 @@ void CListaRezervacija::OnBnClickedButtonRIzbrisi()
 	CRezervacija rez;
 	int y = _tstoi(t);
 	CString s;
-	s.Format(_T("SELECT * FROM Rezervacija Where RezervacijaID = %d"), y);
-	rez.Open(CRecordset::dynaset, s);
+	s.Format(_T("[RezervacijaID] = %d"), y);
+	rez.m_strFilter = s;
+	rez.Open();
 	rez.Delete();
 	c_lista_rezervacija.DeleteItem(x);
 	rez.Close();
@@ -215,8 +221,9 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 	CSoba soba;
 	id = _tstoi(t);
 	CString s,s1;
-	s.Format(_T("SELECT * FROM Rezervacija Where RezervacijaID = %d"), id);
-	rez.Open(CRecordset::dynaset, s);
+	s.Format(_T("[RezervacijaID] = %d"), id);
+	rez.m_strFilter = s;
+	rez.Open();
 
 	int sirina_p = pDC->GetDeviceCaps(HORZRES);
 	int visina_p = pDC->GetDeviceCaps(VERTRES);
@@ -224,8 +231,9 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 	int x1 = sirina_p / 12;
 	int y1 = font.cy * 4;
 
-	s.Format(_T("SELECT * FROM Gost Where GostID = %d"), rez.m_GostID);
-	gost.Open(CRecordset::dynaset, s);
+	s.Format(_T("[GostID] = %d"), rez.m_GostID);
+	gost.m_strFilter = s;
+	gost.Open();
 	s.Format(_T("%s %s"), gost.m_Ime, gost.m_Prezime);
 	pDC->TextOut(x1*9, y1*=3, s);
 	pDC->TextOut(x1 * 9, y1 += font.cy, gost.m_OIB);
@@ -238,8 +246,9 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 	pDC->TextOut(x1*5,y1+=(font.cy*3),s1);
 	pDC->MoveTo(x1, y1 +100);
 	pDC->LineTo(x1 * 11, y1+100);
-	s.Format(_T("SELECT * FROM Zaposlenik Where ZaposlenikID = %d"), rez.m_ZaposlenikID);
-	zap.Open(CRecordset::dynaset, s);
+	s.Format(_T("[ZaposlenikID] = %d"), rez.m_ZaposlenikID);
+	zap.m_strFilter = s;
+	zap.Open();
 	s1.LoadString(511);
 	s.Format(_T("%s: %s"),s1, zap.m_Kor_Oznaka);
 	pDC->TextOut(x1, y1+=(font.cy*3), s);
@@ -272,17 +281,20 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 	pDC->LineTo(x1 * 10, y1 + 100);
 
 	CDetaljiRezervacije det;
-	s.Format(_T("SELECT * FROM DetaljiRezervacije Where RezervacijaID = %d"), rez.m_RezervacijaID);
-	det.Open(CRecordset::dynaset, s);
+	s.Format(_T("[RezervacijaID] = %d"), rez.m_RezervacijaID);
+	det.m_strFilter = s;
+	det.Open();
 	while (!det.IsEOF()) {
 		CSoba soba;
-		s.Format(_T("SELECT * FROM Soba Where SobaID = %d"), det.m_SobaID);
-		soba.Open(CRecordset::dynaset, s);
+		s.Format(_T("[SobaID] = %d"), det.m_SobaID);
+		soba.m_strFilter = s;
+		soba.Open();
 		id = soba.m_HotelID;
 		s.Format(_T("%d"), soba.m_SobaID);
 		pDC->TextOut(x1 * 2, y1 += font.cy, s);
 		CVrstaSobe vrsta;
-		s.Format(_T("SELECT * FROM VrstaSobe Where VrstaSobeID = %d"), soba.m_VrstaSobeID);
+		s.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
+		vrsta.m_strFilter = s;
 		vrsta.Open(CRecordset::dynaset, s);
 		pDC->TextOut(x1 * 3, y1, vrsta.m_Opis);
 		s.LoadString(720);
@@ -294,8 +306,9 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 		det.MoveNext();
 	}
 	
-	s.Format(_T("SELECT * FROM Hotel Where HotelID = %d"), id);
-	hotel.Open(CRecordset::dynaset, s);
+	s.Format(_T("[HotelID] = %d"), id);
+	hotel.m_strFilter = s;
+	hotel.Open();
 	font.cy -= 30;
 	y1 = font.cy * 4;
 	pDC->TextOut(x1, y1, hotel.m_Naziv);

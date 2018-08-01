@@ -118,34 +118,38 @@ void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 {
 	CString s, id;
 	int i = 0;
+	CHotel hotel;
+	CSoba soba;
+	BOOL slobodna = TRUE;
 	GetDlgItem(IDC_BUTTON_NOVA_REZERVACIJA)->EnableWindow(TRUE);
 	c_list_sobe.DeleteAllItems();
-	BOOL slobodna = TRUE;
 	if (c_hoteli_naziv == "" || datumin == "" || datumout== "") {
 		s.LoadString(503);
 		AfxMessageBox(s);
 		return;
 	}
-	CHotel hotel;
-	s.Format(_T("SELECT * FROM Hotel Where Naziv = '%s'"), c_hoteli_naziv);
-	hotel.Open(CRecordset::dynaset, s);
+	s.Format(_T("[Naziv] = %s"), c_hoteli_naziv);
+	hotel.m_strFilter = s;
+	hotel.Open();
 	hotelid = hotel.m_HotelID;
 	hotel.Close();
 	//Dohvaæanje soba s ID odabranog hotela
-	CSoba soba;
-	s.Format(_T("SELECT * FROM Soba Where HotelID = %d"), hotelid); 
-	soba.Open(CRecordset::dynaset, s);
+	s.Format(_T("[HotelID] = %d"), hotelid);
+	soba.m_strFilter = s;
+	soba.Open();
 	while (!soba.IsEOF()) {
 		slobodna = TRUE;
 		//Dohvaæanje detalja rezervacija za pojedinu sobu
 		CDetaljiRezervacije detalji;
-		s.Format(_T("SELECT * FROM DetaljiRezervacije Where SobaID = %d"), soba.m_SobaID);
-		detalji.Open(CRecordset::dynaset, s);
+		s.Format(_T("[SobaID] = %d"), soba.m_SobaID);
+		detalji.m_strFilter = s;
+		detalji.Open();
 		while (!detalji.IsEOF()) {
 			//Dohvaæanje rezervacije na osnovi Detalja rezervacije
 			CRezervacija rez;
-			s.Format(_T("SELECT * FROM Rezervacija Where RezervacijaID = %d"), detalji.m_RezervacijaID);
-			rez.Open(CRecordset::dynaset, s);
+			s.Format(_T("[RezervacijaID] = %d"), detalji.m_RezervacijaID);
+			rez.m_strFilter = s;
+			rez.Open();
 			COleDateTime t1, t2;
 			t1.ParseDateTime(datumin); //odabrani datumi
 			t2.ParseDateTime(datumout); //odabrani datum
@@ -188,8 +192,9 @@ void CSlobodneSobe::IspisSobe(long sobaid, bool duhan, bool ljubimac, long vrsta
 	id.Format(_T("%ld"), vrstasobeid);
 	c_list_sobe.SetItemText(nIndex, 3, id);
 	CVrstaSobe vrsta;
-	s.Format(_T("SELECT * FROM VrstaSobe Where VrstaSobeID = %s"), id);
-	vrsta.Open(CRecordset::dynaset, s);
+	s.Format(_T("[VrstaSobeID] = %s"), id);
+	vrsta.m_strFilter = s;
+	vrsta.Open();
 	c_list_sobe.SetItemText(nIndex, 4, vrsta.m_Opis);
 	s1.LoadString(524);
 	s.Format(_T("%.2f %s"), vrsta.m_Cijena,s1);

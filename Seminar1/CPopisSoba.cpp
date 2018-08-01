@@ -41,11 +41,11 @@ void CPopisSoba::PopisSoba(CString x) {
 	CString s,s1;
 	CString id=x;
 	CVrstaSobe vrsta;
-	s.Format(_T("SELECT * FROM Soba Where HotelID = %s"), id);
-	p_soba.Open(CRecordset::dynaset, s);
+	s.Format(_T("[HotelID] = %d"), id);
+	p_soba.m_strFilter = s;
+	p_soba.Open();
 	popis_soba.DeleteAllItems();
 	while (!p_soba.IsEOF()) {
-		CString id;
 		id.Format(_T("%ld"), p_soba.m_SobaID);
 		int nIndex = popis_soba.InsertItem(0, id);
 		s.LoadString(720);
@@ -54,8 +54,9 @@ void CPopisSoba::PopisSoba(CString x) {
 		p_soba.m_Ljubimci == TRUE ? popis_soba.SetItemText(nIndex, 2, s) : popis_soba.SetItemText(nIndex, 2, s1);
 		id.Format(_T("%ld"), p_soba.m_VrstaSobeID);
 		popis_soba.SetItemText(nIndex, 3, id);
-		s.Format(_T("SELECT * FROM VrstaSobe Where VrstaSobeID = %s"), id);
-		vrsta.Open(CRecordset::dynaset, s);
+		s.Format(_T("[VrstaSobeID] = %s"), id);
+		vrsta.m_strFilter = s;
+		vrsta.Open();
 		popis_soba.SetItemText(nIndex, 4, vrsta.m_Opis);
 		s1.LoadString(524);
 		s.Format(_T("%.2f %s"), vrsta.m_Cijena,s1);
@@ -113,8 +114,9 @@ void CPopisSoba::OnBnClickedButtonPopisIzbrisiSobu()
 	CSoba soba;
 	int y = _tstoi(t);
 	CString s;
-	s.Format(_T("SELECT * FROM Soba Where SobaID = %d"), y);
-	soba.Open(CRecordset::dynaset, s);
+	s.Format(_T("[SobaID] = %d"), y);
+	soba.m_strFilter = s;
+	soba.Open();
 	soba.Delete();
 	popis_soba.DeleteItem(x);
 	soba.Close();

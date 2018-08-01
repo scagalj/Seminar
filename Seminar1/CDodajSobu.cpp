@@ -82,6 +82,8 @@ void CDodajSobu::OnBnClickedButtonDodajSobu()
 {
 	//LoadString(hInstance, IDS_STRING1, s, sizeof s);
 	CString s;
+	CVrstaSobe sobe;
+	CSoba soba;
 	CWnd *label = GetDlgItem(IDC_STATIC_SOBA_STATUS);
 	if (vrsta_soba.GetCurSel() < 0) {
 		s.LoadString(500);
@@ -93,11 +95,10 @@ void CDodajSobu::OnBnClickedButtonDodajSobu()
 	duhan = (m_ctlCheck1->GetCheck() == 1) ? true : false;
 	m_ctlCheck1 = (CButton*)GetDlgItem(IDC_CHECK_LJUBIMCI);
 	ljubimci = (m_ctlCheck1->GetCheck() == 1) ? true : false;
-	s.Format(_T("SELECT * FROM VrstaSobe Where Opis = '%s'"), s_vrsta_soba);
-	CVrstaSobe sobe;
-	sobe.Open(CRecordset::dynaset, s);
+	s.Format(_T("[Opis] = %s"), s_vrsta_soba);
+	sobe.m_strFilter = s;
+	sobe.Open();
 	int id = sobe.m_VrstaSobeID;
-	CSoba soba;
 	soba.Open();
 	soba.AddNew();
 	soba.m_Konzumiranje_duhana = duhan;
