@@ -31,6 +31,7 @@ public:
 	void IspisSobe(long sobaid, bool duhan, bool ljubimac,long vrstasobeid);
 	CListCtrl c_list_sobe;
 	CComboBox c_hoteli;
+	DWORD_PTR hotel_id;
 	CString c_hoteli_naziv;
 	CDateTimeCtrl t_SlobodneSobe;
 	CDateTimeCtrl t_slobodnesobe_out;

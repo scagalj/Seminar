@@ -47,18 +47,27 @@ void CDodajSobu::DoDataExchange(CDataExchange* pDX)
 BOOL CDodajSobu::OnInitDialog() {
 	CDialogEx::OnInitDialog();
 	CString id;
+	int i = 0;
+	CVrstaSobe vrstasobe;
 	CWnd *label = GetDlgItem(IDC_STATIC_HotelID);
 	id.Format(_T("%ld"), s_HotelID);
 	label->SetWindowText(id);
 	label = GetDlgItem(IDC_STATIC_NazivHotela);
 	label->SetWindowTextW(s_NazivHotela);
-	CVrstaSobe vrstasobe;
 	vrstasobe.Open();
 	while (!vrstasobe.IsEOF()) {
+		soba_id = vrstasobe.m_VrstaSobeID;
 		vrsta_soba.AddString(vrstasobe.m_Opis);
+		vrsta_soba.SetItemData(i, soba_id);
+		i++;
 		vrstasobe.MoveNext();
 	}
 	vrstasobe.Close();
+
+	CEdit* pEdit = (CEdit*)vrsta_soba.GetWindow(GW_CHILD);
+	pEdit->EnableWindow();
+	pEdit->SetReadOnly();
+
 	return TRUE;
 }
 
@@ -73,38 +82,33 @@ END_MESSAGE_MAP()
 
 void CDodajSobu::OnCbnSelchangeComboSobaVrsta()
 {
-	vrsta_soba.GetLBText(vrsta_soba.GetCurSel(), s_vrsta_soba);
+	soba_id = vrsta_soba.GetItemData(vrsta_soba.GetCurSel());
+	//vrsta_soba.GetLBText(vrsta_soba.GetCurSel(), s_vrsta_soba);
 	UpdateData(FALSE);
 }
 
 
 void CDodajSobu::OnBnClickedButtonDodajSobu()
 {
-	//LoadString(hInstance, IDS_STRING1, s, sizeof s);
 	CString s;
-	CVrstaSobe sobe;
 	CSoba soba;
+	bool duhan, ljubimci;
 	CWnd *label = GetDlgItem(IDC_STATIC_SOBA_STATUS);
 	if (vrsta_soba.GetCurSel() < 0) {
 		s.LoadString(IDS_STRING_SOBA1);
 		label->SetWindowText(s);
 		return;
 	}
-	bool duhan,ljubimci;
 	CButton *m_ctlCheck1 = (CButton*)GetDlgItem(IDC_CHECK_DUHAN);
 	duhan = (m_ctlCheck1->GetCheck() == 1) ? true : false;
 	m_ctlCheck1 = (CButton*)GetDlgItem(IDC_CHECK_LJUBIMCI);
 	ljubimci = (m_ctlCheck1->GetCheck() == 1) ? true : false;
-	s.Format(_T("[Opis] = %s"), s_vrsta_soba);
-	sobe.m_strFilter = s;
-	sobe.Open();
-	int id = sobe.m_VrstaSobeID;
 	soba.Open();
 	soba.AddNew();
 	soba.m_Konzumiranje_duhana = duhan;
 	soba.m_Ljubimci = ljubimci;
 	soba.m_HotelID = s_HotelID;
-	soba.m_VrstaSobeID = id;
+	soba.m_VrstaSobeID = soba_id;
 	if (!soba.Update()) {
 		s.LoadString(IDS_STRING_SOBA2);
 		label->SetWindowText(s);
@@ -112,7 +116,6 @@ void CDodajSobu::OnBnClickedButtonDodajSobu()
 		s.LoadString(IDS_STRING_SOBA3);
 		label->SetWindowText(s);
 	}
-	sobe.Close();
 	soba.Close();
 	vrsta_soba.SetCurSel(-1);
 }

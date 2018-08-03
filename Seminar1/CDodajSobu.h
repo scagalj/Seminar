@@ -27,6 +27,7 @@ protected:
 
 public:
 	CComboBox vrsta_soba;
+	DWORD_PTR soba_id;
 	CString s_vrsta_soba;
 	afx_msg void OnCbnSelchangeComboSobaVrsta();
 	BOOL s_duhan;

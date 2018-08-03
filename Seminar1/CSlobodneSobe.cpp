@@ -61,7 +61,7 @@ void CSlobodneSobe::OnDtnDatetimechangeDatetimepickerSobe(NMHDR *pNMHDR, LRESULT
 {
 	LPNMDATETIMECHANGE pDTChange = reinterpret_cast<LPNMDATETIMECHANGE>(pNMHDR);
 	GetDlgItemText(IDC_DATETIMEPICKER_SOBE, datumin);
-	UpdateData(FALSE);
+	UpdateData(TRUE);
 	*pResult = 0;
 }
 //datum odlaska
@@ -69,19 +69,23 @@ void CSlobodneSobe::OnDtnDatetimechangeDatetimepickerCout(NMHDR *pNMHDR, LRESULT
 {
 	LPNMDATETIMECHANGE pDTChange = reinterpret_cast<LPNMDATETIMECHANGE>(pNMHDR);
 	GetDlgItemText(IDC_DATETIMEPICKER_COUT, datumout);
-	UpdateData(FALSE);
+	UpdateData(TRUE);
 	*pResult = 0;
 }
 
 BOOL CSlobodneSobe::OnInitDialog()
 {
-	CString s;
 	CDialogEx::OnInitDialog();
+	CString s;
+	int i = 0;
 	CHotel hotel;
 	hotel.Open();
 	while(!hotel.IsEOF()) {
+		 hotel_id = hotel.m_HotelID;
 		c_hoteli.AddString(hotel.m_Naziv);
+		c_hoteli.SetItemData(i, hotel_id);
 		hotel.MoveNext();
+		i++;
 	}
 	hotel.Close();
 
@@ -101,16 +105,19 @@ BOOL CSlobodneSobe::OnInitDialog()
 	c_list_sobe.InsertColumn(6, s, LVCFMT_LEFT, 130);
 	c_list_sobe.SetExtendedStyle(c_list_sobe.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 
-
 	GetDlgItem(IDC_BUTTON_NOVA_REZERVACIJA)->EnableWindow(FALSE);
+	
+	CEdit* pEdit = (CEdit*)c_hoteli.GetWindow(GW_CHILD);
+	pEdit->EnableWindow();
+	pEdit->SetReadOnly();
 
 	return TRUE;
 }
 
 void CSlobodneSobe::OnCbnSelchangeComboSlobodneNazivhotela()
 {
-	c_hoteli.GetLBText(c_hoteli.GetCurSel(), c_hoteli_naziv);
-	UpdateData(FALSE);
+	hotel_id = c_hoteli.GetItemData(c_hoteli.GetCurSel());
+	UpdateData(TRUE);
 
 }
 
@@ -128,13 +135,8 @@ void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 		AfxMessageBox(s);
 		return;
 	}
-	s.Format(_T("[Naziv] = '%s'"), c_hoteli_naziv);
-	hotel.m_strFilter = s;
-	hotel.Open();
-	hotelid = hotel.m_HotelID;
-	hotel.Close();
 	//Dohvaæanje soba s ID odabranog hotela
-	s.Format(_T("[HotelID] = %d"), hotelid);
+	s.Format(_T("[HotelID] = %d"), hotel_id);
 	soba.m_strFilter = s;
 	soba.Open();
 	while (!soba.IsEOF()) {
@@ -157,6 +159,7 @@ void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 			SYSTEMTIME st;
 			if (t1.GetAsSystemTime(st))
 				t3 = CTime(st);
+
 			if (t2.GetAsSystemTime(st))
 				t4 = CTime(st);
 
