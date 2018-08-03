@@ -93,6 +93,9 @@
     <ClInclude Include="CStareRezervacije.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Funkcije.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Seminar1.cpp">
@@ -162,6 +165,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CStareRezervacije.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Funkcije.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

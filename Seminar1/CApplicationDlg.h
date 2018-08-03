@@ -24,6 +24,8 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	CListCtrl c_rezervacije_danas;
+	void IspisRezervacija();
 	afx_msg void OnBnClickedButtonLogout();
 	afx_msg void OnPaint();
 	afx_msg void OnBnClickedButtonHotel();
@@ -31,9 +33,5 @@ public:
 	afx_msg void OnBnClickedButtonGost();
 	afx_msg void OnBnClickedButtonSlobodneSobe();
 	afx_msg void OnBnClickedButtonRezervacije();
-	CListCtrl c_rezervacije_danas;
-	void IspisRezervacija();
-	CString IspisGosta(int id);
-	CString IspisZaposlenika(int id);
 	afx_msg void OnBnClickedButtonStareRezervacije();
 };

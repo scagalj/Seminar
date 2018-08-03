@@ -24,8 +24,6 @@ public:
 	CListCtrl c_lista_rezervacija;
 	virtual BOOL OnInitDialog();
 	void IspisRezervacija();
-	CString IspisGosta(int id);
-	CString IspisZaposlenika(int id);
 	void IspisiSobe(int id);
 	CListCtrl c_list_rez_sobe;
 	afx_msg void OnLvnItemchangedListRezervacije(NMHDR *pNMHDR, LRESULT *pResult);

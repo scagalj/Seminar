@@ -12,6 +12,7 @@
 #include "Soba.h"
 #include "VrstaSobe.h"
 #include "Hotel.h"
+#include "Funkcije.h"
 
 
 // CListaRezervacija dialog
@@ -82,6 +83,7 @@ BOOL CListaRezervacija::OnInitDialog()
 }
 
 void CListaRezervacija::IspisRezervacija() {
+	Funkcije f;
 	CString s,s1;
 	CRezervacija rez;
 	rez.Open();
@@ -99,10 +101,10 @@ void CListaRezervacija::IspisRezervacija() {
 			c_lista_rezervacija.SetItemText(nIndex, 3, s);
 			s = rez.m_Check_IN.Format(_T("%d.%m.%Y"));
 			c_lista_rezervacija.SetItemText(nIndex, 4, s);
-			s = rez.m_Check_OUT.Format(_T("%d.%m.%Y"));
+			s = rez.m_Check_OUT.Format(_T("%d.%m.%Y")); 
 			c_lista_rezervacija.SetItemText(nIndex, 5, s);
-			c_lista_rezervacija.SetItemText(nIndex, 6, IspisGosta(rez.m_GostID));
-			c_lista_rezervacija.SetItemText(nIndex, 7, IspisZaposlenika(rez.m_ZaposlenikID));
+			c_lista_rezervacija.SetItemText(nIndex, 6, f.DohvatiGosta(rez.m_GostID));
+			c_lista_rezervacija.SetItemText(nIndex, 7, f.DohvatiZaposlenika(rez.m_ZaposlenikID));
 			s1.LoadString(IDS_STRING_VALUTA);
 			s.Format(_T("%.2f %s"), rez.m_Ukupna_cijena,s1);
 			c_lista_rezervacija.SetItemText(nIndex, 8, s);
@@ -113,27 +115,7 @@ void CListaRezervacija::IspisRezervacija() {
 	rez.Close();
 
 }
-CString CListaRezervacija::IspisGosta(int id) {
-	CString s;
-	CGost gost;
-	s.Format(_T("[GostID] = %d"), id);
-	gost.m_strFilter = s;
-	gost.Open();
-	s.Format(_T("%s %s"), gost.m_Ime , gost.m_Prezime);
-	gost.Close();
-	return s;
-}
-CString CListaRezervacija::IspisZaposlenika(int id) {
-	CString s;
-	CZaposlenik zaposlenik;
-	s.Format(_T("[ZaposlenikID] = %d"), id);
-	zaposlenik.m_strFilter = s;
-	zaposlenik.Open();
-	s.Format(_T("%s"), zaposlenik.m_Kor_Oznaka);
-	zaposlenik.Close();
-	return s;
 
-}
 void CListaRezervacija::IspisiSobe(int id) {
 	CString s;
 	int nIndex;

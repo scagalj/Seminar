@@ -8,6 +8,7 @@
 #include "Zaposlenik.h"
 #include "Gost.h"
 #include "Rezervacija.h"
+#include "Funkcije.h"
 
 
 // CStareRezervacije dialog
@@ -68,6 +69,7 @@ BOOL CStareRezervacije::OnInitDialog()
 }
 
 void CStareRezervacije::IspisRezervacija() {
+	Funkcije f;
 	CString s,s1;
 	CRezervacija rez;
 	rez.Open();
@@ -85,8 +87,8 @@ void CStareRezervacije::IspisRezervacija() {
 			c_stare_rezervacije.SetItemText(nIndex, 4, s);
 			s = rez.m_Check_OUT.Format(_T("%d.%m.%Y"));
 			c_stare_rezervacije.SetItemText(nIndex, 5, s);
-			c_stare_rezervacije.SetItemText(nIndex, 6, IspisGosta(rez.m_GostID));
-			c_stare_rezervacije.SetItemText(nIndex, 7, IspisZaposlenika(rez.m_ZaposlenikID));
+			c_stare_rezervacije.SetItemText(nIndex, 6, f.DohvatiGosta(rez.m_GostID));
+			c_stare_rezervacije.SetItemText(nIndex, 7, f.DohvatiZaposlenika(rez.m_ZaposlenikID));
 			s1.LoadString(IDS_STRING_VALUTA);
 			s.Format(_T("%.2f %s"), rez.m_Ukupna_cijena,s1);
 			c_stare_rezervacije.SetItemText(nIndex, 8, s);
@@ -97,26 +99,5 @@ void CStareRezervacije::IspisRezervacija() {
 		}
 	}
 	rez.Close();
-
-}
-CString CStareRezervacije::IspisGosta(int id) {
-	CString s;
-	CGost gost;
-	s.Format(_T("[GostID] = %d"), id);
-	gost.m_strFilter = s;
-	gost.Open();
-	s.Format(_T("%s %s"), gost.m_Ime, gost.m_Prezime);
-	gost.Close();
-	return s;
-}
-CString CStareRezervacije::IspisZaposlenika(int id) {
-	CString s;
-	CZaposlenik zaposlenik;
-	s.Format(_T("[ZaposlenikID] = %d"), id);
-	zaposlenik.m_strFilter = s;
-	zaposlenik.Open();
-	s.Format(_T("%s"), zaposlenik.m_Kor_Oznaka);
-	zaposlenik.Close();
-	return s;
 
 }

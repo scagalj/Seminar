@@ -24,6 +24,4 @@ public:
 	CListCtrl c_stare_rezervacije;
 	virtual BOOL OnInitDialog();
 	void IspisRezervacija();
-	CString IspisGosta(int id);
-	CString IspisZaposlenika(int id);
 };

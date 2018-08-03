@@ -15,6 +15,7 @@
 #include "Gost.h"
 #include "Rezervacija.h"
 #include "CStareRezervacije.h"
+#include "Funkcije.h"
 
 // CApplicationDlg dialog
 
@@ -149,6 +150,7 @@ void CApplicationDlg::OnBnClickedButtonRezervacije()
 }
 
 void CApplicationDlg::IspisRezervacija() {
+	Funkcije f;
 	CString s,s1;
 	CRezervacija rez;
 	rez.Open();
@@ -170,8 +172,8 @@ void CApplicationDlg::IspisRezervacija() {
 			c_rezervacije_danas.SetItemText(nIndex, 4, s);
 			s = rez.m_Check_OUT.Format(_T("%d.%m.%Y"));
 			c_rezervacije_danas.SetItemText(nIndex, 5, s);
-			c_rezervacije_danas.SetItemText(nIndex, 6, IspisGosta(rez.m_GostID));
-			c_rezervacije_danas.SetItemText(nIndex, 7, IspisZaposlenika(rez.m_ZaposlenikID));
+			c_rezervacije_danas.SetItemText(nIndex, 6, f.DohvatiGosta(rez.m_GostID));
+			c_rezervacije_danas.SetItemText(nIndex, 7, f.DohvatiZaposlenika(rez.m_ZaposlenikID));
 			s1.LoadString(IDS_STRING_VALUTA);
 			s.Format(_T("%.2f %s"), rez.m_Ukupna_cijena,s1);
 			c_rezervacije_danas.SetItemText(nIndex, 8, s);
@@ -182,27 +184,6 @@ void CApplicationDlg::IspisRezervacija() {
 		}
 	}
 	rez.Close();
-
-}
-CString CApplicationDlg::IspisGosta(int id) {
-	CString s;
-	CGost gost;
-	s.Format(_T("[GostID] = %d"), id);
-	gost.m_strFilter = s;
-	gost.Open();
-	s.Format(_T("%s %s"), gost.m_Ime, gost.m_Prezime);
-	gost.Close();
-	return s;
-}
-CString CApplicationDlg::IspisZaposlenika(int id) {
-	CString s;
-	CZaposlenik zaposlenik;
-	s.Format(_T("[ZaposlenikID] = %d"), id);
-	zaposlenik.m_strFilter = s;
-	zaposlenik.Open();
-	s.Format(_T("%s"), zaposlenik.m_Kor_Oznaka);
-	zaposlenik.Close();
-	return s;
 
 }
 
