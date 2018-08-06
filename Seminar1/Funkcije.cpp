@@ -5,23 +5,16 @@
 #include "Gost.h"
 #include "Zaposlenik.h"
 
-CString Funkcije::DohvatiGosta(int id) {
-	CGost gost;
-	s.Format(_T("[GostID] = %d"), id);
-	gost.m_strFilter = s;
-	gost.Open();
-	s.Format(_T("%s %s"), gost.m_Ime, gost.m_Prezime);
-	gost.Close();
-	return s;
-}
-
-CString Funkcije::DohvatiZaposlenika(int id) {
-	CZaposlenik zaposlenik;
-	s.Format(_T("[ZaposlenikID] = %d"), id);
-	zaposlenik.m_strFilter = s;
-	zaposlenik.Open();
-	s.Format(_T("%s"), zaposlenik.m_Kor_Oznaka);
-	zaposlenik.Close();
-	return s;
+namespace f {
+	CString DohvatiGosta(int id) {
+		CGost rs;
+		rs.m_strFilter.Format(_T("[GostID] = %d"), id);
+		return rs.Open() ? rs.m_Ime + _T(" ") + rs.m_Prezime : _T("");
+	}
+	CString DohvatiZaposlenika(int id) {
+		CZaposlenik rs;
+		rs.m_strFilter.Format(_T("[ZaposlenikID] = %d"), id);
+		return rs.Open() ? rs.m_Kor_Oznaka : _T("");
+	}
 
 }

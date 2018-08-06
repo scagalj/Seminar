@@ -69,7 +69,6 @@ BOOL CStareRezervacije::OnInitDialog()
 }
 
 void CStareRezervacije::IspisRezervacija() {
-	Funkcije f;
 	CString s,s1;
 	CRezervacija rez;
 	rez.Open();
@@ -87,8 +86,8 @@ void CStareRezervacije::IspisRezervacija() {
 			c_stare_rezervacije.SetItemText(nIndex, 4, s);
 			s = rez.m_Check_OUT.Format(_T("%d.%m.%Y"));
 			c_stare_rezervacije.SetItemText(nIndex, 5, s);
-			c_stare_rezervacije.SetItemText(nIndex, 6, f.DohvatiGosta(rez.m_GostID));
-			c_stare_rezervacije.SetItemText(nIndex, 7, f.DohvatiZaposlenika(rez.m_ZaposlenikID));
+			c_stare_rezervacije.SetItemText(nIndex, 6, f::DohvatiGosta(rez.m_GostID));
+			c_stare_rezervacije.SetItemText(nIndex, 7, f::DohvatiZaposlenika(rez.m_ZaposlenikID));
 			s1.LoadString(IDS_STRING_VALUTA);
 			s.Format(_T("%.2f %s"), rez.m_Ukupna_cijena,s1);
 			c_stare_rezervacije.SetItemText(nIndex, 8, s);

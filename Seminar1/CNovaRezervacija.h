@@ -25,7 +25,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	int slobodnesobeID[100];
-	CString korisnik;
 	double ukupna_cijena;
 	int zapID;
 	int gostID=-1;

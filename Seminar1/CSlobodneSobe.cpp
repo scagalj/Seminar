@@ -117,7 +117,6 @@ BOOL CSlobodneSobe::OnInitDialog()
 void CSlobodneSobe::OnCbnSelchangeComboSlobodneNazivhotela()
 {
 	hotel_id = c_hoteli.GetItemData(c_hoteli.GetCurSel());
-	UpdateData(TRUE);
 
 }
 

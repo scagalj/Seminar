@@ -1,10 +1,7 @@
 #pragma once
 
-
-class Funkcije {
-public:
-	CString s;
+namespace f {
 	CString DohvatiGosta(int id);
 	CString DohvatiZaposlenika(int id);
 
-};
+}

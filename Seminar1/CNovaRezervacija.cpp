@@ -35,7 +35,6 @@ CNovaRezervacija::CNovaRezervacija(int *sobeID, CString datumD, CString datumO,C
 	: CDialogEx(IDD_DIALOG_NOVA_REZERVACIJA, pParent)
 	,datumIN(datumD)
 	,datumOUT(datumO)
-	,korisnik(name)
 {
 	int i = 0;
 	while (*sobeID != '\0') {
@@ -44,9 +43,7 @@ CNovaRezervacija::CNovaRezervacija(int *sobeID, CString datumD, CString datumO,C
 		i++;
 	}
 	CZaposlenik zaposlenik;
-	CString s;
-	s.Format(_T("[Kor_Oznaka] = %s"), korisnik);
-	zaposlenik.m_strFilter = s;
+	zaposlenik.m_strFilter.Format(_T("[Kor_Oznaka] = '%s'"), name);
 	zaposlenik.Open();
 	zapID = zaposlenik.m_ZaposlenikID;
 	zaposlenik.Close();
@@ -170,8 +167,8 @@ void CNovaRezervacija::OnBnClickedButtonRTrazi()
 	CWnd *label = GetDlgItem(IDC_STATIC_R_IMEGOSTA);
 	GetDlgItemText(IDC_EDIT_R_OIB_P, m_pretraziOIB);
 	CGost gost;
-	s.Format(_T("[OIB] = %s"), m_pretraziOIB);
-	gost.m_strFilter = s;
+	//s.Format(_T("[OIB] = '%s'"), m_pretraziOIB);
+	gost.m_strFilter.Format(_T("[OIB] = '%s'"), m_pretraziOIB);
 	gost.Open();
 	if (gost.m_Ime != "") {	
 		gostID = gost.m_GostID;
