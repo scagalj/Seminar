@@ -62,10 +62,6 @@ BOOL CDodajSobu::OnInitDialog() {
 	}
 	vrstasobe.Close();
 
-	CEdit* pEdit = (CEdit*)vrsta_soba.GetWindow(GW_CHILD);
-	pEdit->EnableWindow();
-	pEdit->SetReadOnly();
-
 	return TRUE;
 }
 

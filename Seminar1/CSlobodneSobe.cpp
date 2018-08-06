@@ -103,10 +103,6 @@ BOOL CSlobodneSobe::OnInitDialog()
 	c_list_sobe.SetExtendedStyle(c_list_sobe.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 
 	GetDlgItem(IDC_BUTTON_NOVA_REZERVACIJA)->EnableWindow(FALSE);
-	
-	CEdit* pEdit = (CEdit*)c_hoteli.GetWindow(GW_CHILD);
-	pEdit->EnableWindow();
-	pEdit->SetReadOnly();
 
 	return TRUE;
 }
