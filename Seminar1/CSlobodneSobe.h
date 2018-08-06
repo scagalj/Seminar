@@ -24,15 +24,12 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnDtnDatetimechangeDatetimepickerSobe(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnCbnSelchangeComboSlobodneNazivhotela();
 	afx_msg void OnBnClickedButtonSlobodneSobePrikaz();
 	afx_msg void OnDtnDatetimechangeDatetimepickerCout(NMHDR *pNMHDR, LRESULT *pResult);
 	virtual BOOL OnInitDialog();
 	void IspisSobe(long sobaid, bool duhan, bool ljubimac,long vrstasobeid);
 	CListCtrl c_list_sobe;
 	CComboBox c_hoteli;
-	DWORD_PTR hotel_id;
-	CString c_hoteli_naziv;
 	CDateTimeCtrl t_SlobodneSobe;
 	CDateTimeCtrl t_slobodnesobe_out;
 	int hotelid;

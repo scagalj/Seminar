@@ -18,7 +18,6 @@ IMPLEMENT_DYNAMIC(CSlobodneSobe, CDialogEx)
 
 CSlobodneSobe::CSlobodneSobe(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_SLOBODNE_SOBE, pParent)
-	, c_hoteli_naziv(_T(""))
 {
 
 }
@@ -39,7 +38,6 @@ void CSlobodneSobe::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_DATETIMEPICKER_SOBE, t_SlobodneSobe);
 	DDX_Control(pDX, IDC_COMBO_SLOBODNE_NAZIVHOTELA, c_hoteli);
-	DDX_CBString(pDX, IDC_COMBO_SLOBODNE_NAZIVHOTELA, c_hoteli_naziv);
 	DDX_Control(pDX, IDC_LIST_SLOBODNE_SOBE_POPIS, c_list_sobe);
 	DDX_Control(pDX, IDC_DATETIMEPICKER_COUT, t_slobodnesobe_out);
 }
@@ -47,7 +45,6 @@ void CSlobodneSobe::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CSlobodneSobe, CDialogEx)
 	ON_NOTIFY(DTN_DATETIMECHANGE, IDC_DATETIMEPICKER_SOBE, &CSlobodneSobe::OnDtnDatetimechangeDatetimepickerSobe)
-	ON_CBN_SELCHANGE(IDC_COMBO_SLOBODNE_NAZIVHOTELA, &CSlobodneSobe::OnCbnSelchangeComboSlobodneNazivhotela)
 	ON_BN_CLICKED(IDC_BUTTON_SLOBODNE_SOBE_PRIKAZ, &CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz)
 	ON_NOTIFY(DTN_DATETIMECHANGE, IDC_DATETIMEPICKER_COUT, &CSlobodneSobe::OnDtnDatetimechangeDatetimepickerCout)
 	ON_BN_CLICKED(IDC_BUTTON_NOVA_REZERVACIJA, &CSlobodneSobe::OnBnClickedButtonNovaRezervaciju)
@@ -77,7 +74,7 @@ BOOL CSlobodneSobe::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 	CString s;
-	int i = 0;
+	int i = 0,hotel_id;
 	CHotel hotel;
 	hotel.Open();
 	while(!hotel.IsEOF()) {
@@ -114,12 +111,6 @@ BOOL CSlobodneSobe::OnInitDialog()
 	return TRUE;
 }
 
-void CSlobodneSobe::OnCbnSelchangeComboSlobodneNazivhotela()
-{
-	hotel_id = c_hoteli.GetItemData(c_hoteli.GetCurSel());
-
-}
-
 void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 {
 	CString s, id;
@@ -129,13 +120,13 @@ void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 	BOOL slobodna = TRUE;
 	GetDlgItem(IDC_BUTTON_NOVA_REZERVACIJA)->EnableWindow(TRUE);
 	c_list_sobe.DeleteAllItems();
-	if (c_hoteli_naziv == "" || datumin == "" || datumout== "") {
+	if (c_hoteli.GetItemData(c_hoteli.GetCurSel()) < 0 || datumin == "" || datumout== "") {
 		s.LoadString(IDS_STRING_PAZNA_POLJA);
 		AfxMessageBox(s);
 		return;
 	}
 	//Dohvaæanje soba s ID odabranog hotela
-	s.Format(_T("[HotelID] = %d"), hotel_id);
+	s.Format(_T("[HotelID] = %d"), c_hoteli.GetItemData(c_hoteli.GetCurSel()));
 	soba.m_strFilter = s;
 	soba.Open();
 	while (!soba.IsEOF()) {

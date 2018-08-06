@@ -13,7 +13,6 @@ IMPLEMENT_DYNAMIC(CDodajSobu, CDialogEx)
 
 CDodajSobu::CDodajSobu(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_DODAJ_SOBU, pParent)
-	, s_vrsta_soba(_T(""))
 	, s_duhan(FALSE)
 	, s_ljubimci(FALSE)
 {
@@ -39,7 +38,6 @@ void CDodajSobu::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_COMBO_SOBA_VRSTA, vrsta_soba);
-	DDX_CBString(pDX, IDC_COMBO_SOBA_VRSTA, s_vrsta_soba);
 	DDX_Check(pDX, IDC_CHECK_DUHAN, s_duhan);
 	DDX_Check(pDX, IDC_CHECK_LJUBIMCI, s_ljubimci);
 }
@@ -47,7 +45,7 @@ void CDodajSobu::DoDataExchange(CDataExchange* pDX)
 BOOL CDodajSobu::OnInitDialog() {
 	CDialogEx::OnInitDialog();
 	CString id;
-	int i = 0;
+	int i = 0,soba_id;
 	CVrstaSobe vrstasobe;
 	CWnd *label = GetDlgItem(IDC_STATIC_HotelID);
 	id.Format(_T("%ld"), s_HotelID);
@@ -72,7 +70,6 @@ BOOL CDodajSobu::OnInitDialog() {
 }
 
 BEGIN_MESSAGE_MAP(CDodajSobu, CDialogEx)
-	ON_CBN_SELCHANGE(IDC_COMBO_SOBA_VRSTA, &CDodajSobu::OnCbnSelchangeComboSobaVrsta)
 	ON_BN_CLICKED(IDC_BUTTON_DODAJ_SOBU, &CDodajSobu::OnBnClickedButtonDodajSobu)
 END_MESSAGE_MAP()
 
@@ -80,12 +77,6 @@ END_MESSAGE_MAP()
 // CDodajSobu message handlers
 
 
-void CDodajSobu::OnCbnSelchangeComboSobaVrsta()
-{
-	soba_id = vrsta_soba.GetItemData(vrsta_soba.GetCurSel());
-	//vrsta_soba.GetLBText(vrsta_soba.GetCurSel(), s_vrsta_soba);
-	UpdateData(FALSE);
-}
 
 
 void CDodajSobu::OnBnClickedButtonDodajSobu()
@@ -108,7 +99,7 @@ void CDodajSobu::OnBnClickedButtonDodajSobu()
 	soba.m_Konzumiranje_duhana = duhan;
 	soba.m_Ljubimci = ljubimci;
 	soba.m_HotelID = s_HotelID;
-	soba.m_VrstaSobeID = soba_id;
+	soba.m_VrstaSobeID = vrsta_soba.GetItemData(vrsta_soba.GetCurSel());
 	if (!soba.Update()) {
 		s.LoadString(IDS_STRING_SOBA2);
 		label->SetWindowText(s);
