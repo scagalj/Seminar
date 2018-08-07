@@ -74,13 +74,12 @@ BOOL CSlobodneSobe::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 	CString s;
-	int i = 0,hotel_id;
+	int i = 0;
 	CHotel hotel;
 	hotel.Open();
 	while(!hotel.IsEOF()) {
-		 hotel_id = hotel.m_HotelID;
 		c_hoteli.AddString(hotel.m_Naziv);
-		c_hoteli.SetItemData(i, hotel_id);
+		c_hoteli.SetItemData(i, hotel.m_HotelID);
 		hotel.MoveNext();
 		i++;
 	}
@@ -109,7 +108,7 @@ BOOL CSlobodneSobe::OnInitDialog()
 
 void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 {
-	CString s, id;
+	CString s;
 	int i = 0;
 	CHotel hotel;
 	CSoba soba;
@@ -122,21 +121,18 @@ void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 		return;
 	}
 	//Dohvaæanje soba s ID odabranog hotela
-	s.Format(_T("[HotelID] = %d"), c_hoteli.GetItemData(c_hoteli.GetCurSel()));
-	soba.m_strFilter = s;
+	soba.m_strFilter.Format(_T("[HotelID] = %d"), c_hoteli.GetItemData(c_hoteli.GetCurSel()));
 	soba.Open();
 	while (!soba.IsEOF()) {
 		slobodna = TRUE;
 		//Dohvaæanje detalja rezervacija za pojedinu sobu
 		CDetaljiRezervacije detalji;
-		s.Format(_T("[SobaID] = %d"), soba.m_SobaID);
-		detalji.m_strFilter = s;
+		detalji.m_strFilter.Format(_T("[SobaID] = %d"), soba.m_SobaID);
 		detalji.Open();
 		while (!detalji.IsEOF()) {
 			//Dohvaæanje rezervacije na osnovi Detalja rezervacije
 			CRezervacija rez;
-			s.Format(_T("[RezervacijaID] = %d"), detalji.m_RezervacijaID);
-			rez.m_strFilter = s;
+			rez.m_strFilter.Format(_T("[RezervacijaID] = %d"), detalji.m_RezervacijaID);
 			rez.Open();
 			COleDateTime t1, t2;
 			t1.ParseDateTime(datumin); //odabrani datumi
@@ -181,8 +177,7 @@ void CSlobodneSobe::IspisSobe(long sobaid, bool duhan, bool ljubimac, long vrsta
 	id.Format(_T("%ld"), vrstasobeid);
 	c_list_sobe.SetItemText(nIndex, 3, id);
 	CVrstaSobe vrsta;
-	s.Format(_T("[VrstaSobeID] = %s"), id);
-	vrsta.m_strFilter = s;
+	vrsta.m_strFilter.Format(_T("[VrstaSobeID] = %s"), id);
 	vrsta.Open();
 	c_list_sobe.SetItemText(nIndex, 4, vrsta.m_Opis);
 	s1.LoadString(IDS_STRING_VALUTA);

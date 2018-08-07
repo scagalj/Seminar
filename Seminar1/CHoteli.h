@@ -13,6 +13,7 @@ public:
 	BOOL OnInitDialog();
 	void IspisiHotele();
 	void Ugasibotune(bool ispit);
+	CString HotelID(int x);
 
 
 // Dialog Data

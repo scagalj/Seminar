@@ -167,7 +167,6 @@ void CNovaRezervacija::OnBnClickedButtonRTrazi()
 	CWnd *label = GetDlgItem(IDC_STATIC_R_IMEGOSTA);
 	GetDlgItemText(IDC_EDIT_R_OIB_P, m_pretraziOIB);
 	CGost gost;
-	//s.Format(_T("[OIB] = '%s'"), m_pretraziOIB);
 	gost.m_strFilter.Format(_T("[OIB] = '%s'"), m_pretraziOIB);
 	gost.Open();
 	if (gost.m_Ime != "") {	
@@ -260,12 +259,10 @@ void CNovaRezervacija::OnBnClickedButtonRDodaj()
 		GetDlgItem(IDC_EDIT_R_IDSOBE)->SetWindowText(_T(""));
 		return;
 	}
-	s.Format(_T("[SobaID] = %d"), id);
-	soba.m_strFilter = s;
+	soba.m_strFilter.Format(_T("[SobaID] = %d"), id);
 	soba.Open();
 	int nIndex = c_OdabraneSobe.InsertItem(0, m_IDSobe);
-	s.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
-	vrsta.m_strFilter = s;
+	vrsta.m_strFilter.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
 	vrsta.Open();
 	c_OdabraneSobe.SetItemText(nIndex, 1, vrsta.m_Opis);
 	//cijena i broj osoba
@@ -298,17 +295,14 @@ void CNovaRezervacija::OnBnClickedButtonRIzbrisi()
 	int n = c_OdabraneSobe.GetNextItem(-1, LVNI_SELECTED);
 	if (n != -1) {
 		CString t = c_OdabraneSobe.GetItemText(n, 2);
-		double y = _tstoi(t);
-		ukupna_cijena -= (y * m_Brojnocenja);
+		ukupna_cijena -= (_tstoi(t) * m_Brojnocenja);
 		t = c_OdabraneSobe.GetItemText(n, 3);
-		int brosoba = _tstoi(t);
-		m_BrojGostijuizracun -= brosoba;
+		m_BrojGostijuizracun -= _tstoi(t);
 		t = c_OdabraneSobe.GetItemText(n, 0);
-		int id = _tstoi(t);
 		int i = 0;
 		while (slobodnesobeID[i] != '\0') {
 			if (slobodnesobeID[i] < 0) {
-				slobodnesobeID[i] = id;
+				slobodnesobeID[i] = _tstoi(t);
 				break;
 			}i++;
 		}

@@ -76,16 +76,13 @@ void CStareRezervacije::IspisRezervacija() {
 		if (rez.m_Check_OUT < CTime::GetCurrentTime()) {
 			s.Format(_T("%ld"), rez.m_RezervacijaID);
 			int nIndex = c_stare_rezervacije.InsertItem(0, s);
-			s = rez.m_Datum_rezervacije.Format(_T("%d.%m.%Y"));
-			c_stare_rezervacije.SetItemText(nIndex, 1, s);
+			c_stare_rezervacije.SetItemText(nIndex, 1, rez.m_Datum_rezervacije.Format(_T("%d.%m.%Y")));
 			s.Format(_T("%d"), rez.m_Broj_nocenja);
 			c_stare_rezervacije.SetItemText(nIndex, 2, s);
 			s.Format(_T("%d"), rez.m_Broj_gostiju);
 			c_stare_rezervacije.SetItemText(nIndex, 3, s);
-			s = rez.m_Check_IN.Format(_T("%d.%m.%Y"));
-			c_stare_rezervacije.SetItemText(nIndex, 4, s);
-			s = rez.m_Check_OUT.Format(_T("%d.%m.%Y"));
-			c_stare_rezervacije.SetItemText(nIndex, 5, s);
+			c_stare_rezervacije.SetItemText(nIndex, 4, rez.m_Check_IN.Format(_T("%d.%m.%Y")));
+			c_stare_rezervacije.SetItemText(nIndex, 5, rez.m_Check_OUT.Format(_T("%d.%m.%Y")));
 			c_stare_rezervacije.SetItemText(nIndex, 6, f::DohvatiGosta(rez.m_GostID));
 			c_stare_rezervacije.SetItemText(nIndex, 7, f::DohvatiZaposlenika(rez.m_ZaposlenikID));
 			s1.LoadString(IDS_STRING_VALUTA);

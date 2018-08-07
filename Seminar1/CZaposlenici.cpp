@@ -102,10 +102,7 @@ void CZaposlenici::OnBnClickedButtonZaposlenikIzbrisi()
 	int x = zaposlenici.GetNextItem(-1, LVNI_SELECTED);
 	CString t = zaposlenici.GetItemText(x, 0);
 	CZaposlenik zaposlenik;
-	int y = _tstoi(t);
-	CString s;
-	s.Format(_T("[ZaposlenikID] = %d"), y);
-	zaposlenik.m_strFilter = s;
+	zaposlenik.m_strFilter.Format(_T("[ZaposlenikID] = %d"), _tstoi(t));
 	zaposlenik.Open();
 	zaposlenik.Delete();
 	zaposlenici.DeleteItem(x);

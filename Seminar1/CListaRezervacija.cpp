@@ -78,8 +78,7 @@ BOOL CListaRezervacija::OnInitDialog()
 	IspisRezervacija();
 	GetDlgItem(IDC_BUTTON_R_IZBRISI)->EnableWindow(FALSE);
 	GetDlgItem(IDC_BUTTON_R_PRINT)->EnableWindow(FALSE);
-	return TRUE;  // return TRUE unless you set the focus to a control
-				  // EXCEPTION: OCX Property Pages should return FALSE
+	return TRUE;
 }
 
 void CListaRezervacija::IspisRezervacija() {
@@ -92,16 +91,13 @@ void CListaRezervacija::IspisRezervacija() {
 		else {
 			s.Format(_T("%ld"), rez.m_RezervacijaID);
 			int nIndex = c_lista_rezervacija.InsertItem(0, s);
-			s = rez.m_Datum_rezervacije.Format(_T("%d.%m.%Y"));
-			c_lista_rezervacija.SetItemText(nIndex, 1, s);
+			c_lista_rezervacija.SetItemText(nIndex, 1, rez.m_Datum_rezervacije.Format(_T("%d.%m.%Y")));
 			s.Format(_T("%d"), rez.m_Broj_nocenja);
 			c_lista_rezervacija.SetItemText(nIndex, 2, s);
 			s.Format(_T("%d"), rez.m_Broj_gostiju);
 			c_lista_rezervacija.SetItemText(nIndex, 3, s);
-			s = rez.m_Check_IN.Format(_T("%d.%m.%Y"));
-			c_lista_rezervacija.SetItemText(nIndex, 4, s);
-			s = rez.m_Check_OUT.Format(_T("%d.%m.%Y")); 
-			c_lista_rezervacija.SetItemText(nIndex, 5, s);
+			c_lista_rezervacija.SetItemText(nIndex, 4, rez.m_Check_IN.Format(_T("%d.%m.%Y"))); 
+			c_lista_rezervacija.SetItemText(nIndex, 5, rez.m_Check_OUT.Format(_T("%d.%m.%Y")));
 			c_lista_rezervacija.SetItemText(nIndex, 6, f::DohvatiGosta(rez.m_GostID));
 			c_lista_rezervacija.SetItemText(nIndex, 7, f::DohvatiZaposlenika(rez.m_ZaposlenikID));
 			s1.LoadString(IDS_STRING_VALUTA);
@@ -119,19 +115,16 @@ void CListaRezervacija::IspisiSobe(int id) {
 	CString s;
 	int nIndex;
 	CDetaljiRezervacije det;
-	s.Format(_T("[RezervacijaID] = %d"), id);
-	det.m_strFilter = s;
+	det.m_strFilter.Format(_T("[RezervacijaID] = %d"), id);
 	det.Open();
 	while (!det.IsEOF()) {
 		CSoba soba;
-		s.Format(_T("[SobaID] = %d"), det.m_SobaID);
-		soba.m_strFilter = s;
+		soba.m_strFilter.Format(_T("[SobaID] = %d"), det.m_SobaID);
 		soba.Open();
 		s.Format(_T("%d"), soba.m_SobaID);
 		nIndex = c_list_rez_sobe.InsertItem(0, s);
 		CVrstaSobe vrsta;
-		s.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
-		vrsta.m_strFilter = s;
+		vrsta.m_strFilter.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
 		vrsta.Open();
 		c_list_rez_sobe.SetItemText(nIndex, 1, vrsta.m_Opis);
 		vrsta.Close();
@@ -150,8 +143,7 @@ void CListaRezervacija::OnLvnItemchangedListRezervacije(NMHDR *pNMHDR, LRESULT *
 	int n = c_lista_rezervacija.GetNextItem(-1, LVNI_SELECTED);
 	if (n != -1) {
 		CString t = c_lista_rezervacija.GetItemText(n, 0);
-		int x = _tstoi(t);
-		IspisiSobe(x);
+		IspisiSobe(_tstoi(t));
 	}
 	bool ispit = pNMLV->uNewState & LVIS_SELECTED ? TRUE : FALSE;
 	GetDlgItem(IDC_BUTTON_R_IZBRISI)->EnableWindow(ispit);
@@ -166,10 +158,7 @@ void CListaRezervacija::OnBnClickedButtonRIzbrisi()
 	int x = c_lista_rezervacija.GetNextItem(-1, LVNI_SELECTED);
 	CString t = c_lista_rezervacija.GetItemText(x, 0);
 	CRezervacija rez;
-	int y = _tstoi(t);
-	CString s;
-	s.Format(_T("[RezervacijaID] = %d"), y);
-	rez.m_strFilter = s;
+	rez.m_strFilter.Format(_T("[RezervacijaID] = %d"), _tstoi(t));
 	rez.Open();
 	rez.Delete();
 	c_lista_rezervacija.DeleteItem(x);
@@ -200,10 +189,8 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 	CGost gost;
 	CZaposlenik zap;
 	CSoba soba;
-	id = _tstoi(t);
 	CString s,s1;
-	s.Format(_T("[RezervacijaID] = %d"), id);
-	rez.m_strFilter = s;
+	rez.m_strFilter.Format(_T("[RezervacijaID] = %d"), _tstoi(t));
 	rez.Open();
 
 	int sirina_p = pDC->GetDeviceCaps(HORZRES);
@@ -212,8 +199,7 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 	int x1 = sirina_p / 12;
 	int y1 = font.cy * 4;
 
-	s.Format(_T("[GostID] = %d"), rez.m_GostID);
-	gost.m_strFilter = s;
+	gost.m_strFilter.Format(_T("[GostID] = %d"), rez.m_GostID);
 	gost.Open();
 	s.Format(_T("%s %s"), gost.m_Ime, gost.m_Prezime);
 	pDC->TextOut(x1*9, y1*=3, s);
@@ -227,8 +213,7 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 	pDC->TextOut(x1*5,y1+=(font.cy*3),s1);
 	pDC->MoveTo(x1, y1 +100);
 	pDC->LineTo(x1 * 11, y1+100);
-	s.Format(_T("[ZaposlenikID] = %d"), rez.m_ZaposlenikID);
-	zap.m_strFilter = s;
+	zap.m_strFilter.Format(_T("[ZaposlenikID] = %d"), rez.m_ZaposlenikID);
 	zap.Open();
 	s1.LoadString(IDS_STRING_PRINT2);
 	s.Format(_T("%s: %s"),s1, zap.m_Kor_Oznaka);
@@ -262,21 +247,18 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 	pDC->LineTo(x1 * 10, y1 + 100);
 
 	CDetaljiRezervacije det;
-	s.Format(_T("[RezervacijaID] = %d"), rez.m_RezervacijaID);
-	det.m_strFilter = s;
+	det.m_strFilter.Format(_T("[RezervacijaID] = %d"), rez.m_RezervacijaID);
 	det.Open();
 	while (!det.IsEOF()) {
 		CSoba soba;
-		s.Format(_T("[SobaID] = %d"), det.m_SobaID);
-		soba.m_strFilter = s;
+		soba.m_strFilter.Format(_T("[SobaID] = %d"), det.m_SobaID);
 		soba.Open();
 		id = soba.m_HotelID;
 		s.Format(_T("%d"), soba.m_SobaID);
 		pDC->TextOut(x1 * 2, y1 += font.cy, s);
 		CVrstaSobe vrsta;
-		s.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
-		vrsta.m_strFilter = s;
-		vrsta.Open(CRecordset::dynaset, s);
+		vrsta.m_strFilter.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
+		vrsta.Open();
 		pDC->TextOut(x1 * 3, y1, vrsta.m_Opis);
 		s.LoadString(IDS_STRING_DA);
 		s1.LoadString(IDS_STRING_NE);
@@ -287,8 +269,7 @@ void CListaRezervacija::OnPrint(CDC *pDC, CPrintInfo* pInfo)
 		det.MoveNext();
 	}
 	
-	s.Format(_T("[HotelID] = %d"), id);
-	hotel.m_strFilter = s;
+	hotel.m_strFilter.Format(_T("[HotelID] = %d"), id);
 	hotel.Open();
 	font.cy -= 30;
 	y1 = font.cy * 4;

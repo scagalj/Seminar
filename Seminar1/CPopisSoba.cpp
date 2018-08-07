@@ -39,23 +39,20 @@ void CPopisSoba::DoDataExchange(CDataExchange* pDX)
 void CPopisSoba::PopisSoba(CString x) {
 	CSoba p_soba;
 	CString s,s1;
-	CString id=x;
 	CVrstaSobe vrsta;
-	s.Format(_T("[HotelID] = %s"), id);
-	p_soba.m_strFilter = s;
+	p_soba.m_strFilter.Format(_T("[HotelID] = %s"), x);
 	p_soba.Open();
 	popis_soba.DeleteAllItems();
 	while (!p_soba.IsEOF()) {
-		id.Format(_T("%ld"), p_soba.m_SobaID);
-		int nIndex = popis_soba.InsertItem(0, id);
+		s.Format(_T("%ld"), p_soba.m_SobaID);
+		int nIndex = popis_soba.InsertItem(0, s);
 		s.LoadString(IDS_STRING_DA);
 		s1.LoadString(IDS_STRING_NE);
 		p_soba.m_Konzumiranje_duhana == TRUE ? popis_soba.SetItemText(nIndex, 1, s) : popis_soba.SetItemText(nIndex, 1, s1);
 		p_soba.m_Ljubimci == TRUE ? popis_soba.SetItemText(nIndex, 2, s) : popis_soba.SetItemText(nIndex, 2, s1);
-		id.Format(_T("%ld"), p_soba.m_VrstaSobeID);
-		popis_soba.SetItemText(nIndex, 3, id);
-		s.Format(_T("[VrstaSobeID] = %s"), id);
-		vrsta.m_strFilter = s;
+		s.Format(_T("%ld"), p_soba.m_VrstaSobeID);
+		popis_soba.SetItemText(nIndex, 3, s);
+		vrsta.m_strFilter.Format(_T("[VrstaSobeID] = '%s'"), s);
 		vrsta.Open();
 		popis_soba.SetItemText(nIndex, 4, vrsta.m_Opis);
 		s1.LoadString(IDS_STRING_VALUTA);
@@ -112,10 +109,8 @@ void CPopisSoba::OnBnClickedButtonPopisIzbrisiSobu()
 	int x = popis_soba.GetNextItem(-1, LVNI_SELECTED);
 	CString t = popis_soba.GetItemText(x, 0);
 	CSoba soba;
-	int y = _tstoi(t);
 	CString s;
-	s.Format(_T("[SobaID] = %d"), y);
-	soba.m_strFilter = s;
+	soba.m_strFilter.Format(_T("[SobaID] = %d"), _tstoi(t));
 	soba.Open();
 	soba.Delete();
 	popis_soba.DeleteItem(x);

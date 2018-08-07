@@ -101,10 +101,7 @@ void CHoteli::OnBnClickedButtonDeleteHotel()
 	int x = hoteli.GetNextItem(-1, LVNI_SELECTED);
 	CString t = hoteli.GetItemText(x,0);
 	CHotel hotel;
-	int y = _tstoi(t);
-	CString s;
-	s.Format(_T("[HotelID] = %d"), y);
-	hotel.m_strFilter = s;
+	hotel.m_strFilter = HotelID(_tstoi(t));
 	hotel.Open();
 	hotel.Delete();
 	hoteli.DeleteItem(x);
@@ -146,10 +143,7 @@ void CHoteli::OnBnClickedButtonDodajSobu()
 	CHotel hotel;
 	int x = hoteli.GetNextItem(-1, LVNI_SELECTED);
 	CString t = hoteli.GetItemText(x, 0);
-	int y = _tstoi(t);
-	CString s;
-	s.Format(_T("[HotelID] = %d"),y);
-	hotel.m_strFilter = s;
+	hotel.m_strFilter = HotelID(_tstoi(t));
 	hotel.Open();
 	CDodajSobu soba(hotel.m_HotelID,hotel.m_Naziv,this);
 	soba.DoModal();
@@ -171,10 +165,7 @@ void CHoteli::OnBnClickedButtonPopisSoba()
 	CHotel hotel;
 	int x = hoteli.GetNextItem(-1, LVNI_SELECTED);
 	CString t = hoteli.GetItemText(x, 0);
-	int y = _tstoi(t);
-	CString s;
-	s.Format(_T("[HotelID] = %d"), y);
-	hotel.m_strFilter = s;
+	hotel.m_strFilter = HotelID(_tstoi(t));
 	hotel.Open();
 	CPopisSoba popis(hotel.m_HotelID, hotel.m_Naziv, this);
 	popis.DoModal();
@@ -185,4 +176,11 @@ void CHoteli::Ugasibotune(bool ispit) {
 	GetDlgItem(IDC_BUTTON_DODAJ_SOBU)->EnableWindow(ispit);
 	GetDlgItem(IDC_BUTTON_HOTEL_IZBRISI)->EnableWindow(ispit);
 	GetDlgItem(IDC_BUTTON_POPIS_SOBA)->EnableWindow(ispit);
+}
+
+CString CHoteli::HotelID(int x) {
+	CString s;
+	s.Format(_T("[HotelID] = %d"), x);
+	return s;
+
 }

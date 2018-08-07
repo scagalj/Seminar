@@ -161,16 +161,13 @@ void CApplicationDlg::IspisRezervacija() {
 		if (rez.m_Check_OUT.GetYear() == year  && rez.m_Check_OUT.GetMonth() == mon && rez.m_Check_OUT.GetDay() == day) {
 			s.Format(_T("%ld"), rez.m_RezervacijaID);
 			int nIndex = c_rezervacije_danas.InsertItem(0, s);
-			s = rez.m_Datum_rezervacije.Format(_T("%d.%m.%Y"));
-			c_rezervacije_danas.SetItemText(nIndex, 1, s);
+			c_rezervacije_danas.SetItemText(nIndex, 1, rez.m_Datum_rezervacije.Format(_T("%d.%m.%Y")));
 			s.Format(_T("%d"), rez.m_Broj_nocenja);
 			c_rezervacije_danas.SetItemText(nIndex, 2, s);
 			s.Format(_T("%d"), rez.m_Broj_gostiju);
 			c_rezervacije_danas.SetItemText(nIndex, 3, s);
-			s = rez.m_Check_IN.Format(_T("%d.%m.%Y"));
-			c_rezervacije_danas.SetItemText(nIndex, 4, s);
-			s = rez.m_Check_OUT.Format(_T("%d.%m.%Y"));
-			c_rezervacije_danas.SetItemText(nIndex, 5, s);
+			c_rezervacije_danas.SetItemText(nIndex, 4, rez.m_Check_IN.Format(_T("%d.%m.%Y")));
+			c_rezervacije_danas.SetItemText(nIndex, 5, rez.m_Check_OUT.Format(_T("%d.%m.%Y")));
 			c_rezervacije_danas.SetItemText(nIndex, 6, f::DohvatiGosta(rez.m_GostID));
 			c_rezervacije_danas.SetItemText(nIndex, 7, f::DohvatiZaposlenika(rez.m_ZaposlenikID));
 			s1.LoadString(IDS_STRING_VALUTA);
