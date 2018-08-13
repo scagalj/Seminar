@@ -170,7 +170,6 @@
 #define IDC_RADIO1                      1095
 #define IDC_LIST_REZERVACIJE            1096
 #define IDC_LIST_REZERVACIJA_SOBE       1097
-#define IDC_BUTTON_STARE_REZERVACIJE    1098
 #define IDC_RADIO2                      1098
 #define IDC_LIST_D_REZERVACIJE          1099
 #define IDC_RADIO3                      1099
