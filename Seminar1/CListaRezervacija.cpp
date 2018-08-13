@@ -21,6 +21,7 @@ IMPLEMENT_DYNAMIC(CListaRezervacija, CDialogEx)
 
 CListaRezervacija::CListaRezervacija(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_LISTA_REZEVACIJA, pParent)
+	, ispis(0)
 {
 
 }
@@ -34,6 +35,7 @@ void CListaRezervacija::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST_REZERVACIJE, c_lista_rezervacija);
 	DDX_Control(pDX, IDC_LIST_REZERVACIJA_SOBE, c_list_rez_sobe);
+	DDX_Radio(pDX, IDC_RADIO1, ispis);
 }
 
 
@@ -41,6 +43,9 @@ BEGIN_MESSAGE_MAP(CListaRezervacija, CDialogEx)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_REZERVACIJE, &CListaRezervacija::OnLvnItemchangedListRezervacije)
 	ON_BN_CLICKED(IDC_BUTTON_R_IZBRISI, &CListaRezervacija::OnBnClickedButtonRIzbrisi)
 	ON_BN_CLICKED(IDC_BUTTON_R_PRINT, &CListaRezervacija::OnBnClickedButtonRPrint)
+	ON_BN_CLICKED(IDC_RADIO3, &CListaRezervacija::OnBnClickedRadio3)
+	ON_BN_CLICKED(IDC_RADIO2, &CListaRezervacija::OnBnClickedRadio2)
+	ON_BN_CLICKED(IDC_RADIO1, &CListaRezervacija::OnBnClickedRadio1)
 END_MESSAGE_MAP()
 
 
@@ -84,11 +89,13 @@ BOOL CListaRezervacija::OnInitDialog()
 void CListaRezervacija::IspisRezervacija() {
 	CString s,s1;
 	CRezervacija rez;
+	c_lista_rezervacija.DeleteAllItems();
+	if (ispis == 0)
+		rez.m_strFilter.Format(_T("[Check_OUT] >= #%s#"), CTime::GetCurrentTime().Format("%m-%d-%Y"));
+	else if(ispis == 1)
+		rez.m_strFilter.Format(_T("[Check_OUT] < #%s#"), CTime::GetCurrentTime().Format("%m-%d-%Y"));
 	rez.Open();
 	while (!rez.IsEOF()) {
-		if (rez.m_Check_OUT < CTime::GetCurrentTime())
-			rez.MoveNext();
-		else {
 			s.Format(_T("%ld"), rez.m_RezervacijaID);
 			int nIndex = c_lista_rezervacija.InsertItem(0, s);
 			c_lista_rezervacija.SetItemText(nIndex, 1, rez.m_Datum_rezervacije.Format(_T("%d.%m.%Y")));
@@ -105,16 +112,16 @@ void CListaRezervacija::IspisRezervacija() {
 			c_lista_rezervacija.SetItemText(nIndex, 8, s);
 
 			rez.MoveNext();
-		}
 	}
 	rez.Close();
 
 }
 
+
 void CListaRezervacija::IspisiSobe(int id) {
 	CString s;
-	int nIndex;
 	CDetaljiRezervacije det;
+	int nIndex;
 	det.m_strFilter.Format(_T("[RezervacijaID] = %d"), id);
 	det.Open();
 	while (!det.IsEOF()) {
@@ -365,3 +372,24 @@ void CListaRezervacija::Print()
 	dc.DeleteDC();                          // delete the printer DC
 
 }
+
+
+void CListaRezervacija::OnBnClickedRadio1()
+{
+	ispis = 0;
+	IspisRezervacija();
+}
+
+void CListaRezervacija::OnBnClickedRadio2()
+{
+	ispis = 1;
+	IspisRezervacija();
+}
+
+void CListaRezervacija::OnBnClickedRadio3()
+{
+	ispis = 2;
+	IspisRezervacija();
+}
+
+

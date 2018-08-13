@@ -14,7 +14,6 @@
 #include "Zaposlenik.h"
 #include "Gost.h"
 #include "Rezervacija.h"
-#include "CStareRezervacije.h"
 #include "Funkcije.h"
 
 // CApplicationDlg dialog
@@ -84,7 +83,6 @@ BEGIN_MESSAGE_MAP(CApplicationDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_GOST, &CApplicationDlg::OnBnClickedButtonGost)
 	ON_BN_CLICKED(IDC_BUTTON_SLOBODNE_SOBE, &CApplicationDlg::OnBnClickedButtonSlobodneSobe)
 	ON_BN_CLICKED(IDC_BUTTON_REZERVACIJE, &CApplicationDlg::OnBnClickedButtonRezervacije)
-	ON_BN_CLICKED(IDC_BUTTON_STARE_REZERVACIJE, &CApplicationDlg::OnBnClickedButtonStareRezervacije)
 END_MESSAGE_MAP()
 
 
@@ -181,10 +179,4 @@ void CApplicationDlg::IspisRezervacija() {
 	}
 	rez.Close();
 
-}
-
-void CApplicationDlg::OnBnClickedButtonStareRezervacije()
-{
-	CStareRezervacije sr;
-	sr.DoModal();
 }
