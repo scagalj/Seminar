@@ -9,7 +9,7 @@ class CNovaRezervacija : public CDialogEx
 
 public:
 	CNovaRezervacija(CWnd* pParent = nullptr);   // standard constructor
-	explicit CNovaRezervacija(int *sobeID,CString datimD,CString datumO,CString name, CWnd* pParent);
+	explicit CNovaRezervacija(CString datimD,CString datumO,CString name,int hotelid, CWnd* pParent);
 	virtual ~CNovaRezervacija();
 	bool DodajGosta();
 	void IspisiCijenu();
@@ -24,11 +24,11 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	int slobodnesobeID[100];
 	double ukupna_cijena;
 	int zapID;
 	int gostID=-1;
 	int m_Brojnocenja;
+	int hotelID;
 	CString datumIN, datumOUT;
 	CTime datumD, datumO;
 	CString m_Ime;

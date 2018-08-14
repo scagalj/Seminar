@@ -14,7 +14,7 @@ public:
 	BOOL OnInitDialog();
 	int p_HotelID;
 	CString p_NazivHotela;
-	void PopisSoba(CString x);
+	void PopisSoba(int x);
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME

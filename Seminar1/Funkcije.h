@@ -5,3 +5,8 @@ namespace f {
 	CString DohvatiZaposlenika(int id);
 
 }
+
+namespace sobe {
+
+	BOOL Dostupnostsobe(int id, CString datumin, CString datumout);
+}

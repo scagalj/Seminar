@@ -11,6 +11,7 @@
 #include "Soba.h"
 #include "VrstaSobe.h"
 #include "DetaljiRezervacije.h"
+#include "Funkcije.h"
 
 // CNovaRezervacija dialog
 
@@ -31,17 +32,12 @@ CNovaRezervacija::CNovaRezervacija(CWnd* pParent /*=nullptr*/)
 {
 
 }
-CNovaRezervacija::CNovaRezervacija(int *sobeID, CString datumD, CString datumO,CString name, CWnd* pParent)
+CNovaRezervacija::CNovaRezervacija(CString datumD, CString datumO,CString name,int hotelid, CWnd* pParent)
 	: CDialogEx(IDD_DIALOG_NOVA_REZERVACIJA, pParent)
 	,datumIN(datumD)
 	,datumOUT(datumO)
+	,hotelID(hotelid)
 {
-	int i = 0;
-	while (*sobeID != '\0') {
-		slobodnesobeID[i] = *sobeID;
-		sobeID++;
-		i++;
-	}
 	CZaposlenik zaposlenik;
 	zaposlenik.m_strFilter.Format(_T("[Kor_Oznaka] = '%s'"), name);
 	zaposlenik.Open();
@@ -243,24 +239,25 @@ void CNovaRezervacija::OnBnClickedButtonRDodaj()
 		AfxMessageBox(s);
 		return;
 	}
-	int i = 0;
-	bool t=FALSE;
-	while (slobodnesobeID[i] != '\0') {
-		if (slobodnesobeID[i] == id) {
-			slobodnesobeID[i] = -1;
-			t = TRUE;
-			break;
-		}
-		i++;
+	//id - id sobe koja se dodaje 
+	int x = c_OdabraneSobe.GetItemCount();
+	while (x--) {
+		CString t = c_OdabraneSobe.GetItemText(x, 0);
+		int id1 = _tstoi(t);
+		if (id1 == id){ 
+			t.LoadString(IDS_STRING_REZERVACIJA4);
+			AfxMessageBox(t); 
+			return;
+		}	
 	}
-	if (t == FALSE) {
+	soba.m_strFilter.Format(_T("[SobaID] = %d"), id);
+	soba.Open();
+	if (soba.IsEOF() != 0 || soba.m_HotelID != hotelID || sobe::Dostupnostsobe(id, datumIN, datumOUT) == FALSE) {
 		s.LoadString(IDS_STRING_REZERVACIJA5);
 		AfxMessageBox(s);
 		GetDlgItem(IDC_EDIT_R_IDSOBE)->SetWindowText(_T(""));
 		return;
 	}
-	soba.m_strFilter.Format(_T("[SobaID] = %d"), id);
-	soba.Open();
 	int nIndex = c_OdabraneSobe.InsertItem(0, m_IDSobe);
 	vrsta.m_strFilter.Format(_T("[VrstaSobeID] = %d"), soba.m_VrstaSobeID);
 	vrsta.Open();
@@ -299,13 +296,6 @@ void CNovaRezervacija::OnBnClickedButtonRIzbrisi()
 		t = c_OdabraneSobe.GetItemText(n, 3);
 		m_BrojGostijuizracun -= _tstoi(t);
 		t = c_OdabraneSobe.GetItemText(n, 0);
-		int i = 0;
-		while (slobodnesobeID[i] != '\0') {
-			if (slobodnesobeID[i] < 0) {
-				slobodnesobeID[i] = _tstoi(t);
-				break;
-			}i++;
-		}
 		c_OdabraneSobe.DeleteItem(n);
 		IspisiCijenu();
 	}

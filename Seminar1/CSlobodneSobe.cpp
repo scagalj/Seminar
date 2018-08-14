@@ -11,6 +11,7 @@
 #include "DetaljiRezervacije.h"
 #include "VrstaSobe.h"
 #include "CNovaRezervacija.h"
+#include "Funkcije.h"
 
 // CSlobodneSobe dialog
 
@@ -110,9 +111,7 @@ void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 {
 	CString s;
 	int i = 0;
-	CHotel hotel;
 	CSoba soba;
-	BOOL slobodna = TRUE;
 	GetDlgItem(IDC_BUTTON_NOVA_REZERVACIJA)->EnableWindow(TRUE);
 	c_list_sobe.DeleteAllItems();
 	if (c_hoteli.GetItemData(c_hoteli.GetCurSel()) < 0 || datumin == "" || datumout== "") {
@@ -124,57 +123,27 @@ void CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz()
 	soba.m_strFilter.Format(_T("[HotelID] = %d"), c_hoteli.GetItemData(c_hoteli.GetCurSel()));
 	soba.Open();
 	while (!soba.IsEOF()) {
-		slobodna = TRUE;
 		//Dohvaæanje detalja rezervacija za pojedinu sobu
-		CDetaljiRezervacije detalji;
-		detalji.m_strFilter.Format(_T("[SobaID] = %d"), soba.m_SobaID);
-		detalji.Open();
-		while (!detalji.IsEOF()) {
-			//Dohvaæanje rezervacije na osnovi Detalja rezervacije
-			CRezervacija rez;
-			rez.m_strFilter.Format(_T("[RezervacijaID] = %d"), detalji.m_RezervacijaID);
-			rez.Open();
-			COleDateTime t1, t2;
-			t1.ParseDateTime(datumin); //odabrani datumi
-			t2.ParseDateTime(datumout); //odabrani datum
-			CTime t3, t4;
-			SYSTEMTIME st;
-			if (t1.GetAsSystemTime(st))
-				t3 = CTime(st);
-
-			if (t2.GetAsSystemTime(st))
-				t4 = CTime(st);
-
-			if (!(t3 < rez.m_Check_IN && t4 < rez.m_Check_IN || t3 > rez.m_Check_OUT && t4 > rez.m_Check_OUT)) {
-				//Soba je zauzeta
-				slobodna = FALSE;
-				break;
-			}
-			rez.Close();
-			detalji.MoveNext();
-		}
-
-		detalji.Close();
-		if (slobodna == TRUE) {
-			IspisSobe(soba.m_SobaID, soba.m_Konzumiranje_duhana, soba.m_Ljubimci, soba.m_VrstaSobeID);
-			slobodnesobeID1[i] = soba.m_SobaID;
-			i++;
-		}
-		soba.MoveNext();
+		if (sobe::Dostupnostsobe(soba.m_SobaID, datumin, datumout) == TRUE)
+			IspisSobe(soba.m_SobaID);
+		soba.MoveNext();	
 	}
 	soba.Close();
 	
 }
 
-void CSlobodneSobe::IspisSobe(long sobaid, bool duhan, bool ljubimac, long vrstasobeid){
+void CSlobodneSobe::IspisSobe(long sobaid){
 	CString id,s,s1;
+	CSoba soba;
+	soba.m_strFilter.Format(_T("[SobaID] = %d"), sobaid);
+	soba.Open();
 	id.Format(_T("%ld"), sobaid);
 	int nIndex = c_list_sobe.InsertItem(0, id);
 	s.LoadString(IDS_STRING_DA);
 	s1.LoadString(IDS_STRING_NE);
-	duhan == TRUE ? c_list_sobe.SetItemText(nIndex, 1, s) : c_list_sobe.SetItemText(nIndex, 1, s1);
-	ljubimac == TRUE ? c_list_sobe.SetItemText(nIndex, 2, s) : c_list_sobe.SetItemText(nIndex, 2, s1);
-	id.Format(_T("%ld"), vrstasobeid);
+	soba.m_Konzumiranje_duhana == TRUE ? c_list_sobe.SetItemText(nIndex, 1, s) : c_list_sobe.SetItemText(nIndex, 1, s1);
+	soba.m_Ljubimci == TRUE ? c_list_sobe.SetItemText(nIndex, 2, s) : c_list_sobe.SetItemText(nIndex, 2, s1);
+	id.Format(_T("%ld"), soba.m_VrstaSobeID);
 	c_list_sobe.SetItemText(nIndex, 3, id);
 	CVrstaSobe vrsta;
 	vrsta.m_strFilter.Format(_T("[VrstaSobeID] = %s"), id);
@@ -194,6 +163,6 @@ void CSlobodneSobe::IspisSobe(long sobaid, bool duhan, bool ljubimac, long vrsta
 
 void CSlobodneSobe::OnBnClickedButtonNovaRezervaciju()
 {
-	CNovaRezervacija nova(slobodnesobeID1, datumin,datumout,korisnik,this);
+	CNovaRezervacija nova(datumin,datumout,korisnik, c_hoteli.GetItemData(c_hoteli.GetCurSel()),this);
 	nova.DoModal();
 }

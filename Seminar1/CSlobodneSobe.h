@@ -27,12 +27,11 @@ public:
 	afx_msg void OnBnClickedButtonSlobodneSobePrikaz();
 	afx_msg void OnDtnDatetimechangeDatetimepickerCout(NMHDR *pNMHDR, LRESULT *pResult);
 	virtual BOOL OnInitDialog();
-	void IspisSobe(long sobaid, bool duhan, bool ljubimac,long vrstasobeid);
+	void IspisSobe(long sobaid);
 	CListCtrl c_list_sobe;
 	CComboBox c_hoteli;
 	CDateTimeCtrl t_SlobodneSobe;
 	CDateTimeCtrl t_slobodnesobe_out;
-	int hotelid;
 	CString datumin;
 	CString datumout;
 	int slobodnesobeID1[100];

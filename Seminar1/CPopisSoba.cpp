@@ -36,11 +36,11 @@ void CPopisSoba::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST_POPIS_SOBA, popis_soba);
 }
 
-void CPopisSoba::PopisSoba(CString x) {
+void CPopisSoba::PopisSoba(int x) {
 	CSoba p_soba;
 	CString s,s1;
 	CVrstaSobe vrsta;
-	p_soba.m_strFilter.Format(_T("[HotelID] = %s"), x);
+	p_soba.m_strFilter.Format(_T("[HotelID] = %d"), x);
 	p_soba.Open();
 	popis_soba.DeleteAllItems();
 	while (!p_soba.IsEOF()) {
@@ -52,7 +52,7 @@ void CPopisSoba::PopisSoba(CString x) {
 		p_soba.m_Ljubimci == TRUE ? popis_soba.SetItemText(nIndex, 2, s) : popis_soba.SetItemText(nIndex, 2, s1);
 		s.Format(_T("%ld"), p_soba.m_VrstaSobeID);
 		popis_soba.SetItemText(nIndex, 3, s);
-		vrsta.m_strFilter.Format(_T("[VrstaSobeID] = '%s'"), s);
+		vrsta.m_strFilter.Format(_T("[VrstaSobeID] = %ld"), p_soba.m_VrstaSobeID);
 		vrsta.Open();
 		popis_soba.SetItemText(nIndex, 4, vrsta.m_Opis);
 		s1.LoadString(IDS_STRING_VALUTA);
@@ -87,7 +87,7 @@ BOOL CPopisSoba::OnInitDialog() {
 		popis_soba.InsertColumn(5, s, LVCFMT_LEFT, 90);
 		popis_soba.SetExtendedStyle(popis_soba.GetExtendedStyle() | LVS_EX_FULLROWSELECT);
 
-		PopisSoba(id);
+		PopisSoba(p_HotelID);
 
 		GetDlgItem(IDC_BUTTON_POPIS_IZBRISI_SOBU)->EnableWindow(FALSE);
 	return TRUE;
