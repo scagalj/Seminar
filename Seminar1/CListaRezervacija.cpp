@@ -13,7 +13,7 @@
 #include "VrstaSobe.h"
 #include "Hotel.h"
 #include "Funkcije.h"
-
+#include "CUrediRezervaciju.h"
 
 // CListaRezervacija dialog
 
@@ -46,6 +46,7 @@ BEGIN_MESSAGE_MAP(CListaRezervacija, CDialogEx)
 	ON_BN_CLICKED(IDC_RADIO3, &CListaRezervacija::OnBnClickedRadio3)
 	ON_BN_CLICKED(IDC_RADIO2, &CListaRezervacija::OnBnClickedRadio2)
 	ON_BN_CLICKED(IDC_RADIO1, &CListaRezervacija::OnBnClickedRadio1)
+	ON_BN_CLICKED(IDC_BUTTON_UREDI, &CListaRezervacija::OnBnClickedButtonUredi)
 END_MESSAGE_MAP()
 
 
@@ -83,6 +84,7 @@ BOOL CListaRezervacija::OnInitDialog()
 	IspisRezervacija();
 	GetDlgItem(IDC_BUTTON_R_IZBRISI)->EnableWindow(FALSE);
 	GetDlgItem(IDC_BUTTON_R_PRINT)->EnableWindow(FALSE);
+	GetDlgItem(IDC_BUTTON_UREDI)->EnableWindow(FALSE);
 	return TRUE;
 }
 
@@ -150,11 +152,13 @@ void CListaRezervacija::OnLvnItemchangedListRezervacije(NMHDR *pNMHDR, LRESULT *
 	int n = c_lista_rezervacija.GetNextItem(-1, LVNI_SELECTED);
 	if (n != -1) {
 		CString t = c_lista_rezervacija.GetItemText(n, 0);
-		IspisiSobe(_tstoi(t));
+		rezID = _tstoi(t);
+		IspisiSobe(rezID);
 	}
 	bool ispit = pNMLV->uNewState & LVIS_SELECTED ? TRUE : FALSE;
 	GetDlgItem(IDC_BUTTON_R_IZBRISI)->EnableWindow(ispit);
 	GetDlgItem(IDC_BUTTON_R_PRINT)->EnableWindow(ispit);
+	GetDlgItem(IDC_BUTTON_UREDI)->EnableWindow(ispit);
 
 	*pResult = 0;
 }
@@ -393,3 +397,11 @@ void CListaRezervacija::OnBnClickedRadio3()
 }
 
 
+
+
+void CListaRezervacija::OnBnClickedButtonUredi()
+{
+	CUrediRezervaciju uredi(rezID,this);
+	if (uredi.DoModal() == IDOK)
+		IspisRezervacija();
+}

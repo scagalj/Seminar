@@ -16,6 +16,7 @@
 #define IDD_DIALOG_SLOBODNE_SOBE        148
 #define IDD_DIALOG_NOVA_REZERVACIJA     150
 #define IDD_DIALOG_LISTA_REZEVACIJA     152
+#define IDD_DIALOG_UREDI_REZERVACIJU    153
 #define IDS_STRING_SOBA1                500
 #define IDS_STRING_SOBA2                501
 #define IDS_STRING_SOBA3                502
@@ -70,6 +71,8 @@
 #define IDS_STRING_MAX_OSOBA            726
 #define IDS_STRING_OZNAKA               727
 #define IDS_STRING_VRSTA                728
+#define IDS_STRING_DATUM_DA				729	
+#define IDS_STRING_DATUM_NE				730
 #define IDC_Korisnik                    1000
 #define IDC_Lozinka                     1001
 #define IDC_LOGIRAN                     1002
@@ -138,6 +141,7 @@
 #define IDC_BUTTON_SLOBODNE_SOBE_PRIKAZ 1066
 #define IDC_BUTTON_R_TRAZI              1066
 #define IDC_BUTTON_R_PRINT              1066
+#define IDC_BUTTON_DATUM_PROVJERA       1066
 #define IDC_EDIT_GOST_OIB               1067
 #define IDC_COMBO_SLOBODNE_NAZIVHOTELA  1067
 #define IDC_EDIT_GOST_ADRESA            1068
@@ -173,14 +177,17 @@
 #define IDC_RADIO2                      1098
 #define IDC_LIST_D_REZERVACIJE          1099
 #define IDC_RADIO3                      1099
+#define IDC_DATETIME_UREDI_DATUMDOLASKA 1101
+#define IDC_DATETIME_UREDI_DATUMODLASKA 1102
+#define IDC_BUTTON_UREDI                1104
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        152
+#define _APS_NEXT_RESOURCE_VALUE        155
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1101
+#define _APS_NEXT_CONTROL_VALUE         1105
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

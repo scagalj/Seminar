@@ -98,15 +98,12 @@ BOOL CNovaRezervacija::OnInitDialog()
 	COleDateTime t1, t2;
 	t1.ParseDateTime(datumIN);
 	t2.ParseDateTime(datumOUT);
-	CTime t3, t4;
 	SYSTEMTIME st;
 	if (t1.GetAsSystemTime(st))
-		t3 = CTime(st);
+		datumD = CTime(st);
 	if (t2.GetAsSystemTime(st))
-		t4 = CTime(st);
-	datumD = t3;
-	datumO = t4;
-	CTimeSpan t5 = t4 - t3;
+		datumO = CTime(st);
+	CTimeSpan t5 = datumO - datumD;
 	m_Brojnocenja = t5.GetDays();
 	s.Format(_T("%ld"), m_Brojnocenja);
 	label = GetDlgItem(IDC_STATIC_R_BROJNOCENJA);

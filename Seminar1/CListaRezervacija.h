@@ -23,7 +23,7 @@ protected:
 public:
 	CListCtrl c_lista_rezervacija;
 	CListCtrl c_list_rez_sobe;
-	int ispis;
+	int ispis,rezID;
 	void Print();
 	virtual BOOL OnInitDialog();
 	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
@@ -37,4 +37,5 @@ public:
 	afx_msg void OnBnClickedRadio1();
 	void IspisRezervacija();
 	void IspisiSobe(int id);
+	afx_msg void OnBnClickedButtonUredi();
 };

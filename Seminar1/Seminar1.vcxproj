@@ -198,6 +198,7 @@
     <ClInclude Include="CNovaRezervacija.h" />
     <ClInclude Include="CPopisSoba.h" />
     <ClInclude Include="CSlobodneSobe.h" />
+    <ClInclude Include="CUrediRezervaciju.h" />
     <ClInclude Include="CZaposlenici.h" />
     <ClInclude Include="DetaljiRezervacije.h" />
     <ClInclude Include="Funkcije.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="CNovaRezervacija.cpp" />
     <ClCompile Include="CPopisSoba.cpp" />
     <ClCompile Include="CSlobodneSobe.cpp" />
+    <ClCompile Include="CUrediRezervaciju.cpp" />
     <ClCompile Include="CZaposlenici.cpp" />
     <ClCompile Include="DetaljiRezervacije.cpp" />
     <ClCompile Include="Funkcije.cpp" />
