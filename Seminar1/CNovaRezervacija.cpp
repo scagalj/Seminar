@@ -95,14 +95,8 @@ BOOL CNovaRezervacija::OnInitDialog()
 	label->SetWindowText(datumIN);
 	label = GetDlgItem(IDC_STATIC_R_DATUMODLASKA);
 	label->SetWindowText(datumOUT);
-	COleDateTime t1, t2;
-	t1.ParseDateTime(datumIN);
-	t2.ParseDateTime(datumOUT);
-	SYSTEMTIME st;
-	if (t1.GetAsSystemTime(st))
-		datumD = CTime(st);
-	if (t2.GetAsSystemTime(st))
-		datumO = CTime(st);
+	datumD= sobe::Datum(datumIN);
+	datumO = sobe::Datum(datumOUT);
 	CTimeSpan t5 = datumO - datumD;
 	m_Brojnocenja = t5.GetDays();
 	s.Format(_T("%ld"), m_Brojnocenja);

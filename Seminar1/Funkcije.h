@@ -9,4 +9,5 @@ namespace f {
 namespace sobe {
 
 	BOOL Dostupnostsobe(int id, CString datumin, CString datumout);
+	CTime Datum(CString in);
 }

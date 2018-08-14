@@ -59,4 +59,14 @@ namespace sobe {
 		return slobodna == TRUE ? TRUE : FALSE;	
 	
 	}
+
+	CTime Datum(CString datum) {
+		COleDateTime t1;
+		CTime d1;
+		SYSTEMTIME st;
+		t1.ParseDateTime(datum);
+		if (t1.GetAsSystemTime(st))
+			d1 = CTime(st);
+		return d1;
+	}
 }
