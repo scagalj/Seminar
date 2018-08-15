@@ -56,14 +56,7 @@ void CDodajZaposlenika::OnBnClickedOk()
 {
 	CString s;
 	CWnd *label = GetDlgItem(IDC_STATIC_Z_STATUS);
-	GetDlgItemText(IDC_EDIT_Z_KOznaka, m_Kor_Oznaka);
-	GetDlgItemText(IDC_EDIT_Z_Lozinka, m_Lozinka);
-	GetDlgItemText(IDC_EDIT_Z_Ime, m_Ime);
-	GetDlgItemText(IDC_EDIT_Z_Prezime, m_Prezime);
-	GetDlgItemText(IDC_EDIT_Z_Adresa, m_Adresa);
-	GetDlgItemText(IDC_EDIT_Z_Grad, m_Grad);
-	GetDlgItemText(IDC_EDIT_Z_Drzava, m_Drzava);
-	GetDlgItemText(IDC_EDIT_Z_Kontakt, m_Kontakt);
+	UpdateData(TRUE);
 	if (m_Kor_Oznaka == "" || m_Lozinka == "") {
 		s.LoadString(IDS_STRING_PAZNA_POLJA);
 		label->SetWindowText(s);
@@ -82,11 +75,7 @@ void CDodajZaposlenika::OnBnClickedOk()
 	zaposlenik.m_Kontakt = m_Kontakt;
 	if (!zaposlenik.Update()) {
 		s.LoadString(IDS_STRING_ZAPOSLENIK1);
-		label->SetWindowText(s);
-	}
-	else {
-		s.LoadString(IDS_STRING_ZAPOSLENIK2);
-		label->SetWindowText(s);
+		AfxMessageBox(s);
 	}
 	zaposlenik.Close();
 	CDialogEx::OnOK();

@@ -80,29 +80,22 @@ void CDodajSobu::OnBnClickedButtonDodajSobu()
 	CString s;
 	CSoba soba;
 	bool duhan, ljubimci;
-	CWnd *label = GetDlgItem(IDC_STATIC_SOBA_STATUS);
 	if (vrsta_soba.GetCurSel() < 0) {
 		s.LoadString(IDS_STRING_SOBA1);
-		label->SetWindowText(s);
+		AfxMessageBox(s);;
 		return;
 	}
-	CButton *m_ctlCheck1 = (CButton*)GetDlgItem(IDC_CHECK_DUHAN);
-	duhan = (m_ctlCheck1->GetCheck() == 1) ? true : false;
-	m_ctlCheck1 = (CButton*)GetDlgItem(IDC_CHECK_LJUBIMCI);
-	ljubimci = (m_ctlCheck1->GetCheck() == 1) ? true : false;
+	UpdateData(TRUE);
 	soba.Open();
 	soba.AddNew();
-	soba.m_Konzumiranje_duhana = duhan;
-	soba.m_Ljubimci = ljubimci;
+	soba.m_Konzumiranje_duhana = s_duhan;
+	soba.m_Ljubimci = s_ljubimci;
 	soba.m_HotelID = s_HotelID;
 	soba.m_VrstaSobeID = vrsta_soba.GetItemData(vrsta_soba.GetCurSel());
 	if (!soba.Update()) {
 		s.LoadString(IDS_STRING_SOBA2);
-		label->SetWindowText(s);
-	}else{
-		s.LoadString(IDS_STRING_SOBA3);
-		label->SetWindowText(s);
+		AfxMessageBox(s);
 	}
 	soba.Close();
-	vrsta_soba.SetCurSel(-1);
+	CDialogEx::OnOK();
 }

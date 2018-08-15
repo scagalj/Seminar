@@ -88,11 +88,13 @@ void CHoteli::IspisiHotele()
 
 void CHoteli::OnBnClickedButtonAddHotel()
 {
-	int x;
+	CString s;
 	CDodajHotel addHotel;
-	x = addHotel.DoModal();
-	if (x = IDOK)
+	if (addHotel.DoModal() == IDOK) {
 		IspisiHotele();
+		s.LoadString(IDS_STRING_HOTEL2);
+		AfxMessageBox(s);
+	}
 }
 
 
@@ -141,12 +143,16 @@ void CHoteli::OnBnClickedButtonHotelTrazi()
 void CHoteli::OnBnClickedButtonDodajSobu()
 {
 	CHotel hotel;
+	CString s;
 	int x = hoteli.GetNextItem(-1, LVNI_SELECTED);
 	CString t = hoteli.GetItemText(x, 0);
 	hotel.m_strFilter = HotelID(_tstoi(t));
 	hotel.Open();
 	CDodajSobu soba(hotel.m_HotelID,hotel.m_Naziv,this);
-	soba.DoModal();
+	if (soba.DoModal() == IDOK) {
+		s.LoadString(IDS_STRING_SOBA3);
+		AfxMessageBox(s);
+	}
 	hotel.Close();
 }
 

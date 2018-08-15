@@ -53,13 +53,7 @@ END_MESSAGE_MAP()
 void CDodajGosta::OnBnClickedOk()
 {
 	CString s;
-	GetDlgItemText(IDC_EDIT_GOST_IME, m_Ime);
-	GetDlgItemText(IDC_EDIT_GOST_PREZIME, m_Prezime);
-	GetDlgItemText(IDC_EDIT_GOST_OIB, m_OIB);
-	GetDlgItemText(IDC_EDIT_GOST_ADRESA, m_Adresa);
-	GetDlgItemText(IDC_EDIT_GOST_GRAD, m_Grad);
-	GetDlgItemText(IDC_EDIT_GOST_DRZAVA, m_Drzava);
-	GetDlgItemText(IDC_EDIT_GOST_KONTAKT, m_Kontakt);
+	UpdateData(TRUE);
 	if (m_Ime == "" || m_Prezime == "" || m_OIB == "" || m_Adresa == "" || m_Grad  == "" || m_Drzava=="" || m_Kontakt == "") {
 		s.LoadString(IDS_STRING_PAZNA_POLJA);
 		AfxMessageBox(s);

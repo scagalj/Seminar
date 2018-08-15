@@ -26,4 +26,5 @@ public:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButtonZaposlenikDodaj();
 	afx_msg void OnBnClickedButtonZaposlenikIzbrisi();
+	afx_msg void OnLvnItemchangedListPopisZaposlenika(NMHDR *pNMHDR, LRESULT *pResult);
 };
