@@ -22,6 +22,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedOk();
+	int id;
 	CString m_Ime;
 	CString m_Prezime;
 	CString m_OIB;
@@ -29,4 +30,5 @@ public:
 	CString m_Grad;
 	CString m_Drzava;
 	CString m_Kontakt;
+	int GetValue() const { return id; }
 };

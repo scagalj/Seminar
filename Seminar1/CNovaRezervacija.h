@@ -48,4 +48,5 @@ public:
 	afx_msg void OnBnClickedButtonRDodaj();
 	afx_msg void OnLvnItemchangedListROdabranesobe(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedButtonRIzbrisi();
+	afx_msg void OnBnClickedButtonNoviGost();
 };

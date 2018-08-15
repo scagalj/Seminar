@@ -83,6 +83,7 @@ BEGIN_MESSAGE_MAP(CApplicationDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_GOST, &CApplicationDlg::OnBnClickedButtonGost)
 	ON_BN_CLICKED(IDC_BUTTON_SLOBODNE_SOBE, &CApplicationDlg::OnBnClickedButtonSlobodneSobe)
 	ON_BN_CLICKED(IDC_BUTTON_REZERVACIJE, &CApplicationDlg::OnBnClickedButtonRezervacije)
+	ON_BN_CLICKED(IDC_BUTTON_OSVJEZI, &CApplicationDlg::OnBnClickedButtonOsvjezi)
 END_MESSAGE_MAP()
 
 
@@ -148,6 +149,7 @@ void CApplicationDlg::OnBnClickedButtonRezervacije()
 }
 
 void CApplicationDlg::IspisRezervacija() {
+	c_rezervacije_danas.DeleteAllItems();
 	CString s,s1;
 	CRezervacija rez;
 	rez.Open();
@@ -179,4 +181,9 @@ void CApplicationDlg::IspisRezervacija() {
 	}
 	rez.Close();
 
+}
+
+void CApplicationDlg::OnBnClickedButtonOsvjezi()
+{
+	IspisRezervacija();
 }

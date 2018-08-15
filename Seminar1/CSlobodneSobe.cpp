@@ -164,5 +164,10 @@ void CSlobodneSobe::IspisSobe(long sobaid){
 void CSlobodneSobe::OnBnClickedButtonNovaRezervaciju()
 {
 	CNovaRezervacija nova(datumin,datumout,korisnik, c_hoteli.GetItemData(c_hoteli.GetCurSel()),this);
-	nova.DoModal();
+	if (nova.DoModal() == IDOK){
+		CString s;
+		OnBnClickedButtonSlobodneSobePrikaz();
+		s.LoadString(IDS_STRING_REZ_KREIRANA);
+		AfxMessageBox(s);
+	}
 }

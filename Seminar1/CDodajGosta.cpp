@@ -73,6 +73,8 @@ void CDodajGosta::OnBnClickedOk()
 		s.LoadString(IDS_STRING_GOST2);
 		AfxMessageBox(s);
 	}
+	gost.MoveLast();
+	id = gost.m_GostID;
 	gost.Close();
 	CDialogEx::OnOK();
 }

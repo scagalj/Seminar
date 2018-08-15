@@ -12,6 +12,7 @@
 #include "VrstaSobe.h"
 #include "DetaljiRezervacije.h"
 #include "Funkcije.h"
+#include "CDodajGosta.h"
 
 // CNovaRezervacija dialog
 
@@ -52,13 +53,6 @@ CNovaRezervacija::~CNovaRezervacija()
 void CNovaRezervacija::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_EDIT_R_IME, m_Ime);
-	DDX_Text(pDX, IDC_EDIT_R_PREZIME, m_Prezime);
-	DDX_Text(pDX, IDC_EDIT_R_ADRESA, m_Adresa);
-	DDX_Text(pDX, IDC_EDIT_R_GRAD, m_Grad);
-	DDX_Text(pDX, IDC_EDIT_R_DRZAVA, m_Drzava);
-	DDX_Text(pDX, IDC_EDIT_R_OIB, m_OIB);
-	DDX_Text(pDX, IDC_EDIT_R_KONTAKT, m_Kontakt);
 	DDX_Text(pDX, IDC_EDIT_R_OIB_P, m_pretraziOIB);
 	DDX_Text(pDX, IDC_EDIT_R_BROJGOSTIJU, m_Brojgostiju);
 	DDX_Text(pDX, IDC_EDIT_R_IDSOBE, m_IDSobe);
@@ -72,6 +66,7 @@ BEGIN_MESSAGE_MAP(CNovaRezervacija, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_R_DODAJ, &CNovaRezervacija::OnBnClickedButtonRDodaj)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_R_ODABRANESOBE, &CNovaRezervacija::OnLvnItemchangedListROdabranesobe)
 	ON_BN_CLICKED(IDC_BUTTON_R_IZBRISI, &CNovaRezervacija::OnBnClickedButtonRIzbrisi)
+	ON_BN_CLICKED(IDC_BUTTON_NOVI_GOST, &CNovaRezervacija::OnBnClickedButtonNoviGost)
 END_MESSAGE_MAP()
 
 
@@ -110,33 +105,6 @@ BOOL CNovaRezervacija::OnInitDialog()
 
 	return TRUE;
 }
-bool CNovaRezervacija::DodajGosta() {
-	GetDlgItemText(IDC_EDIT_R_IME, m_Ime);
-	GetDlgItemText(IDC_EDIT_R_PREZIME, m_Prezime);
-	GetDlgItemText(IDC_EDIT_R_ADRESA, m_Adresa);
-	GetDlgItemText(IDC_EDIT_R_GRAD, m_Grad);
-	GetDlgItemText(IDC_EDIT_R_DRZAVA, m_Drzava);
-	GetDlgItemText(IDC_EDIT_R_OIB, m_OIB);
-	GetDlgItemText(IDC_EDIT_R_KONTAKT, m_Kontakt);
-	if (m_Ime == "" || m_Prezime == "" || m_OIB == "" || m_Kontakt == "") {
-		return false;
-	}
-	CGost gost;
-	gost.Open();
-	gost.AddNew();
-	gost.m_Ime = m_Ime;
-	gost.m_Prezime = m_Prezime;
-	gost.m_Adresa = m_Adresa;
-	gost.m_Grad = m_Grad;
-	gost.m_Drzava = m_Drzava;
-	gost.m_OIB = m_OIB;
-	gost.m_Kontakt = m_Kontakt;
-	gost.Update();
-	gost.MoveLast();
-	gostID = gost.m_GostID;
-	gost.Close();
-	return true;
-}
 
 void CNovaRezervacija::IspisiCijenu() {
 	CString s, s1;
@@ -172,11 +140,9 @@ void CNovaRezervacija::OnBnClickedOk()
 {
 	CString s;
 	if (gostID < 0) {
-		if (DodajGosta() == false) {
-			s.LoadString(IDS_STRING_REZERVACIJA2);
-			AfxMessageBox(s);
-			return;
-		}
+		s.LoadString(IDS_STRING_REZERVACIJA2);
+		AfxMessageBox(s);
+		return;
 	}
 	GetDlgItemText(IDC_EDIT_R_BROJGOSTIJU, s);
 	m_Brojgostiju = _tstoi(s);
@@ -289,5 +255,23 @@ void CNovaRezervacija::OnBnClickedButtonRIzbrisi()
 		t = c_OdabraneSobe.GetItemText(n, 0);
 		c_OdabraneSobe.DeleteItem(n);
 		IspisiCijenu();
+	}
+}
+
+
+void CNovaRezervacija::OnBnClickedButtonNoviGost()
+{
+	CString s;
+	CDodajGosta Gost;
+	CWnd *label = GetDlgItem(IDC_STATIC_R_IMEGOSTA);
+	if (Gost.DoModal() == IDOK) {
+		gostID = Gost.GetValue();
+		s.LoadString(IDS_STRING_GOST1);
+		AfxMessageBox(s);
+		label->SetWindowText(f::DohvatiGosta(gostID));
+	}
+	else {
+		s.LoadString(519);
+		label->SetWindowText(s);
 	}
 }

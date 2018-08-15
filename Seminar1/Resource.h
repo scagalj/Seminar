@@ -71,8 +71,9 @@
 #define IDS_STRING_MAX_OSOBA            726
 #define IDS_STRING_OZNAKA               727
 #define IDS_STRING_VRSTA                728
-#define IDS_STRING_DATUM_DA				729	
-#define IDS_STRING_DATUM_NE				730
+#define IDS_STRING_DATUM_DA             729
+#define IDS_STRING_DATUM_NE             730
+#define IDS_STRING_REZ_KREIRANA         731
 #define IDC_Korisnik                    1000
 #define IDC_Lozinka                     1001
 #define IDC_LOGIRAN                     1002
@@ -180,6 +181,9 @@
 #define IDC_DATETIME_UREDI_DATUMDOLASKA 1101
 #define IDC_DATETIME_UREDI_DATUMODLASKA 1102
 #define IDC_BUTTON_UREDI                1104
+#define IDC_BUTTON2                     1105
+#define IDC_BUTTON_NOVI_GOST            1105
+#define IDC_BUTTON_OSVJEZI              1105
 
 // Next default values for new objects
 // 
@@ -187,7 +191,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        155
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1105
+#define _APS_NEXT_CONTROL_VALUE         1106
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
