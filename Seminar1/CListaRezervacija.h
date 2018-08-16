@@ -23,7 +23,8 @@ protected:
 public:
 	CListCtrl c_lista_rezervacija;
 	CListCtrl c_list_rez_sobe;
-	int ispis,rezID;
+	int ispis, rezID;
+	int poredak = 0;
 	void Print();
 	virtual BOOL OnInitDialog();
 	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
@@ -38,4 +39,6 @@ public:
 	void IspisRezervacija();
 	void IspisiSobe(int id);
 	afx_msg void OnBnClickedButtonUredi();
+	bool SortColumn(int columnIndex, bool ascending);
+	afx_msg void OnLvnColumnclickListRezervacije(NMHDR *pNMHDR, LRESULT *pResult);
 };

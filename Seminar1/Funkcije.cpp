@@ -70,3 +70,39 @@ namespace sobe {
 		return d1;
 	}
 }
+
+namespace sort {
+	
+
+	PARAMSORT::PARAMSORT(HWND hWnd, int stupac, bool poredak, bool datum)
+		:m_hWnd(hWnd)
+		, m_stupac(stupac)
+		, m_poredak(poredak)
+		,m_datum(datum)
+	{}
+
+	// Comparison extracts values from the List-Control
+	int CALLBACK SortFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+	{
+		PARAMSORT& ps = *(PARAMSORT*)lParamSort;
+
+		TCHAR prvi[256] = _T(""), drugi[256] = _T("");
+		ListView_GetItemText(ps.m_hWnd, lParam1,
+			ps.m_stupac, prvi, sizeof(prvi));
+		ListView_GetItemText(ps.m_hWnd, lParam2,
+			ps.m_stupac, drugi, sizeof(drugi));
+		double x = _wtoi(prvi);
+		double y = _wtoi(drugi);
+		if (x != 0 && ps.m_datum == false) {	
+			return ps.m_poredak ? x - y : -(x - y);
+		}
+		if (ps.m_datum == true) {
+			CTime t1, t2;
+			t1 = sobe::Datum(prvi);
+			t2 = sobe::Datum(drugi);
+			return ps.m_poredak ? t1 < t2 : t1>t2;
+		}
+		return ps.m_poredak ? _tcscmp(prvi, drugi) : _tcscmp(drugi, prvi);
+
+	}
+}

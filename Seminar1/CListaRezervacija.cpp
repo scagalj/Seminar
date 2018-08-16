@@ -47,6 +47,7 @@ BEGIN_MESSAGE_MAP(CListaRezervacija, CDialogEx)
 	ON_BN_CLICKED(IDC_RADIO2, &CListaRezervacija::OnBnClickedRadio2)
 	ON_BN_CLICKED(IDC_RADIO1, &CListaRezervacija::OnBnClickedRadio1)
 	ON_BN_CLICKED(IDC_BUTTON_UREDI, &CListaRezervacija::OnBnClickedButtonUredi)
+	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST_REZERVACIJE, &CListaRezervacija::OnLvnColumnclickListRezervacije)
 END_MESSAGE_MAP()
 
 
@@ -116,7 +117,6 @@ void CListaRezervacija::IspisRezervacija() {
 			rez.MoveNext();
 	}
 	rez.Close();
-
 }
 
 
@@ -404,4 +404,22 @@ void CListaRezervacija::OnBnClickedButtonUredi()
 	CUrediRezervaciju uredi(rezID,this);
 	if (uredi.DoModal() == IDOK)
 		IspisRezervacija();
+}
+
+
+bool CListaRezervacija::SortColumn(int columnIndex, bool ascending)
+{
+	bool datum;
+	columnIndex == 1 || columnIndex == 4 || columnIndex == 5 ? datum = true : datum = false;
+	sort::PARAMSORT paramsort(c_lista_rezervacija, columnIndex, ascending, datum);
+	ListView_SortItemsEx(c_lista_rezervacija, sort::SortFunc, &paramsort);
+	return true;
+}
+
+void CListaRezervacija::OnLvnColumnclickListRezervacije(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	SortColumn(pNMLV->iSubItem, poredak);
+	poredak == 0 ? poredak = 1 : poredak = 0;
+	*pResult = 0;
 }
