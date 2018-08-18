@@ -182,8 +182,9 @@
 #define IDC_DATETIME_UREDI_DATUMODLASKA 1102
 #define IDC_BUTTON_UREDI                1104
 #define IDC_BUTTON2                     1105
-#define IDC_BUTTON_NOVI_GOST            1105
-#define IDC_BUTTON_OSVJEZI              1105
+#define IDC_BUTTON_NOVI_GOST            1106
+#define IDC_BUTTON_OSVJEZI              1107
+#define IDC_BUTTON_GOST_IZBRISI         1108
 
 // Next default values for new objects
 // 

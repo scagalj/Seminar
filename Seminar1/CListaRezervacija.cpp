@@ -401,7 +401,10 @@ void CListaRezervacija::OnBnClickedRadio3()
 
 void CListaRezervacija::OnBnClickedButtonUredi()
 {
-	CUrediRezervaciju uredi(rezID,this);
+	CRezervacija rez;
+	rez.m_strFilter.Format(_T("[RezervacijaID] = %d"), rezID);
+	rez.Open();
+	CUrediRezervaciju uredi(rezID, rez.m_Check_IN.Format(_T("%d.%m.%Y")), rez.m_Check_OUT.Format(_T("%d.%m.%Y")),this);
 	if (uredi.DoModal() == IDOK)
 		IspisRezervacija();
 }
