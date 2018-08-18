@@ -28,4 +28,6 @@ public:
 	afx_msg void OnBnClickedButtonDodajGosta();
 	afx_msg void OnLvnColumnclickListGosti(NMHDR *pNMHDR, LRESULT *pResult);
 	bool SortColumn(int columnIndex, bool ascending);
+	afx_msg void OnLvnItemchangedListGosti(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnBnClickedButtonGostIzbrisi();
 };
