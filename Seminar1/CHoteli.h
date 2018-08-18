@@ -28,10 +28,13 @@ protected:
 public:
 	CListCtrl hoteli;
 	CString h_trazi;
+	int poredak;
 	afx_msg void OnBnClickedButtonAddHotel();
 	afx_msg void OnBnClickedButtonDeleteHotel();
 	afx_msg void OnBnClickedButtonHotelTrazi();
 	afx_msg void OnBnClickedButtonDodajSobu();
 	afx_msg void OnLvnItemchangedListHoteli(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedButtonPopisSoba();
+	afx_msg void OnLvnColumnclickListHoteli(NMHDR *pNMHDR, LRESULT *pResult);
+	bool SortColumn(int columnIndex, bool ascending);
 };

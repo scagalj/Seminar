@@ -13,6 +13,7 @@ public:
 	virtual ~CApplicationDlg();
 	BOOL OnInitDialog();
 	CString user;
+	int poredak;
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
@@ -34,4 +35,6 @@ public:
 	afx_msg void OnBnClickedButtonSlobodneSobe();
 	afx_msg void OnBnClickedButtonRezervacije();
 	afx_msg void OnBnClickedButtonOsvjezi();
+	afx_msg void OnLvnColumnclickListDRezervacije(NMHDR *pNMHDR, LRESULT *pResult);
+	bool SortColumn(int columnIndex, bool ascending);
 };

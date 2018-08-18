@@ -36,6 +36,8 @@ public:
 	CString datumout;
 	int slobodnesobeID1[100];
 	CString korisnik;
-	
+	int poredak;
 	afx_msg void OnBnClickedButtonNovaRezervaciju();
+	afx_msg void OnLvnColumnclickListSlobodneSobePopis(NMHDR *pNMHDR, LRESULT *pResult);
+	bool SortColumn(int columnIndex, bool ascending);
 };

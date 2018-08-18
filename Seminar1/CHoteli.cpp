@@ -9,7 +9,7 @@
 #include "CDodajHotel.h"
 #include "CDodajSobu.h"
 #include "CPopisSoba.h"
-
+#include "Funkcije.h"
 
 // CHoteli dialog
 
@@ -61,6 +61,7 @@ BEGIN_MESSAGE_MAP(CHoteli, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_DODAJ_SOBU, &CHoteli::OnBnClickedButtonDodajSobu)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_HOTELI, &CHoteli::OnLvnItemchangedListHoteli)
 	ON_BN_CLICKED(IDC_BUTTON_POPIS_SOBA, &CHoteli::OnBnClickedButtonPopisSoba)
+	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST_HOTELI, &CHoteli::OnLvnColumnclickListHoteli)
 END_MESSAGE_MAP()
 
 
@@ -189,4 +190,19 @@ CString CHoteli::HotelID(int x) {
 	s.Format(_T("[HotelID] = %d"), x);
 	return s;
 
+}
+
+void CHoteli::OnLvnColumnclickListHoteli(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	SortColumn(pNMLV->iSubItem, poredak);
+	poredak == 0 ? poredak = 1 : poredak = 0;
+	*pResult = 0;
+}
+
+bool CHoteli::SortColumn(int columnIndex, bool ascending)
+{
+	sort::PARAMSORT paramsort(hoteli, columnIndex, ascending, false);
+	ListView_SortItemsEx(hoteli, sort::SortFunc, &paramsort);
+	return true;
 }

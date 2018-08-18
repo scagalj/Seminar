@@ -84,6 +84,7 @@ BEGIN_MESSAGE_MAP(CApplicationDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_SLOBODNE_SOBE, &CApplicationDlg::OnBnClickedButtonSlobodneSobe)
 	ON_BN_CLICKED(IDC_BUTTON_REZERVACIJE, &CApplicationDlg::OnBnClickedButtonRezervacije)
 	ON_BN_CLICKED(IDC_BUTTON_OSVJEZI, &CApplicationDlg::OnBnClickedButtonOsvjezi)
+	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST_D_REZERVACIJE, &CApplicationDlg::OnLvnColumnclickListDRezervacije)
 END_MESSAGE_MAP()
 
 
@@ -186,4 +187,22 @@ void CApplicationDlg::IspisRezervacija() {
 void CApplicationDlg::OnBnClickedButtonOsvjezi()
 {
 	IspisRezervacija();
+}
+
+
+void CApplicationDlg::OnLvnColumnclickListDRezervacije(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	SortColumn(pNMLV->iSubItem, poredak);
+	poredak == 0 ? poredak = 1 : poredak = 0;
+	*pResult = 0;
+}
+
+bool CApplicationDlg::SortColumn(int columnIndex, bool ascending)
+{
+	bool datum;
+	columnIndex == 1 || columnIndex == 4 || columnIndex == 5 ? datum = true : datum = false;
+	sort::PARAMSORT paramsort(c_rezervacije_danas, columnIndex, ascending, datum);
+	ListView_SortItemsEx(c_rezervacije_danas, sort::SortFunc, &paramsort);
+	return true;
 }

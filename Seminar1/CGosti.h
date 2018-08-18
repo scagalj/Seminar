@@ -11,6 +11,7 @@ public:
 	CGosti(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CGosti();
 	void IspisiGoste();
+	int poredak;
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
@@ -25,4 +26,6 @@ public:
 	CListCtrl gosti;
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButtonDodajGosta();
+	afx_msg void OnLvnColumnclickListGosti(NMHDR *pNMHDR, LRESULT *pResult);
+	bool SortColumn(int columnIndex, bool ascending);
 };

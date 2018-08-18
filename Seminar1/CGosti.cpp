@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 #include "Gost.h"
 #include "CDodajGosta.h"
+#include "Funkcije.h"
 
 
 // CGosti dialog
@@ -32,6 +33,7 @@ void CGosti::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CGosti, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_DODAJ_GOSTA, &CGosti::OnBnClickedButtonDodajGosta)
+	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST_GOSTI, &CGosti::OnLvnColumnclickListGosti)
 END_MESSAGE_MAP()
 
 
@@ -98,4 +100,20 @@ void CGosti::OnBnClickedButtonDodajGosta()
 		s.LoadString(IDS_STRING_GOST1);
 		AfxMessageBox(s);
 	}
+}
+
+
+void CGosti::OnLvnColumnclickListGosti(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	SortColumn(pNMLV->iSubItem, poredak);
+	poredak == 0 ? poredak = 1 : poredak = 0;
+	*pResult = 0;
+}
+
+bool CGosti::SortColumn(int columnIndex, bool ascending)
+{
+	sort::PARAMSORT paramsort(gosti, columnIndex, ascending, false);
+	ListView_SortItemsEx(gosti, sort::SortFunc, &paramsort);
+	return true;
 }

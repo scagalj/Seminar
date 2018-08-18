@@ -49,6 +49,7 @@ BEGIN_MESSAGE_MAP(CSlobodneSobe, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_SLOBODNE_SOBE_PRIKAZ, &CSlobodneSobe::OnBnClickedButtonSlobodneSobePrikaz)
 	ON_NOTIFY(DTN_DATETIMECHANGE, IDC_DATETIMEPICKER_COUT, &CSlobodneSobe::OnDtnDatetimechangeDatetimepickerCout)
 	ON_BN_CLICKED(IDC_BUTTON_NOVA_REZERVACIJA, &CSlobodneSobe::OnBnClickedButtonNovaRezervaciju)
+	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST_SLOBODNE_SOBE_POPIS, &CSlobodneSobe::OnLvnColumnclickListSlobodneSobePopis)
 END_MESSAGE_MAP()
 
 
@@ -170,4 +171,20 @@ void CSlobodneSobe::OnBnClickedButtonNovaRezervaciju()
 		s.LoadString(IDS_STRING_REZ_KREIRANA);
 		AfxMessageBox(s);
 	}
+}
+
+
+void CSlobodneSobe::OnLvnColumnclickListSlobodneSobePopis(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	SortColumn(pNMLV->iSubItem, poredak);
+	poredak == 0 ? poredak = 1 : poredak = 0;
+	*pResult = 0;
+}
+
+bool CSlobodneSobe::SortColumn(int columnIndex, bool ascending)
+{
+	sort::PARAMSORT paramsort(c_list_sobe, columnIndex, ascending, false);
+	ListView_SortItemsEx(c_list_sobe, sort::SortFunc, &paramsort);
+	return true;
 }

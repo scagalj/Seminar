@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 #include "Soba.h"
 #include "VrstaSobe.h"
+#include "Funkcije.h"
 
 
 // CPopisSoba dialog
@@ -97,6 +98,7 @@ BOOL CPopisSoba::OnInitDialog() {
 BEGIN_MESSAGE_MAP(CPopisSoba, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_POPIS_IZBRISI_SOBU, &CPopisSoba::OnBnClickedButtonPopisIzbrisiSobu)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_POPIS_SOBA, &CPopisSoba::OnLvnItemchangedListPopisSoba)
+	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST_POPIS_SOBA, &CPopisSoba::OnLvnColumnclickListPopisSoba)
 END_MESSAGE_MAP()
 
 
@@ -124,4 +126,21 @@ void CPopisSoba::OnLvnItemchangedListPopisSoba(NMHDR *pNMHDR, LRESULT *pResult)
 	bool ispit = pNMLV->uNewState & LVIS_SELECTED ? TRUE : FALSE;
 	GetDlgItem(IDC_BUTTON_POPIS_IZBRISI_SOBU)->EnableWindow(ispit);
 	*pResult = 0;
+}
+
+
+void CPopisSoba::OnLvnColumnclickListPopisSoba(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	SortColumn(pNMLV->iSubItem, poredak);
+	poredak == 0 ? poredak = 1 : poredak = 0;
+	*pResult = 0;
+}
+
+
+bool CPopisSoba::SortColumn(int columnIndex, bool ascending)
+{
+	sort::PARAMSORT paramsort(popis_soba, columnIndex, ascending, false);
+	ListView_SortItemsEx(popis_soba, sort::SortFunc, &paramsort);
+	return true;
 }

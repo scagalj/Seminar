@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 #include "Zaposlenik.h"
 #include "CDodajZaposlenika.h"
-
+#include "Funkcije.h"
 
 // CZaposlenici dialog
 
@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CZaposlenici, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_ZAPOSLENIK_DODAJ, &CZaposlenici::OnBnClickedButtonZaposlenikDodaj)
 	ON_BN_CLICKED(IDC_BUTTON_ZAPOSLENIK_IZBRISI, &CZaposlenici::OnBnClickedButtonZaposlenikIzbrisi)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_POPIS_ZAPOSLENIKA, &CZaposlenici::OnLvnItemchangedListPopisZaposlenika)
+	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST_POPIS_ZAPOSLENIKA, &CZaposlenici::OnLvnColumnclickListPopisZaposlenika)
 END_MESSAGE_MAP()
 
 BOOL CZaposlenici::OnInitDialog()
@@ -117,4 +118,21 @@ void CZaposlenici::OnLvnItemchangedListPopisZaposlenika(NMHDR *pNMHDR, LRESULT *
 	bool ispit = pNMLV->uNewState & LVIS_SELECTED ? TRUE : FALSE;
 	GetDlgItem(IDC_BUTTON_ZAPOSLENIK_IZBRISI)->EnableWindow(ispit);
 	*pResult = 0;
+}
+
+
+void CZaposlenici::OnLvnColumnclickListPopisZaposlenika(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	SortColumn(pNMLV->iSubItem, poredak);
+	poredak == 0 ? poredak = 1 : poredak = 0;
+	*pResult = 0;
+}
+
+
+bool CZaposlenici::SortColumn(int columnIndex, bool ascending)
+{
+	sort::PARAMSORT paramsort(zaposlenici, columnIndex, ascending, false);
+	ListView_SortItemsEx(zaposlenici, sort::SortFunc, &paramsort);
+	return true;
 }
