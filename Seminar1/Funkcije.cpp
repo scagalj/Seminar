@@ -27,6 +27,7 @@ namespace sobe {
 
 	BOOL Dostupnostsobe(int id, CString datumin, CString datumout) {
 		BOOL slobodna=TRUE;
+		CTime t3, t4;
 		CDetaljiRezervacije detalji;
 		detalji.m_strFilter.Format(_T("[SobaID] = %d"), id);
 		detalji.Open();
@@ -35,17 +36,8 @@ namespace sobe {
 			CRezervacija rez;
 			rez.m_strFilter.Format(_T("[RezervacijaID] = %d"), detalji.m_RezervacijaID);
 			rez.Open();
-			COleDateTime t1, t2;
-			t1.ParseDateTime(datumin); //odabrani datumi
-			t2.ParseDateTime(datumout); //odabrani datum
-			CTime t3, t4;
-			SYSTEMTIME st;
-			if (t1.GetAsSystemTime(st))
-				t3 = CTime(st);
-
-			if (t2.GetAsSystemTime(st))
-				t4 = CTime(st);
-
+			t3 = Datum(datumin);
+			t4 = Datum(datumout);
 			if (!(t3 < rez.m_Check_IN && t4 < rez.m_Check_IN || t3 > rez.m_Check_OUT && t4 > rez.m_Check_OUT)) {
 				//Soba je zauzeta
 				slobodna = FALSE;
@@ -56,7 +48,7 @@ namespace sobe {
 		}
 
 		detalji.Close();
-		return slobodna == TRUE ? TRUE : FALSE;	
+		return slobodna ? TRUE : FALSE;	
 	
 	}
 
@@ -80,8 +72,6 @@ namespace sort {
 		, m_poredak(poredak)
 		,m_datum(datum)
 	{}
-
-	// Comparison extracts values from the List-Control
 	int CALLBACK SortFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 	{
 		PARAMSORT& ps = *(PARAMSORT*)lParamSort;
