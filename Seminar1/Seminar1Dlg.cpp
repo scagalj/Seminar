@@ -98,25 +98,13 @@ void CSeminar1Dlg::OnBnClickedLogin()
 
 	UpdateData(TRUE);
 	CZaposlenik login;
-	CString korisnik, lozinka, s;
-	bool t = FALSE;
+	CString s;
+	login.m_strFilter.Format(_T("[Kor_Oznaka] = '%s' AND [Lozinka] = '%s'"),m_Korisnik,m_Lozinka);
 	login.Open();
-	while (!login.IsEOF()) {
-		if (m_Korisnik == login.m_Kor_Oznaka && m_Lozinka == login.m_Lozinka)
-		{
-			korisnik = login.m_Kor_Oznaka;
-			lozinka = login.m_Lozinka;
-			t = TRUE;
-			break;
-		}login.MoveNext();
-	
-	}
-	
-	if (t) {
-		CApplicationDlg App(korisnik,this);
+	if (!login.IsEOF()) {
+		CApplicationDlg App(m_Korisnik, this);
 		CDialogEx::OnOK();
 		App.DoModal();
-
 	}
 	else {
 		s.LoadString(IDS_STRING_KORISNIK_NEPOSTOJI);
