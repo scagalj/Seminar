@@ -153,13 +153,9 @@ void CApplicationDlg::IspisRezervacija() {
 	c_rezervacije_danas.DeleteAllItems();
 	CString s,s1;
 	CRezervacija rez;
+	rez.m_strFilter.Format(_T("[Check_OUT] = #%s#"), CTime::GetCurrentTime().Format("%m-%d-%Y"));
 	rez.Open();
-	CTime today = CTime::GetCurrentTime();
-	int year = today.GetYear();
-	int mon = today.GetMonth();
-	int day = today.GetDay();
 	while (!rez.IsEOF()) {
-		if (rez.m_Check_OUT.GetYear() == year  && rez.m_Check_OUT.GetMonth() == mon && rez.m_Check_OUT.GetDay() == day) {
 			s.Format(_T("%ld"), rez.m_RezervacijaID);
 			int nIndex = c_rezervacije_danas.InsertItem(0, s);
 			c_rezervacije_danas.SetItemText(nIndex, 1, rez.m_Datum_rezervacije.Format(_T("%d.%m.%Y")));
@@ -175,10 +171,6 @@ void CApplicationDlg::IspisRezervacija() {
 			s.Format(_T("%.2f %s"), rez.m_Ukupna_cijena,s1);
 			c_rezervacije_danas.SetItemText(nIndex, 8, s);
 			rez.MoveNext();
-		}
-		else {
-			rez.MoveNext();
-		}
 	}
 	rez.Close();
 
