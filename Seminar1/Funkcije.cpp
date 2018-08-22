@@ -25,8 +25,8 @@ namespace f {
 
 namespace sobe {
 
-	BOOL Dostupnostsobe(int id, CString datumin, CString datumout) {
-		BOOL slobodna=TRUE;
+	bool Dostupnostsobe(int id, CString datumin, CString datumout) {
+		bool slobodna=true;
 		CTime t3, t4;
 		CDetaljiRezervacije detalji;
 		detalji.m_strFilter.Format(_T("[SobaID] = %d"), id);
@@ -40,7 +40,7 @@ namespace sobe {
 			t4 = Datum(datumout);
 			if (!(t3 < rez.m_Check_IN && t4 < rez.m_Check_IN || t3 > rez.m_Check_OUT && t4 > rez.m_Check_OUT)) {
 				//Soba je zauzeta
-				slobodna = FALSE;
+				slobodna = false;
 				break;
 			}
 			rez.Close();
@@ -48,7 +48,7 @@ namespace sobe {
 		}
 
 		detalji.Close();
-		return slobodna ? TRUE : FALSE;	
+		return slobodna;	
 	
 	}
 
