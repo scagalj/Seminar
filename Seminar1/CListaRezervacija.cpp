@@ -412,8 +412,7 @@ void CListaRezervacija::OnBnClickedButtonUredi()
 
 bool CListaRezervacija::SortColumn(int columnIndex, bool ascending)
 {
-	bool datum;
-	columnIndex == 1 || columnIndex == 4 || columnIndex == 5 ? datum = true : datum = false;
+	bool datum = columnIndex == 1 || columnIndex == 4 || columnIndex == 5 ? true : false;
 	sort::PARAMSORT paramsort(c_lista_rezervacija, columnIndex, ascending, datum);
 	ListView_SortItemsEx(c_lista_rezervacija, sort::SortFunc, &paramsort);
 	return true;

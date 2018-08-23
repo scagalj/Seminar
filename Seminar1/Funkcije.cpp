@@ -77,12 +77,10 @@ namespace sort {
 		PARAMSORT& ps = *(PARAMSORT*)lParamSort;
 
 		TCHAR prvi[256] = _T(""), drugi[256] = _T("");
-		ListView_GetItemText(ps.m_hWnd, lParam1,
-			ps.m_stupac, prvi, sizeof(prvi));
-		ListView_GetItemText(ps.m_hWnd, lParam2,
-			ps.m_stupac, drugi, sizeof(drugi));
-		double x = _wtoi(prvi);
-		double y = _wtoi(drugi);
+		ListView_GetItemText(ps.m_hWnd, lParam1, ps.m_stupac, prvi, sizeof(prvi));
+		ListView_GetItemText(ps.m_hWnd, lParam2, ps.m_stupac, drugi, sizeof(drugi));
+		int x = _ttoi(prvi);
+		int y = _ttoi(drugi);
 		if (x != 0 && ps.m_datum == false) {	
 			return ps.m_poredak ? x - y : -(x - y);
 		}
