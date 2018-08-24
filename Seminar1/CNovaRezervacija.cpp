@@ -18,19 +18,15 @@
 
 IMPLEMENT_DYNAMIC(CNovaRezervacija, CDialogEx)
 
-CNovaRezervacija::CNovaRezervacija(CWnd* pParent /*=nullptr*/)
+CNovaRezervacija::CNovaRezervacija(CString datumD, CString datumO, CString name, int hotelid, CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_NOVA_REZERVACIJA, pParent)
 	, m_pretraziOIB(_T(""))
 	, m_Brojgostiju(0)
 	, m_IDSobe(_T(""))
-{
-
-}
-CNovaRezervacija::CNovaRezervacija(CString datumD, CString datumO,CString name,int hotelid, CWnd* pParent)
-	: CDialogEx(IDD_DIALOG_NOVA_REZERVACIJA, pParent)
-	,datumIN(datumD)
-	,datumOUT(datumO)
-	,hotelID(hotelid)
+	, gostID(-1)
+	, datumIN(datumD)
+	, datumOUT(datumO)
+	, hotelID(hotelid)	
 {
 	CZaposlenik zaposlenik;
 	zaposlenik.m_strFilter.Format(_T("[Kor_Oznaka] = '%s'"), name);

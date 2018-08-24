@@ -17,13 +17,7 @@
 
 IMPLEMENT_DYNAMIC(CSlobodneSobe, CDialogEx)
 
-CSlobodneSobe::CSlobodneSobe(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_DIALOG_SLOBODNE_SOBE, pParent)
-{
-
-}
-
-CSlobodneSobe::CSlobodneSobe(const CString & name, CWnd * pParent) 
+CSlobodneSobe::CSlobodneSobe (const CString name, CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_SLOBODNE_SOBE, pParent)
 	, korisnik(name)
 {

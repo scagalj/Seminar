@@ -8,8 +8,7 @@ class CSlobodneSobe : public CDialogEx
 	DECLARE_DYNAMIC(CSlobodneSobe)
 
 public:
-	CSlobodneSobe(CWnd* pParent = nullptr);   // standard constructor
-	explicit CSlobodneSobe(const CString &name, CWnd* pParent);
+	CSlobodneSobe(const CString name, CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CSlobodneSobe();
 
 
@@ -34,7 +33,6 @@ public:
 	CDateTimeCtrl t_slobodnesobe_out;
 	CString datumin;
 	CString datumout;
-	int slobodnesobeID1[100];
 	CString korisnik;
 	int poredak;
 	afx_msg void OnBnClickedButtonNovaRezervaciju();

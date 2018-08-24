@@ -8,8 +8,7 @@ class CPopisSoba : public CDialogEx
 	DECLARE_DYNAMIC(CPopisSoba)
 
 public:
-	CPopisSoba(CWnd* pParent = nullptr);   // standard constructor
-	explicit CPopisSoba(const int &HotelID, const CString &Naziv_Hotela, CWnd* pParent);
+	CPopisSoba(const int HotelID, const CString Naziv_Hotela,  CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CPopisSoba();
 	BOOL OnInitDialog();
 	int p_HotelID,poredak;

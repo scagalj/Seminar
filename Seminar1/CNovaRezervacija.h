@@ -8,8 +8,7 @@ class CNovaRezervacija : public CDialogEx
 	DECLARE_DYNAMIC(CNovaRezervacija)
 
 public:
-	CNovaRezervacija(CWnd* pParent = nullptr);   // standard constructor
-	explicit CNovaRezervacija(CString datimD,CString datumO,CString name,int hotelid, CWnd* pParent);
+	CNovaRezervacija(CString datimD, CString datumO, CString name, int hotelid, CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CNovaRezervacija();
 	void IspisiCijenu();
 
@@ -25,7 +24,7 @@ protected:
 public:
 	double ukupna_cijena;
 	int zapID;
-	int gostID=-1;
+	int gostID;
 	int m_Brojnocenja;
 	int hotelID;
 	CString datumIN, datumOUT;

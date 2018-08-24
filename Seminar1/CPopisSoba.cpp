@@ -14,18 +14,14 @@
 
 IMPLEMENT_DYNAMIC(CPopisSoba, CDialogEx)
 
-CPopisSoba::CPopisSoba(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_DIALOG_POPIS_SOBA, pParent)
-{
-
-}
-
-CPopisSoba::CPopisSoba(const int &HotelID, const CString &Naziv_Hotela, CWnd* pParent)
+CPopisSoba::CPopisSoba(const int HotelID, const CString Naziv_Hotela, CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_POPIS_SOBA, pParent)
 	, p_HotelID(HotelID)
 	, p_NazivHotela(Naziv_Hotela)
 {
+
 }
+
 
 CPopisSoba::~CPopisSoba()
 {
