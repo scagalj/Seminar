@@ -20,15 +20,11 @@
 
 IMPLEMENT_DYNAMIC(CApplicationDlg, CDialogEx)
 
-CApplicationDlg::CApplicationDlg(CWnd* pParent /*=nullptr*/)
+CApplicationDlg::CApplicationDlg(const CString name, CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_APLIKACIJA, pParent)
-{
-
-}
-
-CApplicationDlg::CApplicationDlg(const CString &name, CWnd* pParent)
-	: CDialogEx(IDD_DIALOG_APLIKACIJA, pParent)
-	, user(name)
+	,user(name)
+	, poredak(true)
+	,stupac(-1)
 {
 
 }
@@ -185,8 +181,9 @@ void CApplicationDlg::OnBnClickedButtonOsvjezi()
 void CApplicationDlg::OnLvnColumnclickListDRezervacije(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
-	SortColumn(pNMLV->iSubItem, poredak);
-	poredak == 0 ? poredak = 1 : poredak = 0;
+	poredak = pNMLV->iItem == stupac ? !poredak : false;
+	stupac = pNMLV->iItem;
+	SortColumn(stupac, poredak);
 	*pResult = 0;
 }
 

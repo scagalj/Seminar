@@ -8,12 +8,12 @@ class CApplicationDlg : public CDialogEx
 	DECLARE_DYNAMIC(CApplicationDlg)
 
 public:
-	CApplicationDlg(CWnd* pParent = nullptr); // standard constructor
-	explicit CApplicationDlg(const CString &name, CWnd* pParent);
+	CApplicationDlg(const CString name, CWnd* pParent = nullptr); // standard constructor
 	virtual ~CApplicationDlg();
 	BOOL OnInitDialog();
 	CString user;
-	int poredak;
+	bool poredak;
+	int stupac;
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME

@@ -11,7 +11,6 @@ public:
 	CNovaRezervacija(CWnd* pParent = nullptr);   // standard constructor
 	explicit CNovaRezervacija(CString datimD,CString datumO,CString name,int hotelid, CWnd* pParent);
 	virtual ~CNovaRezervacija();
-	bool DodajGosta();
 	void IspisiCijenu();
 
 // Dialog Data
@@ -31,13 +30,6 @@ public:
 	int hotelID;
 	CString datumIN, datumOUT;
 	CTime datumD, datumO;
-	CString m_Ime;
-	CString m_Prezime;
-	CString m_Adresa;
-	CString m_Grad;
-	CString m_Drzava;
-	CString m_OIB;
-	CString m_Kontakt;
 	CString m_pretraziOIB;
 	int m_Brojgostiju,m_BrojGostijuizracun;
 	CString m_IDSobe;

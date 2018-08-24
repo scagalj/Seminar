@@ -22,6 +22,8 @@ IMPLEMENT_DYNAMIC(CListaRezervacija, CDialogEx)
 CListaRezervacija::CListaRezervacija(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_LISTA_REZEVACIJA, pParent)
 	, ispis(0)
+	, poredak(true)
+	, stupac(-1)
 {
 
 }
@@ -421,7 +423,8 @@ bool CListaRezervacija::SortColumn(int columnIndex, bool ascending)
 void CListaRezervacija::OnLvnColumnclickListRezervacije(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
-	SortColumn(pNMLV->iSubItem, poredak);
-	poredak == 0 ? poredak = 1 : poredak = 0;
+	poredak = pNMLV->iItem == stupac ? !poredak : false;
+	stupac = pNMLV->iItem;
+	SortColumn(stupac, poredak);
 	*pResult = 0;
 }

@@ -24,7 +24,8 @@ public:
 	CListCtrl c_lista_rezervacija;
 	CListCtrl c_list_rez_sobe;
 	int ispis, rezID;
-	int poredak = 0;
+	bool poredak;
+	int stupac;
 	void Print();
 	virtual BOOL OnInitDialog();
 	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
