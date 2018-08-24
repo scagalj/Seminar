@@ -181,8 +181,8 @@ void CApplicationDlg::OnBnClickedButtonOsvjezi()
 void CApplicationDlg::OnLvnColumnclickListDRezervacije(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
-	poredak = pNMLV->iItem == stupac ? !poredak : false;
-	stupac = pNMLV->iItem;
+	poredak = pNMLV->iSubItem == stupac ? !poredak : false;
+	stupac = pNMLV->iSubItem;
 	SortColumn(stupac, poredak);
 	*pResult = 0;
 }

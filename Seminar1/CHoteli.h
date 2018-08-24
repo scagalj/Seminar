@@ -28,7 +28,8 @@ protected:
 public:
 	CListCtrl hoteli;
 	CString h_trazi;
-	int poredak;
+	bool poredak;
+	int stupac;
 	afx_msg void OnBnClickedButtonAddHotel();
 	afx_msg void OnBnClickedButtonDeleteHotel();
 	afx_msg void OnBnClickedButtonHotelTrazi();

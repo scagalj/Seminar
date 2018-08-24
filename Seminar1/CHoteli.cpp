@@ -18,6 +18,8 @@ IMPLEMENT_DYNAMIC(CHoteli, CDialogEx)
 CHoteli::CHoteli(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_HOTEL, pParent)
 	, h_trazi(_T(""))
+	,poredak(true)
+	,stupac(-1)
 {
 
 }
@@ -195,8 +197,9 @@ CString CHoteli::HotelID(int x) {
 void CHoteli::OnLvnColumnclickListHoteli(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
-	SortColumn(pNMLV->iSubItem, poredak);
-	poredak == 0 ? poredak = 1 : poredak = 0;
+	poredak = pNMLV->iSubItem == stupac ? !poredak : true;
+	stupac = pNMLV->iSubItem;
+	SortColumn(stupac, poredak);
 	*pResult = 0;
 }
 

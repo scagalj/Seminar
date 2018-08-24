@@ -22,7 +22,8 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	int poredak;
+	bool poredak;
+	int stupac;
 	CListCtrl zaposlenici;
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButtonZaposlenikDodaj();

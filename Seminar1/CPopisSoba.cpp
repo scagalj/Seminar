@@ -18,6 +18,8 @@ CPopisSoba::CPopisSoba(const int HotelID, const CString Naziv_Hotela, CWnd* pPar
 	: CDialogEx(IDD_DIALOG_POPIS_SOBA, pParent)
 	, p_HotelID(HotelID)
 	, p_NazivHotela(Naziv_Hotela)
+	,poredak(true)
+	,stupac(-1)
 {
 
 }
@@ -128,8 +130,9 @@ void CPopisSoba::OnLvnItemchangedListPopisSoba(NMHDR *pNMHDR, LRESULT *pResult)
 void CPopisSoba::OnLvnColumnclickListPopisSoba(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
-	SortColumn(pNMLV->iSubItem, poredak);
-	poredak == 0 ? poredak = 1 : poredak = 0;
+	poredak = pNMLV->iSubItem == stupac ? !poredak : true;
+	stupac = pNMLV->iSubItem;
+	SortColumn(stupac, poredak);
 	*pResult = 0;
 }
 

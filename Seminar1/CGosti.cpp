@@ -16,6 +16,8 @@ IMPLEMENT_DYNAMIC(CGosti, CDialogEx)
 
 CGosti::CGosti(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_GOST, pParent)
+	,poredak(true)
+	,stupac(-1)
 {
 
 }
@@ -108,8 +110,9 @@ void CGosti::OnBnClickedButtonDodajGosta()
 void CGosti::OnLvnColumnclickListGosti(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
-	SortColumn(pNMLV->iSubItem, poredak);
-	poredak == 0 ? poredak = 1 : poredak = 0;
+	poredak = pNMLV->iSubItem == stupac ? !poredak : false;
+	stupac = pNMLV->iSubItem;
+	SortColumn(stupac, poredak);
 	*pResult = 0;
 }
 

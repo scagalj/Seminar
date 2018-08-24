@@ -15,6 +15,8 @@ IMPLEMENT_DYNAMIC(CZaposlenici, CDialogEx)
 
 CZaposlenici::CZaposlenici(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_ZAPOSLENIK, pParent)
+	,poredak(true)
+	,stupac(-1)
 {
 
 }
@@ -124,8 +126,9 @@ void CZaposlenici::OnLvnItemchangedListPopisZaposlenika(NMHDR *pNMHDR, LRESULT *
 void CZaposlenici::OnLvnColumnclickListPopisZaposlenika(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
-	SortColumn(pNMLV->iSubItem, poredak);
-	poredak == 0 ? poredak = 1 : poredak = 0;
+	poredak = pNMLV->iSubItem == stupac ? !poredak : true;
+	stupac = pNMLV->iSubItem;
+	SortColumn(stupac, poredak);
 	*pResult = 0;
 }
 

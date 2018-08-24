@@ -11,7 +11,6 @@ public:
 	CGosti(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~CGosti();
 	void IspisiGoste();
-	int poredak;
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
@@ -23,6 +22,8 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	bool poredak;
+	int stupac;
 	CListCtrl gosti;
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButtonDodajGosta();
